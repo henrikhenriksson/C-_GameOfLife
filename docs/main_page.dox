@@ -1,0 +1,17 @@
+/**
+* @mainpage Project_dt042G_Group11
+This project is the finishing part of the course Dt042g, metoder & verktyg at Miun, autumn 2019.\n
+The project consists of three parts, where the workflow will be dictaded by the agile method "Kanban",\n
+which is planned and administrated via a Trello Board. The other main tasks is to write unit tests for all classes,\n
+and automatically generated HTML style documentation for all provided classes.\n\n
+* @ref about_the_authors
+*/
+
+
+/**
+* @page about_the_authors Presentation about the project members:
+* @section Author1 Henrik Henriksson
+TODO: Add information and image
+* @section Author2 Johan Karlsson
+TODO: Add information and image
+*/
