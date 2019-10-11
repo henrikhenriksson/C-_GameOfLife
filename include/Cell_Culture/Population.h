@@ -40,14 +40,35 @@ private:
     RuleOfExistence* oddRuleOfExistence;
 
     void randomizeCellCulture();
+	/// @brief Send cells map to FileLoader, which will populate its culture based on file values.
     void buildCellCultureFromFile();
 
 public:
+    /**
+	* @brief Constructor for class population
+	* @details always resets generation to 0, sets class object values to nullPtr
+	* 
+	* Test Recommendation:
+	* @test no recommended tests at this point.
+	*/
     Population() : generation(0), evenRuleOfExistence(nullptr), oddRuleOfExistence(nullptr) {}
     ~Population();
 
+	/**
+	* @brief initializes the cell culture and the concrete rules to be used in the sim.
+	* @details determines wheter the cell culture should be randomized or built from file,
+	* creates the rules to be used, based on a specified rule name. If no odd rule is specified
+	* odd rule is set to even rule.
+	* @param evenRuleName specifies rule name for evenRuleOfExistence
+	* @param oddRuleName specifies rule name for oddRuleOfExistence
+	* Recommended Tests:
+	* @test if filename could be read, the correct function should be called.
+	* @test if oddRuleName is set to evenRuleName if no odd rule name is specified,
+	*/
     void initiatePopulation(const string& evenRuleName, string oddRuleName = "");
-    int calculateNewGeneration();
+    
+	
+	int calculateNewGeneration();
 
     // Returns cell by specified key value.
     Cell& getCellAtPosition(Point position) { return cells.at(position); }
