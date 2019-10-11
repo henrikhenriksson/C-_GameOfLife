@@ -83,7 +83,7 @@ public:
 
     /**
 	* @brief Returns cell by specified key value.
-	* @details uses Point object position to return the cell at that current position
+	* @details Uses Point object position to return the cell at that current position
 	* Recommended Tests
 	* @test check that the function returns the correct value
 	* @param position holding the current position of a specified point.
@@ -92,6 +92,12 @@ public:
     Cell& getCellAtPosition(Point position) { return cells.at(position); }
 
     // Gets the total amount of cells in the population, regardless of state.
+    /**
+	* @brief get the size of a cell object
+	* @details Get the total ammount of cells in the population, regardless of state.
+	* @test if the correct size is returned for a cells object.
+	* @return INT size of cell object.
+	*/
     int getTotalCellPopulation() { return cells.size(); }
 
 };
