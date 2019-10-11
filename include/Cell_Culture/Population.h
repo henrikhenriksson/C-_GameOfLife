@@ -70,17 +70,25 @@ public:
 	* @brief update the cell population and next generational changes based on the rules
 	* @details first the function calls each cell in turn and updates their state 
 	* until the entire cell population has been updated. Secondly it alternates between
-	* odd and even rulesets, based on the current generation.
+	* odd and even rulesets, based on the current generation. 
 	*  
 	* Test Recommendations
 	* @test if generation has been updated after function has been called.
 	* @test if generation is even or odd, the correct ruleofexistence should be executed.
 	*
+	* @bug wrong function name as the function updates and calculates.
 	* @return INT generation prefix-incremented 
 	*/
 	int calculateNewGeneration();
 
-    // Returns cell by specified key value.
+    /**
+	* @brief Returns cell by specified key value.
+	* @details uses Point object position to return the cell at that current position
+	* Recommended Tests
+	* @test check that the function returns the correct value
+	* @param position holding the current position of a specified point.
+	* @return CELL map object.
+	*/ 
     Cell& getCellAtPosition(Point position) { return cells.at(position); }
 
     // Gets the total amount of cells in the population, regardless of state.
