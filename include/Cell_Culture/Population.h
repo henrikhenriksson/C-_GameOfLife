@@ -13,6 +13,9 @@
  *
  * Population's main responsibility during execution is determining which rule to apply for each new generation
  * and updating the cells to their new states.
+ * 
+ * @test The constructor and each public function in this class should be tested with a separate test function
+
 */
 
 #ifndef POPULATION_H
