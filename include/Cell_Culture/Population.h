@@ -40,7 +40,6 @@ private:
     RuleOfExistence* oddRuleOfExistence;
 
     void randomizeCellCulture();
-	/// @brief Send cells map to FileLoader, which will populate its culture based on file values.
     void buildCellCultureFromFile();
 
 public:
@@ -67,7 +66,18 @@ public:
 	*/
     void initiatePopulation(const string& evenRuleName, string oddRuleName = "");
     
-	
+	/**
+	* @brief update the cell population and next generational changes based on the rules
+	* @details first the function calls each cell in turn and updates their state 
+	* until the entire cell population has been updated. Secondly it alternates between
+	* odd and even rulesets, based on the current generation.
+	*  
+	* Test Recommendations
+	* @test if generation has been updated after function has been called.
+	* @test if generation is even or odd, the correct ruleofexistence should be executed.
+	*
+	* @return INT generation prefix-incremented 
+	*/
 	int calculateNewGeneration();
 
     // Returns cell by specified key value.
