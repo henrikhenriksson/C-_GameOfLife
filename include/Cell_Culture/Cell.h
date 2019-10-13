@@ -28,7 +28,12 @@ struct StateColors {
 /* Initiate default state color values. */
 const STATE_COLORS = { COLOR::WHITE, COLOR::BLACK, COLOR::CYAN, COLOR::MAGENTA };
 
-/// @brief Available Cell actions
+/**
+ * @brief Available Cell actions
+ * @bug IGNORE_CELL is a missleading name, KEEP_STATE would more correctly
+ * describe actions taken by program
+ */
+
 enum ACTION { KILL_CELL, IGNORE_CELL, GIVE_CELL_LIFE, DO_NOTHING };
 
 
@@ -85,6 +90,9 @@ public:
 
     /**
      * @brief Constructor for class Cell.
+     *
+     * @test Test that isRimCell is set for the cell
+     *
      * @param isRimCell Sets if the current cell is a rim cell or not
      * @param action What is the initial state of the cell
      */
@@ -132,19 +140,22 @@ public:
      * next generation data does not match their current status
      * The current set action
      *
-     * Test Recommendations
-     * @test An alive rim cell should not age
-     * @test An dead cell should stay dead if neutral actions is used such as
-     * IGNORE_CELL or DO_NOTHING
-     * @test nextUpdate.nextGenerationAction should be reset after
+     * @test Check that an cell is updated according to the set action. All
+     * defined Actions is tested for cell states:  Alive, Dead and rim cells.
+     *
+     * @bug DO_NOTHING updates cell color and value. This is not indicated
+     * from the state name.
+     *
+     * @bug GIVE_LIFE What is the expected behavior when GIVE_LIFE is set for
+     * a living cell. Should the cell be reborn or should it be handled as
+     * IGNORE_CELL
      */
     void updateState();
 
     /**
      * @brief Get function for the current cell age (nr iterations)
      *
-     * Test Recommendations
-     * @test set age and check that the function returns the correct value
+     * @test check that the age is increased for an surviving cell
      *
      * @return int cell age, nr iterations
      * @retval 0 for dead cells
@@ -155,8 +166,8 @@ public:
     /**
     * @brief Get function for the current cell color
     *
-    * Test Recommendations
-    * @test set color and check that the function returns the correct value
+    * @test Set color with setNextGenerationAction and check that the function
+    * returns the correct value
     *
     * @return COLOR current cell color
     */
@@ -209,7 +220,8 @@ public:
      * Test recommendation
      * @test set value with function. Call update and check current value
      *
-     * @bug should next iteration value change when DO_NOTING is set as action
+     * @bug should it be possible to set escape chars as tab(\\t) or new line
+     * (\\n)
      *
      * @param value value to be used for next iteration value
      */
@@ -220,9 +232,8 @@ public:
      *
      * @details Not used internally by this class and
      *
-     * Test Recommendations
-     * @test since this flag is not used internally when deciding the the
-     * next iteration values set and get test should be enough
+     * @test check that setIsAliveNext() can set the variable and isAliveNext
+     * can read the varliable
      *
      * @param isAliveNext bool, set if cell should be alive or not
      */
@@ -235,9 +246,8 @@ public:
      * @details This flag is not used internally by class. Only by external
      * usage
      *
-     * Test Recommendations
-     * @test since this flag is not used internally when deciding the the
-     * next iteration values set and get test should be enough
+     * @test check that setIsAliveNext() can set the variable and isAliveNext
+     * can read the variable
      *
      * @return bool is cell alive next iteration
      * @retval TRUE the cell should be alive next iteration
