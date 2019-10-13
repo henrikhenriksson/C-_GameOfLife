@@ -9,13 +9,13 @@
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>
 
-SCENARIO("Hello Test")
-{
-    GIVEN("A valid configuration")
-    {
-        THEN("The first test should fail!")
-        {
-            REQUIRE(false);
-        }
-    }
-}
+//SCENARIO("Hello Test")
+//{
+//    GIVEN("A valid configuration")
+//    {
+//        THEN("The first test should fail!")
+//        {
+//            REQUIRE(false);
+//        }
+//    }
+//}
