@@ -1,8 +1,10 @@
 /**
  * @file CellTester.hpp
- * This file contains test functions that supports testing of the Cell class.
- * This to keep the test cases in the test file as clear as possible. This
- * file also contains abstract test cases that can test functionality with
+ * @author Johan Karlsson, joka1806
+ * @brief This file contains test functions that supports testing of the Cell
+ * class.
+ * @details This to keep the test cases in the test file as clear as possible.
+ * This file also contains abstract test cases that can test functionality with
  * different parameters.
  */
 
@@ -10,8 +12,6 @@
 #define GAMEOFLIFE_CELLTESTER_H
 
 #include <string>
-
-
 
 /**
  * @brief Support function that returns the corresponding string for the given
