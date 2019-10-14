@@ -162,11 +162,10 @@ SCENARIO("Create a cell and validate that the cell ages")
     }
 }
 
-
 /**
  * @brief Tests that the correct color is returned by getColor()
  *
- * @details Uses setNexgGenColor() and updateState() to validate that the
+ * @details Uses setNextGenColor() and updateState() to validate that the
  * correct color is stored.
  */
 SCENARIO("Create a cell and validate that the color can be changed")
@@ -207,10 +206,38 @@ SCENARIO("Create a cell and validate that the color can be changed")
 }
 
 /**
+ * @brief Test that an incorect color cant be set
+ *
+ * @details Tries to set an COLOR index out of bound, undefined.
+ * This should be detected and ignored
+ *
+ * @todo test with program what happends in terminal when an undefined color
+ * is used and update test cases with lession learned
+ */
+SCENARIO("Trie to set an non defined color for a cell")
+{
+    GIVEN("A default cell")
+    {
+        Cell testCell;
+        COLOR expColor;
+        expColor = COLOR(8);
+        testCell.setNextColor(expColor);
+        WHEN("An undefined color is set and an simulated iteration has passed")
+        {
+            testCell.updateState();
+            THEN("The set color should be ignored")
+            {
+                REQUIRE(testCell.getColor() != expColor);
+            }
+        }
+    }
+}
+
+/**
  * @brief tests that a correct value is returned by getValue()
  *
  * @details tests that valid characters can be set and is returned by getValue()
- * setNextGenVal() and updateState() is used to set values
+ * setNextCellValue() and updateState() is used to set values
  */
 SCENARIO("getValue should return the value set by setNextCellValue after "
          "updateState is called")
@@ -351,15 +378,14 @@ SCENARIO("Test that the correct actions is taken for defined ACTIONS")
         //Test that the action GIVE_CELL_LIFE sets the new born status
         WHEN("The cell next generation action is set to GIVE_LIFE")
         {
-            //Increment age to 2 to see if the cell is reset when GIVE_CELL_LIFE
-            //is tested
-            testCell.setNextGenerationAction(IGNORE_CELL);
-            testCell.updateState();
-
-            //This should not be able to set for an alive cell
             testCell.setNextGenerationAction(GIVE_CELL_LIFE);
             testCell.updateState();
-            testCellState(testCell, 1, true);
+            THEN("The cell should not change this iteration")
+            {
+                testCellState(testCell, 1, true);
+            }
+
+            //testCellState(testCell, 1, true);
         }
         WHEN("The cell next generation action is set to DO_NOTHING")
         {
@@ -509,6 +535,94 @@ SCENARIO("Test that the correct actions is taken for defined ACTIONS")
 
             //Test that the rim cell is not affected
             testCellState(testCell, 0, false, expVal, STATE_COLORS.DEAD);
+        }
+    }
+}
+
+/**
+ * @brief Test that setNextGenerationActions sets the correct value
+ *
+ * @details Test all start Action and simulates one iteration
+ * For all start Actions all Actions is set and tested that the correct
+ * action is returned.
+ * For alive cells GIVE_CELL_LIFE should be ignored
+ */
+SCENARIO("Test possible nextGenarationAction changes")
+{
+    ACTION TEST_ACTIONS[] =
+            { GIVE_CELL_LIFE, IGNORE_CELL, KILL_CELL, DO_NOTHING };
+    Cell testCell;
+    for(auto startAction: TEST_ACTIONS)
+    {
+        testCell.setNextGenerationAction(startAction);
+        GIVEN("A non rim cell of state: " + actionToString(startAction))
+        {
+
+            //Check that the start action is set
+            THEN("getNextGenAction() should return the start state: "
+                 + actionToString(startAction));
+            {
+                REQUIRE(testCell.getNextGenerationAction() == startAction);
+            }
+
+            //Simulate one iteration
+            testCell.updateState();
+            AND_WHEN("A simulated iteration has passed")
+            {
+                //Test to set all actions
+                for(auto nextAction: TEST_ACTIONS)
+                {
+
+                    AND_WHEN("nextGenerationAction is set to: "
+                                 + actionToString(nextAction))
+                    {
+                        //Set tested action
+                        testCell.setNextGenerationAction(nextAction);
+
+                        //When an alive cell is set to give live the set
+                        // command should be ignored,
+                        if((nextAction == GIVE_CELL_LIFE)
+                            && (testCell.isAlive()) )
+                        {
+                            //test for DO_NOTHING, set in updateState
+                            nextAction = DO_NOTHING;
+                        }
+
+                        THEN("getNextGeneration() should return: "
+                             + actionToString(nextAction))
+                        {
+                            REQUIRE(testCell.getNextGenerationAction()
+                                    == nextAction);
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+/**
+ * @brief Test that setNextGenerationAction does not affect rim cells
+ */
+ SCENARIO("Test that setNextGenerationAction does not affects rim cells")
+{
+    ACTION TEST_ACTIONS[] =
+            { GIVE_CELL_LIFE, IGNORE_CELL, KILL_CELL, DO_NOTHING };
+    GIVEN("A Rim cell")
+    {
+         //Define a rim cell as test cell
+        Cell testCell(true);
+        for(auto setAction : TEST_ACTIONS)
+        {
+            WHEN(actionToString(setAction) + "is set with setNextGenerationAction")
+            {
+                testCell.setNextGenerationAction(setAction);
+                THEN("getNextAction should return DO_NOTHING")
+                {
+                    REQUIRE(testCell.getNextGenerationAction() == DO_NOTHING);
+                }
+            }
         }
     }
 }
