@@ -181,7 +181,7 @@ void testCellState(Cell &testCell, int expAge, bool expAlive)
 }
 
 /**
- * @breif Test that the cell has the expected status given by the input values
+ * @brief Test that the cell has the expected status given by the input values
  *
  * @details Test on THEN level with separate THEN for each input
  *

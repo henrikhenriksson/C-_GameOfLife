@@ -78,7 +78,7 @@ SCENARIO("Check that constructor can set rimCell and ACTION")
  * GIVE_CELL_LIFE is set from constructor and IGNORE_CELL is set for the
  * first iteration
  *
- * @Toto check that IGNORE_CELL is the value that should be set when a cell
+ * @todo check that IGNORE_CELL is the value that should be set when a cell
  * survives an iteration
  */
 SCENARIO("Create a cell and validate that the cell ages")
