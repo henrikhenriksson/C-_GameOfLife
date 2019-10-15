@@ -1,6 +1,7 @@
 /** @file CatchMain.cpp
- * @autor       : Mikael Nilsson
- * Description : Används för att minska på kompieringstiden genom
+ * @autor Mikael Nilsson
+ * @brief Main file for Game Of Life tests
+ * @details : Används för att minska på kompieringstiden genom
  * att definera CATCH_CONFIG_MAIN i en kompileringsenhet
  * som aldrig ändras och därför aldrig behöver kompileras om.
  *
