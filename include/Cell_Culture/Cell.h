@@ -28,7 +28,12 @@ struct StateColors {
 /* Initiate default state color values. */
 const STATE_COLORS = { COLOR::WHITE, COLOR::BLACK, COLOR::CYAN, COLOR::MAGENTA };
 
-/// @brief Available Cell actions
+/**
+ * @brief Available Cell actions
+ * @bug IGNORE_CELL is a missleading name, KEEP_STATE would more correctly
+ * describe actions taken by program
+ */
+
 enum ACTION { KILL_CELL, IGNORE_CELL, GIVE_CELL_LIFE, DO_NOTHING };
 
 
@@ -85,21 +90,26 @@ public:
 
     /**
      * @brief Constructor for class Cell.
+     *
+     * @test Test that rimCell status can be set for a created Cell
+     *
      * @param isRimCell Sets if the current cell is a rim cell or not
      * @param action What is the initial state of the cell
      */
     explicit Cell(bool isRimCell = false, ACTION action = DO_NOTHING);
 
     /**
-     * @brief returns if the cell is alive or not
+     * @brief Returns if the cell is alive or not
      *
      * @details A cell is vied as alive if the cell is not a rim cell or if
      * the cell has a age => 0
      *
      * Test Recommendations
-     * @test rim cells cant be alive
-     * @test cells with details.age >= 0 should be marked as alive
-     *
+     * @test Validate that rim cells is not alive after the status
+     * GIVE_CELL_LIFE
+     * @test Validate that non rim cells get status alive after given life
+     * and stays alive when aging. Finaly that isAlive return false when the
+     * cell has been killed.
      *
      * @return bool is alive
      * @retval TRUE cell is alive
@@ -113,9 +123,10 @@ public:
      * @details The action for a rim cell cant be updated
      * If the cell currently is alive it cant be updated to GIVE_CELL_LIFE
      *
-     * Test Recommendations
-     * @test trie to update the state of a rim cell
-     * @test GIVE_CELL_LIFE is not set when the cell is alive
+     * @test Test that all actions can be set for a non rim cell and that
+     * GIVE_CELL_LIFE is ignored for alive cells.
+     *
+     * @test Test that setNextGenerationAction is ignored by rim cells
      *
      * @param action for next iteration
      */
@@ -132,19 +143,18 @@ public:
      * next generation data does not match their current status
      * The current set action
      *
-     * Test Recommendations
-     * @test An alive rim cell should not age
-     * @test An dead cell should stay dead if neutral actions is used such as
-     * IGNORE_CELL or DO_NOTHING
-     * @test nextUpdate.nextGenerationAction should be reset after
+     * @test Check that an cell is updated according to the action set. All
+     * defined Actions is tested for cell states:  Alive, Dead and rim cells.
+     *
+     * @bug DO_NOTHING updates cell color and value. This is not indicated
+     * from the state name.
      */
     void updateState();
 
     /**
      * @brief Get function for the current cell age (nr iterations)
      *
-     * Test Recommendations
-     * @test set age and check that the function returns the correct value
+     * @test Test that getAge() increased when alive and set to 0 when killed
      *
      * @return int cell age, nr iterations
      * @retval 0 for dead cells
@@ -155,8 +165,8 @@ public:
     /**
     * @brief Get function for the current cell color
     *
-    * Test Recommendations
-    * @test set color and check that the function returns the correct value
+    * @test Test that getColor() returns the color that has been set with
+    * setNextGenerationAction(), after one simulated iteration has passed
     *
     * @return COLOR current cell color
     */
@@ -168,8 +178,8 @@ public:
      * @details Determines whether the cell is a rim cell, and thus should be
      * immutable
      *
-     * Test Recommendations
-     * @test set Rim cell and check that the function returns the correct value
+     * @test Test that the correct status is returned for rim cells and non
+      * rim cells. Set value given by constructor.
      *
      * @return bool if the cell is a rim cell
      * @retval TRUE the cell is a rim cell
@@ -178,38 +188,44 @@ public:
     bool isRimCell() { return details.rimCell; }
 
     /**
-     * @brief set function for the next iteration color
+     * @brief Set function for the next iteration color
      *
-     * Test recommendations
-     * @test set next iteration color and read that the color has been set
-     * @test set an color index outside of COLOR class values?
+     * @test Set next iteration color and read that the color has been set
+     * @test Set an color index that is not defined in COLOR class values
+     *
+     * @bug Function are not detecting if an undefined color is set.
+     * Investigate expected behavior and update test.
      *
      * @param nextColor color to be used the next iteration
      */
     void setNextColor(COLOR nextColor) { this->nextUpdate.nextColor = nextColor; }
 
     /**
-     * @brief get function for the character that should represent the cell
+     * @brief Get function for the character that should represent the cell
      *
-     * @details the current character used to represent the cell can be
+     * @details The current character used to represent the cell can be
      * changed to
      * distinguish the cell when shown
      *
-     * Test recommendations
-     * @test set a cell value and check that the function returns the correct
-     * value
+     * @test Test that the value set in setNextCellValue is returned by
+     * getCellValue() after an simulated iteration has passed.
      *
      * @return char cell representation char
      */
     char getCellValue() { return details.value; }
 
     /**
-     * @brief set function for the cell next iteration value
+     * @brief Set function for the cell next iteration value
      *
-     * Test recommendation
-     * @test set value with function. Call update and check current value
+     * @test Test that the value set with setNextCellValue is returned with
+     * getCellValue() after an simulated iteration has passed
      *
-     * @bug should next iteration value change when DO_NOTING is set as action
+     * @test Test that invalid cell values as escape character such as tab
+     * (\\t) or new line(\\n) is ignored.
+     *
+     * @bug It should not be possible to set format breaking cell values such
+     * as tab(\\t) or new line (\\n). Investigate correct behavior and update
+     * test cases
      *
      * @param value value to be used for next iteration value
      */
@@ -220,9 +236,8 @@ public:
      *
      * @details Not used internally by this class and
      *
-     * Test Recommendations
-     * @test since this flag is not used internally when deciding the the
-     * next iteration values set and get test should be enough
+     * @test Test that the value set by setIsAliveNext is returned by
+     * getIsAliveNext()
      *
      * @param isAliveNext bool, set if cell should be alive or not
      */
@@ -235,9 +250,8 @@ public:
      * @details This flag is not used internally by class. Only by external
      * usage
      *
-     * Test Recommendations
-     * @test since this flag is not used internally when deciding the the
-     * next iteration values set and get test should be enough
+     * @test Test that the value set by setIsAliveNext is returned by
+     * getIsAliveNext()
      *
      * @return bool is cell alive next iteration
      * @retval TRUE the cell should be alive next iteration
@@ -249,8 +263,12 @@ public:
      * @brief Get the action that should determinate the cell destiny for the
      * next iteration
      *
-     * @details returns the action that is used internally to update the cell
+     * @details Returns the action that is used internally to update the cell
      * when the updateState function is called
+     *
+     * @test Test that all actions can be set and for an alive cell
+     * GIVE_CELL_LIFE is ignored
+     *
      *
      * @return @ref ACTION value
      */
