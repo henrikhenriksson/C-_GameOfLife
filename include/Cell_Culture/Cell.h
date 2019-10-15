@@ -99,7 +99,7 @@ public:
     explicit Cell(bool isRimCell = false, ACTION action = DO_NOTHING);
 
     /**
-     * @brief returns if the cell is alive or not
+     * @brief Returns if the cell is alive or not
      *
      * @details A cell is vied as alive if the cell is not a rim cell or if
      * the cell has a age => 0
@@ -188,10 +188,10 @@ public:
     bool isRimCell() { return details.rimCell; }
 
     /**
-     * @brief set function for the next iteration color
+     * @brief Set function for the next iteration color
      *
-     * @test set next iteration color and read that the color has been set
-     * @test set an color index that is not defined in COLOR class values
+     * @test Set next iteration color and read that the color has been set
+     * @test Set an color index that is not defined in COLOR class values
      *
      * @bug Function are not detecting if an undefined color is set.
      * Investigate expected behavior and update test.
@@ -201,9 +201,9 @@ public:
     void setNextColor(COLOR nextColor) { this->nextUpdate.nextColor = nextColor; }
 
     /**
-     * @brief get function for the character that should represent the cell
+     * @brief Get function for the character that should represent the cell
      *
-     * @details the current character used to represent the cell can be
+     * @details The current character used to represent the cell can be
      * changed to
      * distinguish the cell when shown
      *
@@ -215,7 +215,7 @@ public:
     char getCellValue() { return details.value; }
 
     /**
-     * @brief set function for the cell next iteration value
+     * @brief Set function for the cell next iteration value
      *
      * @test Test that the value set with setNextCellValue is returned with
      * getCellValue() after an simulated iteration has passed
@@ -263,7 +263,7 @@ public:
      * @brief Get the action that should determinate the cell destiny for the
      * next iteration
      *
-     * @details returns the action that is used internally to update the cell
+     * @details Returns the action that is used internally to update the cell
      * when the updateState function is called
      *
      * @test Test that all actions can be set and for an alive cell

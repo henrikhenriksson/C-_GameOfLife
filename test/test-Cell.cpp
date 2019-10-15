@@ -17,9 +17,9 @@
 #include "CellTester.hpp"
 
 /**
- * @brief tests set and get for isAliveNextGen
+ * @brief Tests set and get for isAliveNextGen
  *
- * @details since isAliveNextGen is separated from other functions in class
+ * @details Since isAliveNextGen is separated from other functions in class
  * these two functions can be tested separate
  */
 SCENARIO("set and get isAliveNextGen")
@@ -54,7 +54,7 @@ SCENARIO("set and get isAliveNextGen")
 }
 
 /**
- * @brief test that isRimCell can be set with the constructor
+ * @brief Test that isRimCell can be set with the constructor
  *
  * @details These test focus on the values that can be set from the
  * constructor.
@@ -78,7 +78,7 @@ SCENARIO("Check that constructor can set rimCell and ACTION")
  * GIVE_CELL_LIFE is set from constructor and IGNORE_CELL is set for the
  * first iteration
  *
- * @todo check that IGNORE_CELL is the value that should be set when a cell
+ * @todo Check that IGNORE_CELL is the value that should be set when a cell
  * survives an iteration
  */
 SCENARIO("Create a cell and validate that the cell ages")
@@ -211,7 +211,7 @@ SCENARIO("Create a cell and validate that the color can be changed")
  * @details Tries to set an COLOR index out of bound, undefined.
  * This should be detected and ignored
  *
- * @todo test with program what happends in terminal when an undefined color
+ * @todo Test with program what happends in terminal when an undefined color
  * is used and update test cases with lession learned
  */
 SCENARIO("Trie to set an non defined color for a cell")
@@ -234,9 +234,9 @@ SCENARIO("Trie to set an non defined color for a cell")
 }
 
 /**
- * @brief tests that a correct value is returned by getValue()
+ * @brief Tests that a correct value is returned by getValue()
  *
- * @details tests that valid characters can be set and is returned by getValue()
+ * @details Tests that valid characters can be set and is returned by getValue()
  * setNextCellValue() and updateState() is used to set values
  */
 SCENARIO("getValue should return the value set by setNextCellValue after "
@@ -277,7 +277,7 @@ SCENARIO("getValue should return the value set by setNextCellValue after "
 /**
  * @brief Test that some invalid character cant be set.
  *
- * @details characters such as new line or tab is not suited and should be
+ * @details Characters such as new line or tab is not suited and should be
  * limited
  *
  * @todo Add system test that test if such invalid values as new line could

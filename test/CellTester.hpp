@@ -43,10 +43,10 @@ std::string actionToString(ACTION action)
 }
 
 /**
- * @brief test function that checks that the constructor input value isRimCell
+ * @brief Test function that checks that the constructor input value isRimCell
  * is stored and returned by function isRimCell()
  *
- * @details tests implemented in own GIVEN
+ * @details Tests implemented in own GIVEN {}
  * @param expIsRimCell constructor input to test
  */
 void testSetConstructorValues(bool expIsRimCell)
@@ -152,7 +152,7 @@ void testCellIsAlive(bool testRimCell)
 /**
  * @brief Test that the cell has the expected age and alive status
  *
- * @details Test on THEN level with separate THEN for age and alive
+ * @details Test on THEN{} level with separate THEN{} for age and alive
  *
  * @param testCell cell to test
  * @param expAge expected cell age
