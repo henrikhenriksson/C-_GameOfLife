@@ -3,7 +3,7 @@
  *
  * @author Johan Karlsson, joka1806
  *
- * @breif This file contains test cases to test the class Cell
+ * @brief This file contains test cases to test the class Cell
  *
  * @details Some Cell funcitons is tested in multiple tests. This since
  * complex test uses the functionality that is already tested in simpler test.
