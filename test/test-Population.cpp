@@ -1,11 +1,8 @@
 /**
  * @file test-Population.cpp
- *
  * @author Henrik Henriksson, hehe0601
- *
  * @brief This file contains test cases to test the class Population
- *
- * @details
+ * @details to come
  *
  */
 
@@ -16,6 +13,7 @@
 //---------------------------------------------------------------------------
 /**
  * @brief Tests initiatePopulation
+ * @details to come
  */
 SCENARIO("Input is given to initiatePopulation") {
   GIVEN("a Population object created by default constructor") {
@@ -48,9 +46,31 @@ SCENARIO("Input is given to initiatePopulation") {
 }
 //---------------------------------------------------------------------------
 /**
-* @brief Tests calculateNewGeneration
-*/
-SCENARIO() {
+ * @brief Tests calculateNewGeneration
+ * @details to come
+ * @todo test if evenRule or odd rule is executed depending on the value of
+ * generation
+ */
+SCENARIO("The function is called as the programme is running") {
+  GIVEN("a Population obejct created by default constructor and initiated") {
+    Population pop;
+    pop.initiatePopulation("");
+    THEN("Generation should be 0") { REQUIRE(pop.getGeneration() == 0); }
 
-
+    WHEN("The function is called during runtime") {
+      pop.calculateNewGeneration();
+      THEN("The value of generation should increase by 1") {
+        REQUIRE(pop.getGeneration() == 1);
+      }
+      AND_WHEN("The Function has been called 5 times") {
+        for (size_t i = 1; i < 5; i++) {
+          pop.calculateNewGeneration();
+        }
+        THEN("The value of generation should be 5") {
+          REQUIRE(pop.getGeneration() == 5);
+        }
+      }
+    }
+  }
 }
+//---------------------------------------------------------------------------
