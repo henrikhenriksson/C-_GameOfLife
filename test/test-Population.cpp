@@ -8,7 +8,6 @@
 
 #include <catch.hpp>
 #include <string>
-//#include "../include/Cell_Culture/Population.h"
 #include "GameOfLife.h"
 
 //---------------------------------------------------------------------------
