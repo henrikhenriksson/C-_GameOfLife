@@ -74,3 +74,19 @@ SCENARIO("The function is called as the programme is running") {
   }
 }
 //---------------------------------------------------------------------------
+/**
+ * @brief Tests getCellatPosition
+ * @details to come
+ */
+SCENARIO("Get the value of a specific cell in the population") {
+  GIVEN("a Population object is created by default constructor and initiated") {
+    Population pop;
+    pop.initiatePopulation("");
+    WHEN("you get the value of the first cell") {
+      Cell cell = pop.getCellAtPosition(Point{0, 0});
+      THEN("That cell should have the isRimCell value = true") {
+        REQUIRE(cell.isRimCell() == true);
+      }
+    }
+  }
+}
