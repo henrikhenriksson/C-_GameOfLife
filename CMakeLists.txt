@@ -11,8 +11,67 @@ add_subdirectory(terminal)
 
 set(SRC_LIST
         src/main.cpp
-        include/Cell_Culture/Cell.h include/Support/FileLoader.h include/GameOfLife.h include/Support/Globals.h include/Support/MainArgumentsParser.h include/Cell_Culture/Population.h include/GoL_Rules/RuleFactory.h include/GoL_Rules/RuleOfExistence.h include/ScreenPrinter.h src/Cell_Culture/Cell.cpp src/Support/FileLoader.cpp src/GameOfLife.cpp src/Support/Globals.cpp src/Cell_Culture/Population.cpp src/GoL_Rules/RuleFactory.cpp src/GoL_Rules/RuleOfExistence.cpp src/ScreenPrinter.cpp include/GoL_Rules/RuleOfExistence_Conway.h src/GoL_Rules/RuleOfExistence_Conway.cpp include/GoL_Rules/RuleOfExistence_VonNeumann.h src/GoL_Rules/RulesOfExistence_VonNeumann.cpp include/GoL_Rules/RuleOfExistence_Erik.h src/GoL_Rules/RuleOfExistence_Erik.cpp include/Support/SupportStructures.h src/Support/MainArgumentsParser.cpp include/Support/MainArguments.h src/Support/MainArguments.cpp)
+        include/Cell_Culture/Cell.h
+        include/Support/FileLoader.h
+        include/GameOfLife.h
+        include/Support/Globals.h
+        include/Support/MainArgumentsParser.h
+        include/Cell_Culture/Population.h
+        include/GoL_Rules/RuleFactory.h
+        include/GoL_Rules/RuleOfExistence.h
+        include/ScreenPrinter.h
+        src/Cell_Culture/Cell.cpp
+        src/Support/FileLoader.cpp
+        src/GameOfLife.cpp
+        src/Support/Globals.cpp
+        src/Cell_Culture/Population.cpp
+        src/GoL_Rules/RuleFactory.cpp
+        src/GoL_Rules/RuleOfExistence.cpp
+        src/ScreenPrinter.cpp
+        include/GoL_Rules/RuleOfExistence_Conway.h
+        src/GoL_Rules/RuleOfExistence_Conway.cpp
+        include/GoL_Rules/RuleOfExistence_VonNeumann.h
+        src/GoL_Rules/RulesOfExistence_VonNeumann.cpp
+        include/GoL_Rules/RuleOfExistence_Erik.h
+        src/GoL_Rules/RuleOfExistence_Erik.cpp
+        include/Support/SupportStructures.h
+        src/Support/MainArgumentsParser.cpp
+        include/Support/MainArguments.h
+        src/Support/MainArguments.cpp)
 
+
+set(SRC_LIST_TEST
+        test/CatchMain.cpp
+        #test/test-Cell.cpp
+        #test/CellTester.hpp
+        #test/test-Population.cpp
+        include/Cell_Culture/Cell.h
+        include/Support/FileLoader.h
+        include/GameOfLife.h
+        include/Support/Globals.h
+        include/Support/MainArgumentsParser.h
+        include/Cell_Culture/Population.h
+        include/GoL_Rules/RuleFactory.h
+        include/GoL_Rules/RuleOfExistence.h
+        include/ScreenPrinter.h
+        src/Cell_Culture/Cell.cpp
+        src/Support/FileLoader.cpp
+        src/GameOfLife.cpp
+        src/Support/Globals.cpp
+        src/Cell_Culture/Population.cpp
+        src/GoL_Rules/RuleFactory.cpp
+        src/GoL_Rules/RuleOfExistence.cpp
+        src/ScreenPrinter.cpp
+        include/GoL_Rules/RuleOfExistence_Conway.h
+        src/GoL_Rules/RuleOfExistence_Conway.cpp
+        include/GoL_Rules/RuleOfExistence_VonNeumann.h
+        src/GoL_Rules/RulesOfExistence_VonNeumann.cpp
+        include/GoL_Rules/RuleOfExistence_Erik.h
+        src/GoL_Rules/RuleOfExistence_Erik.cpp
+        include/Support/SupportStructures.h
+        src/Support/MainArgumentsParser.cpp
+        include/Support/MainArguments.h
+        src/Support/MainArguments.cpp)
 
 # Om Debug mode
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -30,5 +89,7 @@ else(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})
+add_executable(${PROJECT_NAME}_TEST ${SRC_LIST_TEST})
 
 target_link_libraries(${PROJECT_NAME} Terminal)
+target_link_libraries(${PROJECT_NAME}_TEST Terminal)
