@@ -125,13 +125,14 @@ class Population {
    */
   Cell& getCellAtPosition(Point position) { return cells.at(position); }
 
-  // Gets the total amount of cells in the population, regardless of state.
   /**
    * @brief get the size of a cell object
    * @details Get the total ammount of cells in the population, regardless of
-   * state.
+   * state. Function is not used elsewhere in the code.
    * @test if the correct size is returned for a cells object.
-   * @return INT size of cell object.
+   * @return INT size of population object.
+   * @bug The function does not return the correct value. Bug probably
+   * originates in private functions "randomizeCellCulture" and "buildCellCultureFromFile"
    */
   int getTotalCellPopulation() { return cells.size(); }
 };

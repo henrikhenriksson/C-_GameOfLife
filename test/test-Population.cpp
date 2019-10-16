@@ -8,12 +8,17 @@
 
 #include <catch.hpp>
 #include <string>
-#include "../include/Cell_Culture/Population.h"
+//#include "../include/Cell_Culture/Population.h"
+#include "GameOfLife.h"
 
 //---------------------------------------------------------------------------
 /**
  * @brief Tests initiatePopulation
- * @details to come
+ * @details Test the function initiatePopulation when input parameters are
+ * given, when only one is given, which should set the oddRule to evenRule, and
+ * that an exception is thrown if an incorrect rule name is given, as it would
+ * not be desirable for the program to run default rulesets if the user intended
+ * to use another ruleset.
  */
 SCENARIO("Input is given to initiatePopulation") {
   GIVEN("a Population object created by default constructor") {
@@ -47,9 +52,10 @@ SCENARIO("Input is given to initiatePopulation") {
 //---------------------------------------------------------------------------
 /**
  * @brief Tests calculateNewGeneration
- * @details to come
- * @todo test if evenRule or odd rule is executed depending on the value of
- * generation
+ * @details test that the support function returns the correct value of the
+ * variable generation after the function has been called during "runtime".
+ * @todo test if evenRule or oddRule is executed depending on the value of
+ * generation.
  */
 SCENARIO("The function is called as the programme is running") {
   GIVEN("a Population obejct created by default constructor and initiated") {
@@ -76,7 +82,8 @@ SCENARIO("The function is called as the programme is running") {
 //---------------------------------------------------------------------------
 /**
  * @brief Tests getCellatPosition
- * @details to come
+ * @details test to make sure that if a cell is position at a point that is a
+ * border cell, it should get the value isRimCell, otherwise, it should not.
  */
 SCENARIO("Get the value of a specific cell in the population") {
   GIVEN("a Population object is created by default constructor and initiated") {
@@ -88,5 +95,28 @@ SCENARIO("Get the value of a specific cell in the population") {
         REQUIRE(cell.isRimCell() == true);
       }
     }
+    WHEN("you get the value of the nth-1 cell (non border cell)") {
+      Cell cell = pop.getCellAtPosition(Point{10, 14});
+      THEN("That cell should have the isRimCell value = false") {
+        REQUIRE(cell.isRimCell() == false);
+      }
+    }
   }
 }
+//---------------------------------------------------------------------------
+/**
+ * @brief Tests getTotalCellPopulation
+ * @details Test to make sure that the funciton returns the correct value. The
+ * standard WORLD_DIMENSIONS should return the value 80x24 == 1920.
+ */
+SCENARIO("Check the total cell population") {
+  GIVEN("a Population object is created by default constructor and initiated") {
+    Population pop;
+    pop.initiatePopulation("");
+    THEN("The entire population should be WIDTH * HEIGHT") {
+      REQUIRE(pop.getTotalCellPopulation() ==
+              (WORLD_DIMENSIONS.HEIGHT * WORLD_DIMENSIONS.WIDTH));
+    }
+  }
+}
+//---------------------------------------------------------------------------
