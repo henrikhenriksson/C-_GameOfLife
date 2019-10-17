@@ -131,8 +131,6 @@ class Population {
    * state. Function is not used elsewhere in the code.
    * @test if the correct size is returned for a cells object.
    * @return INT size of population object.
-   * @bug The function does not return the correct value. Bug probably
-   * originates in private functions "randomizeCellCulture" and "buildCellCultureFromFile"
    */
   int getTotalCellPopulation() { return cells.size(); }
 };

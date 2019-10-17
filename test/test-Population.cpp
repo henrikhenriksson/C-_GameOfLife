@@ -106,7 +106,7 @@ SCENARIO("Get the value of a specific cell in the population") {
 /**
  * @brief Tests getTotalCellPopulation
  * @details Test to make sure that the funciton returns the correct value. The
- * standard WORLD_DIMENSIONS should return the value 80x24 == 1920.
+ * standard WORLD_DIMENSIONS should return the value 80+2x24+2 == 1920.
  */
 SCENARIO("Check the total cell population") {
   GIVEN("a Population object is created by default constructor and initiated") {
@@ -114,7 +114,7 @@ SCENARIO("Check the total cell population") {
     pop.initiatePopulation("");
     THEN("The entire population should be WIDTH * HEIGHT") {
       REQUIRE(pop.getTotalCellPopulation() ==
-              (WORLD_DIMENSIONS.HEIGHT * WORLD_DIMENSIONS.WIDTH));
+              ((WORLD_DIMENSIONS.HEIGHT+2) * (WORLD_DIMENSIONS.WIDTH+2)));
     }
   }
 }
