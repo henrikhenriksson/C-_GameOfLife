@@ -8,11 +8,12 @@
  * @details Some Cell funcitons is tested in multiple tests. This since
  * complex test uses the functionality that is already tested in simpler test.
  * But also that simple/function specific test is wanted to make location of
- * bugs easier.
+ * bugs easier.cd
  */
 
-#include <Cell_Culture/Cell.h>
+#include <iostream>
 #include <string>
+#include "Cell_Culture/Cell.h"
 #include "catch.hpp"
 #include "CellTester.hpp"
 
@@ -121,7 +122,8 @@ SCENARIO("Create a cell and validate that the cell ages")
         }
     }
     //Test that an rim cell does not age
-    AND_GIVEN("A new born RIM cell that is not a rim cell")
+    //Compability fix, AND_GIVEN not supported by provided CATCH version
+    /*AND_*/GIVEN("A new born RIM cell that is not a rim cell")
     {
         //Create a rim cell that should be alive
         Cell testCell(true, GIVE_CELL_LIFE);
@@ -319,7 +321,8 @@ SCENARIO("Check the alive status of a cell")
         testCellIsAlive(false);
     }
     //Test that a rim cell is not aging
-    AND_GIVEN("A rim cell")
+    //Compability fix, AND_GIVEN not supported by provided CATCH version
+    /*AND_*/GIVEN("A rim cell")
     {
         testCellIsAlive(true);
     }
