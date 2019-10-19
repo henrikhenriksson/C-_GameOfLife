@@ -8,7 +8,7 @@
  * @details Some Cell funcitons is tested in multiple tests. This since
  * complex test uses the functionality that is already tested in simpler test.
  * But also that simple/function specific test is wanted to make location of
- * bugs easier.cd
+ * bugs easier.
  */
 
 #include <sstream>
