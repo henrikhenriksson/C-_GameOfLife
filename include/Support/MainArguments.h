@@ -47,11 +47,12 @@ class BaseArgument {
 
  public:
   /**
-  * @brief initialized constructor for abstract class MainArguments
-  * @details
-  * @param argValue holding entered argument to be parsed.
-  * @test create a derived class object and test that argValue was set correctly.
-  */
+   * @brief initialized constructor for abstract class MainArguments
+   * @details
+   * @param argValue holding entered argument to be parsed.
+   * @test create a derived class object and test that argValue was set
+   * correctly.
+   */
   explicit BaseArgument(string argValue) : argValue(std::move(argValue)) {}
 
   /**
@@ -62,24 +63,32 @@ class BaseArgument {
    */
   virtual ~BaseArgument() = default;
   /**
-  * @brief pure virtual function
-  * @details pure virtual function will be overridden in derived classes.
-  * @param appValues holding datamembers that can be modified by input arguments.
-  * @param value pointer holding argument value.
-  * @test will be tested in derived classes to make sure override works.
-  */
+   * @brief pure virtual function
+   * @details pure virtual function will be overridden in derived classes.
+   * @param appValues holding datamembers that can be modified by input
+   * arguments.
+   * @param value pointer holding argument value.
+   * @test will be tested in derived classes to make sure override works.
+   */
   virtual void execute(ApplicationValues& appValues, char* value = nullptr) = 0;
 
-/**
-* @brief Get function for the argValue. 
-* @details returns a specific argument
-*
-*
-*/
+  /**
+   * @brief Get function for the argValue.
+   * @details returns a specific argument to be parsed into either of the
+   * derived classes
+   * recommended tests
+   * @test Test that the function returns the correct value if any is given.
+   * @test Test that the function returns default value if no argument is
+   * passed.
+   */
   const string& getValue() { return argValue; }
 };
 
-// Help screen
+/**
+ * @brief This class handles the argument -h if passed by the user.
+ * @detail derived class of BaseArgument. Presents a help screen. The main
+ * program "gameOfLife" is not executed if this class is called.
+ */
 class HelpArgument : public BaseArgument {
  public:
   HelpArgument() : BaseArgument("-h") {}
