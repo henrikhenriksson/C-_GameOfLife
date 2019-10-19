@@ -12,7 +12,7 @@
 #define GAMEOFLIFE_CELLTESTER_H
 
 
-#include <iostream>
+#include <sstream>
 #include <ios>
 #include <string>
 
