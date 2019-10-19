@@ -11,7 +11,11 @@
 #ifndef GAMEOFLIFE_CELLTESTER_H
 #define GAMEOFLIFE_CELLTESTER_H
 
+
+#include <sstream>
+#include <ios>
 #include <string>
+
 
 /**
  * @brief Support function that returns the corresponding string for the given
@@ -51,15 +55,20 @@ std::string actionToString(ACTION action)
  */
 void testSetConstructorValues(bool expIsRimCell)
 {
-    GIVEN("Default constructor, rimCell = "
-          << std::boolalpha << expIsRimCell);
+    std::stringstream header;
+    header << "Default constructor, rimCell = "
+           << std::boolalpha << expIsRimCell;
+    GIVEN(header.str() )
     {
         //Create test cell of wanted rim cell status
         Cell testCell(expIsRimCell);
 
+        //Clear header stream
+        header.str(std::string());
+        header << "isRimCell() should return "
+               << std::boolalpha << expIsRimCell;
         //Check that the rim cell status is stored in the cell
-        THEN("isRimCell() should return "
-             << std::boolalpha << expIsRimCell)
+        THEN(header.str())
         {
             REQUIRE(testCell.isRimCell() == expIsRimCell);
         }
