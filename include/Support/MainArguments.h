@@ -148,8 +148,8 @@ class GenerationsArgument : public BaseArgument {
   /**
    * @brief Sets the ammount of generations to run.
    * @details Changes the default appValue for int maxGenerations to input
-   * value and Sets how many generations the simulation should run. If no value is
-   * passed, the simulation will not run.
+   * value and Sets how many generations the simulation should run. If no value
+   * is passed, the simulation will not run.
    * @param appValues struct holding application Values
    * @param generations holding the ammount of generations to run.
    * @test Pass default ApplicationValues object and a given value, test that
@@ -222,9 +222,9 @@ class FileArgument : public BaseArgument {
 
   /**
    * @brief Sets the filename to read from.
-   * @details Changes the default appValue for fileName to input
-   * value and sets the filename to read a worldSize and population from.  If no
-   * value is passed, the simulation will not run.
+   * @details Changes the global variable fileName to input
+   * value to read a worldSize and population from. If no value is passed,
+   * the simulation will not run.
    * @param appValues struct holding application Values
    * @param fileNameArg holding the filename to be read from.
    * @test Pass default ApplicationValues object and a given value, test that
