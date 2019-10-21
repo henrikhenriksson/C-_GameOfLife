@@ -80,88 +80,228 @@ class BaseArgument {
    * recommended tests
    * @test Test that the function returns the correct value in a derived class
    * object.
-   *
    */
   const string& getValue() { return argValue; }
 };
 
 /**
- * @brief This class handles the argument -h if passed by the user.
+ * @brief This class handles the help argument if passed by the user.
  * @detail derived class of BaseArgument. Presents a help screen if the -h
  * argument is given. The main program "gameOfLife" is not executed if this
  * class is called.
  * @test Test the constructor when given the -h argument. If a helpArgument
  * object is created, the function getValue() should return "-h".
- * @test Test that bool RunSimulation is set to false when -h arg is called.
+ * @test Test the execute function.
  */
 class HelpArgument : public BaseArgument {
  public:
   /**
    * @brief Default constructor for the derived HelpArguments Class.
    * @details BaseArgument constructor is used to set inherited argValue.
-   * @test That an object can be created and that the getValue() returns "-h"
+   * @test That an object can be created and that the getValue() returns the
+   * correct argValue.
    */
   HelpArgument() : BaseArgument("-h") {}
 
   /**
-   * @brief Overriden destructor
-   * @details Overriden default destcutor for a derived class.
+   * @brief Overriden destructor for helpArgument class.
+   * @details Overriden default destructor for a derived class.
    * @test no recommended tests at this time.
    */
   ~HelpArgument() override = default;
 
   /**
    * @brief changes appValues based on entered parameters.
-   * @details called from the MainArgumentsParser, changes the default appValues
-   * and if valid argument value is given.
-   * @test Pass defalt ApplicationValues object and value, Test that the
+   * @details changes the default appValue for bool runSimulation to false.
+   * Calls the function printHelpScreen() for the current running instance.
+   * @param appValues struct holding application Values
+   * @param value holding the entered parameter.
+   * @test Pass defalt ApplicationValues object and value, test that the
    * function sets runSimulation to false.
    */
   void execute(ApplicationValues& appValues, char* value) override;
 };
 
-// Amount of generations to simulate
+/**
+ * @brief This class handles the generations argument if passed by the user.
+ * @details Derived class from BaseArgument. Is responsible for the amount of
+ * generations to simulate.
+ * @test Test the constructor when given the -g argument.
+ * @test Test the Execute function.
+ */
 class GenerationsArgument : public BaseArgument {
  public:
+  /**
+   * @brief Default constructor for the derived GenerationsArgument class
+   * @details BaseArgument constructor is used to set inherited argValue.
+   * @test That an object can be created and that the getValue() function
+   * returns the correct argValue.
+   */
   GenerationsArgument() : BaseArgument("-g") {}
+  /**
+   * @brief Overriden destructor for the GenerationsArgument class.
+   * @details Overriden default destructor for a derived class.
+   * @test no recommended tests at this time.
+   */
   ~GenerationsArgument() override = default;
 
+  /**
+   * @brief changes appValues based on entered parameters.
+   * @details changes the default appValue for int maxGenerations to input
+   * value. Sets how many generations the simulation should run.
+   * @param appValues struct holding application Values
+   * @param generations holding the entered parameter.
+   * @test Pass default ApplicationValues object and a given value, test that
+   * the function sets maxGeneration to the correct value.
+   * @test Test that error message is printed if the argument is passed with no
+   * value.
+   */
   void execute(ApplicationValues& appValues, char* generations) override;
 };
 
-// Custom population size
+/**
+ * @brief This class handles the worldsize argument if passed by the user.
+ * @details Derived class from BaseArgument. Is responsible for
+ * the custom size of the world.
+ * @test Test the constructor when given the -s argument.
+ * @test Test the Execute function.
+ */
 class WorldsizeArgument : public BaseArgument {
  public:
+  /**
+   * @brief Default constructor for the derived GenerationsArgument class
+   * @details BaseArgument constructor is used to set inherited argValue.
+   * @test That an object can be created and that the getValue() function
+   * returns the correct argValue.
+   */
   WorldsizeArgument() : BaseArgument("-s") {}
+  /**
+   * @brief Overriden destructor for WorlsizeArgument class.
+   * @details Overriden default destructor for a derived class.
+   * @test no recommended tests at this time.
+   */
   ~WorldsizeArgument() override = default;
-
+  /**
+   * @brief changes appValues based on entered parameters.
+   * @details changes the default appValue for world WIDTH and HEIGHT to input
+   * value. Sets the size of the world by width and height.
+   * @param appValues struct holding application Values
+   * @param dimension holding the entered parameter.
+   * @test Pass default ApplicationValues object and a given value, test that
+   * the function sets WORLD_DIMENSTIONS.WIDTH and .HEIGHT to the correct value.
+   * @test Test that error message is printed if the argument is passed with no
+   * value.
+   */
   void execute(ApplicationValues& appValues, char* dimensions) override;
 };
 
-// Initiate population from file
+/**
+ * @brief This class handles the file argument if passed by the user.
+ * @details Derived class from BaseArgument. Is responsible for
+ * initiating a population from a file.
+ * @test Test the constructor when given the -s argument.
+ * @test Test the Execute function.
+ */
 class FileArgument : public BaseArgument {
  public:
+  /**
+   * @brief Default constructor for the derived FileArgument class
+   * @details BaseArgument constructor is used to set inherited argValue.
+   * @test That an object can be created and that the getValue() function
+   * returns the correct argValue.
+   */
   FileArgument() : BaseArgument("-f") {}
+  /**
+   * @brief Overriden destructor for WorlsizeArgument class.
+   * @details Overriden default destructor for a derived class.
+   * @test no recommended tests at this time.
+   */
   ~FileArgument() override = default;
 
+  /**
+   * @brief changes appValues based on entered parameters.
+   * @details changes the default appValue for fileName to input
+   * value. Sets the filename to read a worldSize and population from.
+   * @param appValues struct holding application Values
+   * @param fileNameArg holding the entered parameter.
+   * @test Pass default ApplicationValues object and a given value, test that
+   * the function sets filename to the correct value.
+   * @test Test that error message is printed if the argument is passed with no
+   * value.
+   */
   void execute(ApplicationValues& appValues, char* fileNameArg) override;
 };
 
-// Rule used for even generations
+/**
+ * @brief This class handles the even rule argument if passed by the user.
+ * @details Derived class from BaseArgument. Is responsible for
+ * setting the rule used for even generations.
+ * @test Test the constructor when given the -er argument.
+ * @test Test the Execute function.
+ */
 class EvenRuleArgument : public BaseArgument {
  public:
+  /**
+   * @brief Default constructor for the derived EvenRuleArgument class
+   * @details BaseArgument constructor is used to set inherited argValue.
+   * @test That an object can be created and that the getValue() function
+   * returns the correct argValue.
+   */
   EvenRuleArgument() : BaseArgument("-er") {}
+  /**
+   * @brief Overriden destructor for EvenRuleArgument class.
+   * @details Overriden default destructor for a derived class.
+   * @test no recommended tests at this time.
+   */
   ~EvenRuleArgument() override = default;
 
+  /**
+   * @brief changes appValues based on entered parameters.
+   * @details changes the default appValue for evenRuleName to input
+   * value. Sets a rule used for even generations.
+   * @param appValues struct holding application Values
+   * @param evenRule holding the entered parameter.
+   * @test Pass default ApplicationValues object and a given value, test that
+   * the function sets evenRuleName to the correct value.
+   * @test Test that error message is printed if the argument is passed with no
+   * value.
+   */
   void execute(ApplicationValues& appValues, char* evenRule) override;
 };
 
-// Rule used for odd generations
+/**
+ * @brief This class handles the odd rule argument if passed by the user.
+ * @details Derived class from BaseArgument. Is responsible for
+ * setting the rule used for odd generations.
+ * @test Test the constructor when given the -or argument.
+ * @test Test the Execute function.
+ */
 class OddRuleArgument : public BaseArgument {
  public:
+  /**
+   * @brief Default constructor for the derived FileArgument class
+   * @details BaseArgument constructor is used to set inherited argValue.
+   * @test That an object can be created and that the getValue() function
+   * returns the correct argValue.
+   */
   OddRuleArgument() : BaseArgument("-or") {}
+  /**
+   * @brief Overriden destructor for WorlsizeArgument class.
+   * @details Overriden default destructor for a derived class.
+   * @test no recommended tests at this time.
+   */
   ~OddRuleArgument() override = default;
-
+  /**
+   * @brief changes appValues based on entered parameters.
+   * @details changes the default appValue for oddRuleName to input
+   * value. Sets a rule used for odd generations.
+   * @param appValues struct holding application Values
+   * @param oddRule holding the entered parameter.
+   * @test Pass default ApplicationValues object and a given value, test that
+   * the function sets oddRuleName to the correct value.
+   * @test Test that error message is printed if the argument is passed with no
+   * value.
+   */
   void execute(ApplicationValues& appValues, char* oddRule) override;
 };
 
