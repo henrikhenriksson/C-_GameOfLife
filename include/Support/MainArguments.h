@@ -31,8 +31,8 @@ struct ApplicationValues {
 };
 
 /**
- * @brief abstract base parent class
- * @details abstract base class holding pure virtual function used by derived
+ * @brief Abstract base parent class
+ * @details Abstract base class holding pure virtual function used by derived
  * classes. Derived classes handles every valid type of argument.
  * @test As this is an abstract class - test the class by creating an object of
  * a derived class.
@@ -64,8 +64,8 @@ class BaseArgument {
    */
   virtual ~BaseArgument() = default;
   /**
-   * @brief pure virtual function
-   * @details pure virtual function will be overridden in derived classes.
+   * @brief Pure virtual function
+   * @details Pure virtual function will be overridden in derived classes.
    * @param appValues holding datamembers that can be modified by input
    * arguments.
    * @param value pointer holding argument value.
@@ -106,16 +106,16 @@ class HelpArgument : public BaseArgument {
   /**
    * @brief Overriden destructor for helpArgument class.
    * @details Overriden default destructor for a derived class.
-   * @test no recommended tests at this time.
+   * @test No recommended tests at this time.
    */
   ~HelpArgument() override = default;
 
   /**
-   * @brief changes appValues based on entered parameters.
-   * @details changes the default appValue for bool runSimulation to false.
+   * @brief Presents helpscreen and sets the simulation to not run.
+   * @details Changes the default appValue for bool runSimulation to false.
    * Calls the function printHelpScreen() for the current running instance.
    * @param appValues struct holding application Values
-   * @param value holding the entered parameter.
+   * @param value holding any entered parameter after the help argument.
    * @test Pass defalt ApplicationValues object and value, test that the
    * function sets runSimulation to false.
    */
@@ -141,16 +141,17 @@ class GenerationsArgument : public BaseArgument {
   /**
    * @brief Overriden destructor for the GenerationsArgument class.
    * @details Overriden default destructor for a derived class.
-   * @test no recommended tests at this time.
+   * @test No recommended tests at this time.
    */
   ~GenerationsArgument() override = default;
 
   /**
-   * @brief changes appValues based on entered parameters.
-   * @details changes the default appValue for int maxGenerations to input
-   * value. Sets how many generations the simulation should run.
+   * @brief Sets the ammount of generations to run.
+   * @details Changes the default appValue for int maxGenerations to input
+   * value and Sets how many generations the simulation should run. If no value is
+   * passed, the simulation will not run.
    * @param appValues struct holding application Values
-   * @param generations holding the entered parameter.
+   * @param generations holding the ammount of generations to run.
    * @test Pass default ApplicationValues object and a given value, test that
    * the function sets maxGeneration to the correct value.
    * @test Test that error message is printed if the argument is passed with no
@@ -178,15 +179,16 @@ class WorldsizeArgument : public BaseArgument {
   /**
    * @brief Overriden destructor for WorlsizeArgument class.
    * @details Overriden default destructor for a derived class.
-   * @test no recommended tests at this time.
+   * @test No recommended tests at this time.
    */
   ~WorldsizeArgument() override = default;
   /**
-   * @brief changes appValues based on entered parameters.
-   * @details changes the default appValue for world WIDTH and HEIGHT to input
-   * value. Sets the size of the world by width and height.
+   * @brief Sets the worldSize Height and Width.
+   * @details Changes the default appValue for world WIDTH and HEIGHT to input
+   * value nad sets the size of the world.  If no value is
+   * passed, the simulation will not run.
    * @param appValues struct holding application Values
-   * @param dimension holding the entered parameter.
+   * @param dimension holding the size the world will have.
    * @test Pass default ApplicationValues object and a given value, test that
    * the function sets WORLD_DIMENSTIONS.WIDTH and .HEIGHT to the correct value.
    * @test Test that error message is printed if the argument is passed with no
@@ -199,7 +201,7 @@ class WorldsizeArgument : public BaseArgument {
  * @brief This class handles the file argument if passed by the user.
  * @details Derived class from BaseArgument. Is responsible for
  * initiating a population from a file.
- * @test Test the constructor when given the -s argument.
+ * @test Test the constructor when given the -f argument.
  * @test Test the Execute function.
  */
 class FileArgument : public BaseArgument {
@@ -214,16 +216,17 @@ class FileArgument : public BaseArgument {
   /**
    * @brief Overriden destructor for WorlsizeArgument class.
    * @details Overriden default destructor for a derived class.
-   * @test no recommended tests at this time.
+   * @test No recommended tests at this time.
    */
   ~FileArgument() override = default;
 
   /**
-   * @brief changes appValues based on entered parameters.
-   * @details changes the default appValue for fileName to input
-   * value. Sets the filename to read a worldSize and population from.
+   * @brief Sets the filename to read from.
+   * @details Changes the default appValue for fileName to input
+   * value and sets the filename to read a worldSize and population from.  If no
+   * value is passed, the simulation will not run.
    * @param appValues struct holding application Values
-   * @param fileNameArg holding the entered parameter.
+   * @param fileNameArg holding the filename to be read from.
    * @test Pass default ApplicationValues object and a given value, test that
    * the function sets filename to the correct value.
    * @test Test that error message is printed if the argument is passed with no
@@ -251,16 +254,17 @@ class EvenRuleArgument : public BaseArgument {
   /**
    * @brief Overriden destructor for EvenRuleArgument class.
    * @details Overriden default destructor for a derived class.
-   * @test no recommended tests at this time.
+   * @test No recommended tests at this time.
    */
   ~EvenRuleArgument() override = default;
 
   /**
-   * @brief changes appValues based on entered parameters.
-   * @details changes the default appValue for evenRuleName to input
-   * value. Sets a rule used for even generations.
+   * @brief Sets the rule used for even generations
+   * @details Changes the default appValue for evenRuleName to input
+   * value which sets a rule used for even generations.  If no value is passed,
+   * the simulation will not run.
    * @param appValues struct holding application Values
-   * @param evenRule holding the entered parameter.
+   * @param evenRule holding rule to be used for even generations.
    * @test Pass default ApplicationValues object and a given value, test that
    * the function sets evenRuleName to the correct value.
    * @test Test that error message is printed if the argument is passed with no
@@ -288,15 +292,16 @@ class OddRuleArgument : public BaseArgument {
   /**
    * @brief Overriden destructor for WorlsizeArgument class.
    * @details Overriden default destructor for a derived class.
-   * @test no recommended tests at this time.
+   * @test No recommended tests at this time.
    */
   ~OddRuleArgument() override = default;
   /**
-   * @brief changes appValues based on entered parameters.
-   * @details changes the default appValue for oddRuleName to input
-   * value. Sets a rule used for odd generations.
+   * @brief Sets a the rule used for odd generations.
+   * @details Changes the default appValue for oddRuleName to input
+   * value which ets a rule used for odd generations.  If no value is passed,
+   * the simulation will not run.
    * @param appValues struct holding application Values
-   * @param oddRule holding the entered parameter.
+   * @param oddRule holding the rule to be used for odd generations.
    * @test Pass default ApplicationValues object and a given value, test that
    * the function sets oddRuleName to the correct value.
    * @test Test that error message is printed if the argument is passed with no
