@@ -6,7 +6,9 @@
  *
  * @brief This class handles the main arguments to be passed by the user.
  *
- * @details
+ * @details This file contains an abstract base class and several derived
+ * classes that each handles a different argument parameter that can be passed
+ * by the used when running the simulation
  */
 
 #ifndef GAMEOFLIFE_MAINARGUMENTS_H
