@@ -34,7 +34,8 @@ struct ApplicationValues {
  * @brief abstract base parent class
  * @details abstract base class holding pure virtual function used by derived
  * classes. Derived classes handles every valid type of argument.
- * @test as this is an abstract class, testing will be done in derived classes.
+ * @test As this is an abstract class - test the class by creating an object of
+ * a derived class.
  */
 class BaseArgument {
  protected:
@@ -77,23 +78,45 @@ class BaseArgument {
    * @details returns a specific argument to be parsed into either of the
    * derived classes
    * recommended tests
-   * @test Test that the function returns the correct value if any is given.
-   * @test Test that the function returns default value if no argument is
-   * passed.
+   * @test Test that the function returns the correct value in a derived class
+   * object.
+   *
    */
   const string& getValue() { return argValue; }
 };
 
 /**
  * @brief This class handles the argument -h if passed by the user.
- * @detail derived class of BaseArgument. Presents a help screen. The main
- * program "gameOfLife" is not executed if this class is called.
+ * @detail derived class of BaseArgument. Presents a help screen if the -h
+ * argument is given. The main program "gameOfLife" is not executed if this
+ * class is called.
+ * @test Test the constructor when given the -h argument. If a helpArgument
+ * object is created, the function getValue() should return "-h".
+ * @test Test that bool RunSimulation is set to false when -h arg is called.
  */
 class HelpArgument : public BaseArgument {
  public:
+  /**
+   * @brief Default constructor for the derived HelpArguments Class.
+   * @details BaseArgument constructor is used to set inherited argValue.
+   * @test That an object can be created and that the getValue() returns "-h"
+   */
   HelpArgument() : BaseArgument("-h") {}
+
+  /**
+   * @brief Overriden destructor
+   * @details Overriden default destcutor for a derived class.
+   * @test no recommended tests at this time.
+   */
   ~HelpArgument() override = default;
 
+  /**
+   * @brief changes appValues based on entered parameters.
+   * @details called from the MainArgumentsParser, changes the default appValues
+   * and if valid argument value is given.
+   * @test Pass defalt ApplicationValues object and value, Test that the
+   * function sets runSimulation to false.
+   */
   void execute(ApplicationValues& appValues, char* value) override;
 };
 
