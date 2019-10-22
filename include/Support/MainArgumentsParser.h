@@ -5,8 +5,8 @@
  * @version     0.1
 
  * @brief This file contains the mainArgumentsParser class
- * @details The MainArgumentsParser handles the parsiing of input parameter
- arguments.
+ * @details The MainArgumentsParser handles the parsing of input parameter
+ * arguments using static functions.
 */
 
 #ifndef mainArgumentsParserH
@@ -24,7 +24,7 @@ Static functions that parses the starting arguments for the application.
 */
 
 /**
- * @brief This class parses any arguments.
+ * @brief This class parses any given arguments.
  * @details The user can opt to add arguments when running the program. This
  * class checks if there are arguments when the program starts and will parse
  * these starting arguments to the simulation.
@@ -39,7 +39,7 @@ class MainArgumentsParser {
    * @brief Takes input parmeter arguments and parses them to corresponding
    * derived mainArgument classes.
    * @details Only looks for valid arguments. Invalid arguments are discarded.
-   * Sets the evenRUleName to default "conway" if none is entered.
+   * Sets the evenRuleName to default "conway" if none is entered.
    * @param argv Argument Vector containing strings of arguments and values.
    * @param lenght containing the number of arguments in the argument vector.
    * @test What happens if the function is given argument parameter. Test that
