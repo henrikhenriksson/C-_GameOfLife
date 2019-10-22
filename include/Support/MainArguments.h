@@ -51,7 +51,8 @@ class BaseArgument {
  public:
   /**
    * @brief initialized constructor for abstract class MainArguments
-   * @details
+   * @details As an abstract class this class constructor is used by its derived
+   * classes to initialize the member variable argValue
    * @param argValue holding entered argument to be parsed.
    * @test create a derived class object and test that argValue was set
    * correctly.
