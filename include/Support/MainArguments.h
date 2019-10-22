@@ -285,14 +285,14 @@ class EvenRuleArgument : public BaseArgument {
 class OddRuleArgument : public BaseArgument {
  public:
   /**
-   * @brief Default constructor for the derived FileArgument class
+   * @brief Default constructor for the derived OddRuleArgument class
    * @details BaseArgument constructor is used to set inherited argValue.
    * @test That an object can be created and that the getValue() function
    * returns the correct argValue.
    */
   OddRuleArgument() : BaseArgument("-or") {}
   /**
-   * @brief Overriden destructor for WorlsizeArgument class.
+   * @brief Overriden destructor for OddRuleArgument class.
    * @details Overriden default destructor for a derived class.
    * @test No recommended tests at this time.
    */
