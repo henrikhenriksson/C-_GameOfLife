@@ -1,6 +1,6 @@
 /**
  * @file RuleOfExistence.h
- * @author      Erik StrÃ¶m
+ * @author      Erik Ström
  * @date        July 2019
  * @version     0.2
  *
@@ -61,8 +61,8 @@ const vector<Directions> DIAGONAL{{1, -1}, {1, 1}, {-1, 1}, {-1, -1}};
  * @details The derivations of RuleOfExistence is what determines the culture
  * of Cell Population. Each rule implements specific behaviours and so may
  * execute some parts in different orders. In order to accommodate this
- * requirement RuleOfExistence will utilize a **Template Method** desing
- * pattern, where all derived rulesimplements their logic based on the virtual
+ * requirement RuleOfExistence will utilize a **Template Method** design
+ * pattern, where all derived rules implemented their logic based on the virtual
  * method executeRule().
 */
 class RuleOfExistence {
@@ -87,7 +87,7 @@ class RuleOfExistence {
    *
    * Test recommendation
    * Count only specified (in constructor) directions
-   * Count various nr of alice cells
+   * Count various nr of alive cells
    * Null input to point
    * negative currentPoint
    * Point out of board
@@ -108,17 +108,15 @@ class RuleOfExistence {
    * Test Recommendation
    * Negative nr of alive Neighbours
    *
-   * @param aliveNeighbours
-   * @param isAlive
-   * @return
+   * @param aliveNeighbours nr of counted alive neighbours given by rule
+   * @param isAlive if the current cell is currentlly alive
+   * @return Action that defines what to happen with the cell next itteration
    */
   ACTION getAction(int aliveNeighbours, bool isAlive);
 
  public:
   /**
    * @brief Constructor for the abstract class RuleOfExistence
-   *
-   * @details
    *
    * Test Recommendations
    * Test that each data field can be set
@@ -150,7 +148,7 @@ class RuleOfExistence {
    * Test Recommendation
    * Create instance and read value
    *
-   * @return string : rule name
+   * @return string : name of rule
    */
   string getRuleName() { return ruleName; }
 };
