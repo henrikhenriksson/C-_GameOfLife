@@ -1,6 +1,11 @@
-//
-// Created by Johan on 2019-10-22.
-//
+/**
+ * @file TestClassRulesOfExistence.hpp
+ * @author Johan Karlsson, joka1806
+ *
+ * @brief This class contains test functionality for the RuleOfExistence class
+ *
+ * @details This class
+ */
 
 #ifndef GAMEOFLIFE_TEST_TESTCLASSRULESOFEXISTENCE_HPP_
 #define GAMEOFLIFE_TEST_TESTCLASSRULESOFEXISTENCE_HPP_
@@ -23,7 +28,7 @@ class TestClassRulesOfExistence : public RuleOfExistence {
   );
 
   static void testCompareDirections(const vector<Directions> &realDir,
-                             const vector<Directions> &expDir);
+                                    const vector<Directions> &expDir);
 
   static void sTestValesRulesOfExistence(
       AccessRulesOfExistence &testClass,
@@ -73,6 +78,7 @@ void TestClassRulesOfExistence::testCompareDirections(const vector<Directions> &
     }
 
 }
+
 void TestClassRulesOfExistence::sTestValesRulesOfExistence(
     AccessRulesOfExistence &testClass,
     map<Point, Cell> &expCells,
