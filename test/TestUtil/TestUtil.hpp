@@ -7,7 +7,9 @@
  *
  * @details This cell should define support functions that modify or
  * interact with test data or tested objects. Functions that only interacts
- * with a specific test object should be places in a Utility file for that class
+ * with a specific test object should be places in a Utility file for that
+ * class. This file should not contain any test functions, only files that
+ * modifies data.
  */
 
 
@@ -58,7 +60,7 @@ void createMap(map<Point, Cell> &map,
  */
 void updateCellAge(map<Point, Cell> &cells,
                    Point center,
-                   std::vector<pair<Point, int>> &newCellAges)
+                   std::vector<pair<Point, int>> &newCellAges);
 
 /**
  * @brief Print the positions and if the cell is a rim cell or not
