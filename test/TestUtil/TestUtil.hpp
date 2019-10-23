@@ -29,7 +29,7 @@
 namespace TestUtil {
 
 /**
- * @brief creates a new empty game map of the defined size
+ * @brief Creates a new empty game map of the defined size
  *
  * @details Sets the global WORLD_DIMENSIONS.HEIGHT and WIDTH to the
  * parameters. The raw size of the world will be width+2 and heigth+2 to
@@ -48,7 +48,7 @@ void createMap(map<Point, Cell> &map,
                bool defineRimCells);
 
 /**
- * @brief updates the cells around the center to the input age.
+ * @brief Updates the cells around the center to the input age.
  *
  * @details Sets the age of the defined cells surrounding the give center
  * point of the game board. There is no check that the center + point
@@ -65,29 +65,35 @@ void updateCellAge(map<Point, Cell> &cells,
 /**
  * @brief Print the positions and if the cell is a rim cell or not
  *
+ * @details Example 1,2:0 for a non rim cell at position 1,2
+ *
  * @todo decide if a prety print should be added to print the game board
  * @todo decide if it is wanted to include a algorytm of what to print such
  * as age or rimCell status
  *
- * @details example 1,2:0 for a non rim cell at position 1,2
  * @param cells to print
  */
 void printIsRimCell(map<Point, Cell> &cells);
 
 /**
- * Checks wheter the cell at the given position is a rim cell or not
- * @todo create a overloaded funciton that takes a Point as input
+ * @brief Checks wheter the cell at the given position is a rim cell or not
  *
- * @param x Cell x pos
- * @param y Cell y pos
+ * @details Does not check if the position is outside the game board or not
+ *
+ * @todo add status[out] and check boarders and overloaded version
+ *
+ * @todo create overloaded version for Position
+ *
+ * @param row Cell x pos
+ * @param col Cell y pos
  * @return
  */
-bool isRimCell(int x, int y);
+bool isPosRimCell(int x, int y);
 
 /**
- * @brief print the age of all cells in the game board
+ * @brief Prints the age of all cells in the game board
  *
- * @details print all the cells on a own row in the format x,y:age
+ * @details Prints all the cells on a own row in the format x,y:age
  *
  * @todo decide if algorithm input and common print function should be developed
  *
@@ -112,7 +118,7 @@ void createMap(map<Point, Cell> &cells,
         for (int col = 0; col <= width + 1; col++) {
             cells[Point{row, col}] =
                 //Create a new rim cell with the calculated rim cell status
-                Cell(defineRimCells && isRimCell(row, col));
+                Cell(defineRimCells && isPosRimCell(row, col));
         }
     }
 }
@@ -125,7 +131,7 @@ void printIsRimCell(map<Point, Cell> &cells) {
     }
 }
 
-bool isRimCell(int row, int col) {
+bool isPosRimCell(int row, int col) {
     //Check if position is around the boarders of the game board
     return ((row == 0) || (row == WORLD_DIMENSIONS.HEIGHT + 1)
         || (col == 0) || col == WORLD_DIMENSIONS.WIDTH + 1);

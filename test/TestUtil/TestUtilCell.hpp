@@ -24,9 +24,9 @@
 namespace TestUtilCell {
 
 /**
- * @brief sets the specific age to a cell.
+ * @brief Sets the specific age to a cell.
  *
- * @details used next generation action and update cells which limits
+ * @details Used next generation action and update cells which limits
  * function to affect non rim cells. If the age 0 is set the cell is killed
  * and setting a age > 0 will give life to the cell
  *
@@ -40,7 +40,7 @@ namespace TestUtilCell {
 bool setCellAge(Cell &cell, int newAge);
 
 /**
- * @brief ages non rim cells ageIterations
+ * @brief Ages non rim cells ageIterations
  *
  * @details If the cell is a non rim cell the cell is aged the given nr of
  * iterations. Dead cells is given life.
@@ -54,7 +54,7 @@ bool setCellAge(Cell &cell, int newAge);
 bool ageCell(Cell &cell, int ageIterations);
 
 /**
- * @brief gives life to dead non rim cells
+ * @brief Gives life to dead non rim cells
  *
  * @details Cells that already are alive is ignored and ded cells are given
  * life. If the cell is a rim cell the action is ignored.
@@ -68,8 +68,10 @@ bool ageCell(Cell &cell, int ageIterations);
 bool setCellAlive(Cell &cell, bool &updated);
 
 /**
- * @overload bool setCellAlive(Cell &cell, bool &updated)
- * Overloaded function where the caller does not care if the cell was updated
+ * @brief See setCellAlive(Cell &cell, bool &updated)
+ *
+ * @details Overloaded function where the caller does not care if the cell was
+ * updated
  * or not
  * @param cell to give life
  * @return operation success
@@ -159,12 +161,6 @@ bool ageCell(Cell &cell, int ageIterations)
         cell.updateState();
     }
     return true;
-}
-
-bool isRimCellPos(int row, int col) {
-    //Check if the given position is a rim cell position
-    return ((row == 0) || (row == WORLD_DIMENSIONS.HEIGHT + 1)
-        || (col == 0) || col == WORLD_DIMENSIONS.WIDTH + 1);
 }
 
 }
