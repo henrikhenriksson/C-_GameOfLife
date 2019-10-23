@@ -15,7 +15,7 @@
 #include <string>
 #include "Cell_Culture/Cell.h"
 #include "catch.hpp"
-#include "CellTester.hpp"
+#include "TestClasses/TestCell.hpp"
 
 /**
  * @brief Tests set and get for isAliveNextGen
@@ -263,7 +263,7 @@ SCENARIO("getValue should return the value set by setNextCellValue after "
                 testCell.updateState();
 
                 //Create THEN header
-                header.clear();
+                header.str(std::string());
                 header << "getValue should return: " << expChar;
 
                 //Check that the cell value has been updated

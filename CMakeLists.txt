@@ -23,6 +23,8 @@ add_definitions(-DDEBUG)
 
 #Add test files
 aux_source_directory(./test SRC_LIST_TEST)
+aux_source_directory(./test/TestUtil SRC_LIST_Test)
+aux_source_directory(test/TestClasses SRC_LIST_TEST)
 #include program files when building test
 list(APPEND SRC_LIST_TEST ${SRC_LIST})
 #Remove program main for program not to get conflict of multiple main files
