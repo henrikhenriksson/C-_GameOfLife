@@ -119,22 +119,24 @@ SCENARIO("Test the WorldsizeArgument Constructor and Public funtions") {
       REQUIRE(WorldsizeTest.getValue() == "-s");
     }
     // Save the previously stored values.
-    Dimensions oldDimensions = WORLD_DIMENSIONS;
+    Dimensions oldDimensions;
+    oldDimensions.HEIGHT = WORLD_DIMENSIONS.HEIGHT;
+    oldDimensions.WIDTH = WORLD_DIMENSIONS.WIDTH;
 
     WHEN("The function execute() is called and given an argument value") {
       ApplicationValues appValues;
-      char* dimensions = "100x240";
+      char* dimensions = "20x24";
       WorldsizeTest.execute(appValues, dimensions);
       THEN(
           "The global variable WORLD_DIMENSIONS.WIDTH should be set to the "
           "given value "
-          "100") {
-        REQUIRE(WORLD_DIMENSIONS.WIDTH == 100);
+          "20") {
+        REQUIRE(WORLD_DIMENSIONS.WIDTH == 20);
         THEN(
             "The global variable WORLD_DIMENSIONS.HEIGHT should be set to "
             "the "
-            "given value 240") {
-          REQUIRE(WORLD_DIMENSIONS.HEIGHT == 240);
+            "given value 24") {
+          REQUIRE(WORLD_DIMENSIONS.HEIGHT == 24);
         }
       }
     }
@@ -142,7 +144,7 @@ SCENARIO("Test the WorldsizeArgument Constructor and Public funtions") {
       ApplicationValues appValues;
       char* dimensions = nullptr;
       THEN("An exception should be thrown") {
-        REQUIRE_THROWS(WorldsizeTest.execute(appValues, dimensions));
+        CHECK_THROWS(WorldsizeTest.execute(appValues, dimensions));
       }
       THEN("runsimulation should be set to false") {
         REQUIRE_FALSE(appValues.runSimulation);
@@ -150,16 +152,17 @@ SCENARIO("Test the WorldsizeArgument Constructor and Public funtions") {
     }
     WHEN("THe function execute() is given an invalid format for given Value") {
       ApplicationValues appValues;
-      char* dimensions = "invalidxstring";
+      char* dimensions = "20xtest";
       THEN("An exception should throw as the function should expect digits") {
-        REQUIRE_THROWS(WorldsizeTest.execute(appValues, dimensions));
+        CHECK_THROWS(WorldsizeTest.execute(appValues, dimensions));
       }
       THEN("runsimulation should be set to false") {
         REQUIRE_FALSE(appValues.runSimulation);
       }
     }
     // restore the old values to isolate the test case changes.
-    WORLD_DIMENSIONS = oldDimensions;
+    WORLD_DIMENSIONS.HEIGHT = oldDimensions.HEIGHT;
+    WORLD_DIMENSIONS.WIDTH = oldDimensions.WIDTH;
   }
 }
 //---------------------------------------------------------------------------
@@ -187,7 +190,7 @@ SCENARIO("Test the FileArgument Constructor and public functions") {
       ApplicationValues appValues;
       char* fileNameArg = nullptr;
       THEN("The function should throw an exception") {
-        REQUIRE_THROWS(FileArgTest.execute(appValues, fileNameArg));
+        CHECK_THROWS(FileArgTest.execute(appValues, fileNameArg));
       }
       THEN("runsimulation should be set to false") {
         REQUIRE_FALSE(appValues.runSimulation);
