@@ -19,6 +19,7 @@
 #include "Support/SupportStructures.h"
 #include "TestUtilCell.hpp"
 #include "Cell_Culture/Cell.h"
+#include "../TestClasses/TestPoint.hpp"
 
 /**
  * @brief Support functions that is not specific to any tested type
@@ -54,13 +55,14 @@ void createMap(map<Point, Cell> &map,
  * point of the game board. There is no check that the center + point
  * position is inside the game board. Only positions that is defined in the
  * vector are updated.
+ *
  * @param cells the game board to affect.
  * @param center Sets the center which the positions of the cells is calculated
  * @param newCellAges defines distances from the center and the ages to set
  */
 void updateCellAge(map<Point, Cell> &cells,
                    Point center,
-                   std::vector<pair<Point, int>> &newCellAges);
+                   std::vector<pair<TestPoint, int>> &newCellAges);
 
 /**
  * @brief Print the positions and if the cell is a rim cell or not
@@ -99,7 +101,39 @@ bool isPosRimCell(int x, int y);
  *
  * @param cells defining the game board
  */
-void printCellAge(map<Point, Cell> &cells );
+void printCellAge(map<Point, Cell> &cells);
+
+/**
+ * @brief Adds 2 points.
+ *
+ * @details Since the points or directions has not overloaded the + or +=
+ * operators this function simply adds the cordinated of the 2 points
+ *
+ * @param p1
+ * @param p2
+ * @return p1 + p2
+ */
+Point addPoints(Point p1, Point p2); //Todo make infinity nr of points
+
+/**
+ * @brief Creates a string representation of the Point
+ *
+ * @details In the form [p1.x],[p1.y]
+ * @param p1 Point to represent
+ * @return string conversion
+ */
+std::string pointToStr(Point p1);
+
+/**
+ * @brief Creates a string representation of the Distance
+ *
+ * @details In the form [d1.x],[d1.y]
+ * @param d1 Point to represent
+ * @return string conversion
+ */
+std::string distToStr(Point d1);
+
+
 
 //-------------------------------------------------------------------------------------
 void createMap(map<Point, Cell> &cells,
@@ -107,18 +141,25 @@ void createMap(map<Point, Cell> &cells,
                int width,
                bool defineRimCells) {
     //Clear existing cells in the game map.
-    cells.clear();
-
+    //cells.clear();
     //Update world dimensions
     WORLD_DIMENSIONS.HEIGHT = height;
     WORLD_DIMENSIONS.WIDTH = width;
 
+
     //Iterate through the world and create a new cell for each position
     for (int row = 0; row <= height + 1; row++) {
         for (int col = 0; col <= width + 1; col++) {
-            cells[Point{row, col}] =
-                //Create a new rim cell with the calculated rim cell status
-                Cell(defineRimCells && isPosRimCell(row, col));
+            cells.insert(
+                pair<Point, Cell>
+                    (
+                        Point{row, col},
+                        Cell(defineRimCells && isPosRimCell(row, col))
+                    )
+            );
+//            cells[Point{row,col}] =
+//                Cell( defineRimCells && isPosRimCell(row, col) );
+//                cells[Point{row, col}] = Cell(true);
         }
     }
 }
@@ -137,7 +178,7 @@ bool isPosRimCell(int row, int col) {
         || (col == 0) || col == WORLD_DIMENSIONS.WIDTH + 1);
 }
 
-void printCellAge(map<Point, Cell> &cells ) {
+void printCellAge(map<Point, Cell> &cells) {
     //Iterate through all the cells and print position and age
     for (auto mapIt : cells) {
         std::cout << " " << mapIt.first.x << "," << mapIt.first.y
@@ -147,7 +188,7 @@ void printCellAge(map<Point, Cell> &cells ) {
 
 void updateCellAge(map<Point, Cell> &cells,
                    Point center,
-                   std::vector<pair<Point, int>> &newCellAges) {
+                   std::vector<pair<TestPoint, int>> &newCellAges) {
 
     int newX, newY; //Variables used to temp store the new positions
     for (auto update : newCellAges) {
@@ -161,6 +202,20 @@ void updateCellAge(map<Point, Cell> &cells,
         //set the age of the cell
         TestUtilCell::setCellAge(cells[newPoint], update.second);
     }
+}
+
+std::string pointToStr(Point p1)
+{
+    std::stringstream output;
+    output << p1.x << "," << p1.y;
+    return output.str();
+}
+
+std::string distToStr(Directions d1)
+{
+    std::stringstream output;
+    output << d1.HORIZONTAL << "," << d1.VERTICAL;
+    return output.str();
 }
 }
 #endif //GAMEOFLIFE_TEST_TESTUTIL_H_

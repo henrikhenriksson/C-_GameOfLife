@@ -7,7 +7,7 @@
 #include "TestClasses/TestClassRulesOfExistence.hpp"
 #include "TestClasses/AccessRulesOfExistence.hpp"
 #include "TestUtil/TestUtil.hpp"
-
+#include "TestClasses/TestPoint.hpp"
 
 #define RULES_OF_EXISTENCE_TAG "[RulesOfExistence]"
 
@@ -22,41 +22,75 @@ SCENARIO("Set constructor values should be stored in class",
     }
 }
 
-SCENARIO("Given a specific nr of alive neighbours", "[Test]")
-{
+SCENARIO("Given a existing board", RULES_OF_EXISTENCE_TAG) {
     //Test for rules using the 3 defined direction types
     //All, Cardinal, Diagonal
+
+    //Create board
     map<Point, Cell> cells;
-    TestUtil::createMap(cells, 1,1, false);
+    TestUtil::createMap(cells, 1, 1, false);
 
-    vector<Directions> dir = ALL_DIRECTIONS;
-    AccessRulesOfExistence testClass(cells, dir);
-    vector<Directions> testDir = testClass.getDirections();
-    std::cout << "TEste" << std::endl;
+    //Check start conditions
+    GIVEN("An new game board") {
 
-    GIVEN("Rules with direction: ") { ///@toto add direction to header
+        WHEN("Elements are added") {
 
-        //Create map with updated cells
-        Point d1 {1,1};
-
-        std::vector<pair<Point, int>> newCellAges;
-        newCellAges.push_back(std::make_pair(d1, 1));
-
-        Point center{1,1};
-        //Make util function
-        TestUtil::updateCellAge(cells, center, newCellAges);
-//
-//
-//        REQUIRE(cells[Point{2,2}].isAlive());
-//
-//
-//        TestUtil::printAliveCell(cells );
-//        THEN("Alive counter should return 1")
-//        {
-//            // Why is direction no longer set in testClass
-//            TestUtil::printAliveCell(cells );
-//            REQUIRE(1 == testClass.countAliveNeighbours(Point{1,1}));
-//        }
+            THEN("The bord should not be empty") {
+                REQUIRE(!cells.empty());
+                REQUIRE(9 == cells.size());
+            }
+        }
     }
+
+    //Create a test instance
+    AccessRulesOfExistence testClass(cells, ALL_DIRECTIONS);
+
+    //define center point to set new values
+    Point center{1, 1};
+    GIVEN("Rules That checks all directions") { ///@toto add direction to header
+
+
+        int age = 1;
+
+        for (auto alivePos : ALL_DIRECTIONS) {
+
+            TestPoint pointAlive = center + alivePos;
+
+            //Test age to use
+            std::stringstream header;
+            header << "Current Alive cell is placed at distance from Cell: "
+                      "" << alivePos << " abs pos: " << pointAlive;
+
+            WHEN(header.str()) {
+                //Update the current direction from the center point [1,1]
+                std::vector<pair<TestPoint, int>> newCellAges;
+                newCellAges.emplace_back(alivePos, age);
+
+
+                //Update cell values
+                TestUtil::updateCellAge(cells, center, newCellAges);
+
+                bool cellIsAlive;
+
+                std::cout << "Cell" << alivePos << std::endl;
+
+                cellIsAlive = cells.at(
+                    pointAlive.toPoint()).isAlive();
+
+                THEN("The point ... should be alive") { //Requiere update header
+                    REQUIRE(cellIsAlive);
+                }
+
+                THEN("Alive counter for the center point should return 1") {
+                    // Why is direction no longer set in testClass
+                    TestUtil::printCellAge(cells);
+                    REQUIRE(
+                        1 == testClass.countAliveNeighbours(center)
+                    );
+                }
+            }
+        }
+    }
+
 }
 
