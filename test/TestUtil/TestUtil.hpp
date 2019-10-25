@@ -19,7 +19,7 @@
 #include "Support/SupportStructures.h"
 #include "TestUtilCell.hpp"
 #include "Cell_Culture/Cell.h"
-#include "../TestClasses/TestPoint.hpp"
+
 
 /**
  * @brief Support functions that is not specific to any tested type
@@ -103,35 +103,7 @@ bool isPosRimCell(int x, int y);
  */
 void printCellAge(map<Point, Cell> &cells);
 
-/**
- * @brief Adds 2 points.
- *
- * @details Since the points or directions has not overloaded the + or +=
- * operators this function simply adds the cordinated of the 2 points
- *
- * @param p1
- * @param p2
- * @return p1 + p2
- */
-Point addPoints(Point p1, Point p2); //Todo make infinity nr of points
 
-/**
- * @brief Creates a string representation of the Point
- *
- * @details In the form [p1.x],[p1.y]
- * @param p1 Point to represent
- * @return string conversion
- */
-std::string pointToStr(Point p1);
-
-/**
- * @brief Creates a string representation of the Distance
- *
- * @details In the form [d1.x],[d1.y]
- * @param d1 Point to represent
- * @return string conversion
- */
-std::string distToStr(Point d1);
 
 
 
@@ -204,18 +176,6 @@ void updateCellAge(map<Point, Cell> &cells,
     }
 }
 
-std::string pointToStr(Point p1)
-{
-    std::stringstream output;
-    output << p1.x << "," << p1.y;
-    return output.str();
-}
 
-std::string distToStr(Directions d1)
-{
-    std::stringstream output;
-    output << d1.HORIZONTAL << "," << d1.VERTICAL;
-    return output.str();
-}
 }
 #endif //GAMEOFLIFE_TEST_TESTUTIL_H_

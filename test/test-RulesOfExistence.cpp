@@ -4,10 +4,10 @@
  * @brief Contains test cases for the class RulesOfExistence
  */
 #include "catch.hpp"
-#include "TestClasses/TestClassRulesOfExistence.hpp"
-#include "TestClasses/AccessRulesOfExistence.hpp"
+#include "TestPoint.h"
+#include "TestSrcFiles/TestClassRulesOfExistence.hpp"
+#include "TestSrcFiles/AccessRulesOfExistence.hpp"
 #include "TestUtil/TestUtil.hpp"
-#include "TestClasses/TestPoint.hpp"
 
 #define RULES_OF_EXISTENCE_TAG "[RulesOfExistence]"
 
@@ -46,7 +46,7 @@ SCENARIO("Given a existing board", RULES_OF_EXISTENCE_TAG) {
     AccessRulesOfExistence testClass(cells, ALL_DIRECTIONS);
 
     //define center point to set new values
-    Point center{1, 1};
+    TestPoint center{1, 1};
     GIVEN("Rules That checks all directions") { ///@toto add direction to header
 
 
@@ -54,12 +54,12 @@ SCENARIO("Given a existing board", RULES_OF_EXISTENCE_TAG) {
 
         for (auto alivePos : ALL_DIRECTIONS) {
 
-            TestPoint pointAlive = center + alivePos;
+            TestPoint pointAlive = center + TestPoint(alivePos);
 
             //Test age to use
             std::stringstream header;
-            header << "Current Alive cell is placed at distance from Cell: "
-                      "" << alivePos << " abs pos: " << pointAlive;
+            header << "Current Alive cell is placed at distance from Cell: " ;
+//                      "" << alivePos << " abs pos: " << pointAlive;
 
             WHEN(header.str()) {
                 //Update the current direction from the center point [1,1]
@@ -68,11 +68,11 @@ SCENARIO("Given a existing board", RULES_OF_EXISTENCE_TAG) {
 
 
                 //Update cell values
-                TestUtil::updateCellAge(cells, center, newCellAges);
+                TestUtil::updateCellAge(cells, center.toPoint(), newCellAges);
 
                 bool cellIsAlive;
 
-                std::cout << "Cell" << alivePos << std::endl;
+//                std::cout << "Cell" << alivePos << std::endl;
 
                 cellIsAlive = cells.at(
                     pointAlive.toPoint()).isAlive();
@@ -85,7 +85,7 @@ SCENARIO("Given a existing board", RULES_OF_EXISTENCE_TAG) {
                     // Why is direction no longer set in testClass
                     TestUtil::printCellAge(cells);
                     REQUIRE(
-                        1 == testClass.countAliveNeighbours(center)
+                        1 == testClass.countAliveNeighbours(center.toPoint())
                     );
                 }
             }

@@ -15,7 +15,7 @@
 #include <string>
 #include "Cell_Culture/Cell.h"
 #include "catch.hpp"
-#include "TestClasses/TestCell.hpp"
+#include "TestSrcFiles/TestFuncitonsCell.hpp"
 
 /**
  * @brief Tests set and get for isAliveNextGen
