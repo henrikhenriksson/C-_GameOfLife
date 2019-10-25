@@ -9,6 +9,13 @@
  * @details This file contains an abstract base class and several derived
  * classes that each handles a different argument parameter that can be passed
  * by the used when running the simulation
+ *
+ * @issue The main abstract class BaseArgument contains a protected member
+ * function that prints a message to the console. This is not desired behaviour
+ * as the class should be silent. Errors should be handled through catching
+ * exceptions further down in the class structure. The function "printNoValue()"
+ * interferes with testing as the message is repeatedly printed to console
+ * during testing.
  */
 
 #ifndef GAMEOFLIFE_MAINARGUMENTS_H
@@ -89,7 +96,7 @@ class BaseArgument {
 
 /**
  * @brief This class handles the help argument if passed by the user.
- * @detail derived class of BaseArgument. Presents a help screen if the -h
+ * @details derived class of BaseArgument. Presents a help screen if the -h
  * argument is given. The main program "gameOfLife" is not executed if this
  * class is called.
  * @test Test the constructor when given the -h argument. If a helpArgument
@@ -119,8 +126,7 @@ class HelpArgument : public BaseArgument {
    * Calls the function printHelpScreen() for the current running instance.
    * @param appValues struct holding application Values
    * @param value holding any entered parameter after the help argument.
-   * @test Pass defalt ApplicationValues object and value, test that the
-   * function sets runSimulation to false.
+   * @test Test that the function sets appValue bool runSimulation to false.
    */
   void execute(ApplicationValues& appValues, char* value) override;
 };
@@ -155,10 +161,19 @@ class GenerationsArgument : public BaseArgument {
    * is passed, the simulation will not run.
    * @param appValues struct holding application Values
    * @param generations holding the ammount of generations to run.
-   * @test Pass default ApplicationValues object and a given value, test that
-   * the function sets maxGeneration to the correct value.
-   * @test Test that error message is printed if the argument is passed with no
+   * @test Test that the function sets maxGeneration to the correct value.
+   * @test Test that exception is thrown if the argument is passed with no
    * value.
+   * @test Test that the bool runSimulation is set to false if argument i passed
+   * with no/invalid value.
+   * @bug [WHEN Execute is called and given no value] no exception is thrown
+   * where one should be. The function instead calls a print function from a
+   * class that should be silent. Bool runSimulation is not set to false.
+   * @bug [WHEN Execute is called and given an invalid input for Value] no
+   * exception is thrown where one should be. Bool runSimulation is not set to
+   * false. The function has no check to make sure the parameter Value contains
+   * valid digits. The program will call an abort() function if invalid input is
+   * entered after the -g argument, as the stoi() is given an invalid parameter.
    */
   void execute(ApplicationValues& appValues, char* generations) override;
 };
@@ -192,10 +207,21 @@ class WorldsizeArgument : public BaseArgument {
    * passed, the simulation will not run.
    * @param appValues struct holding application Values
    * @param dimension holding the size the world will have.
-   * @test Pass default ApplicationValues object and a given value, test that
-   * the function sets WORLD_DIMENSTIONS.WIDTH and .HEIGHT to the correct value.
-   * @test Test that error message is printed if the argument is passed with no
+   * @test Test that the function sets WORLD_DIMENSTIONS.WIDTH and .HEIGHT to
+   * the correct value.
+   * @test Test that exception is thrown if the argument is passed with no
    * value.
+   * @test Test that an exception is thrown if the user has entered invalid
+   * argument value.
+   * @test Test that the bool runSimulation is set to false if argument is
+   * passed with no/invalid value.
+   * @bug [WHEN Execute is called and given no value] no exception is thrown
+   * where one should be. The function instead calls a print function from a
+   * class that should be silent. Bool runSimulation is not set to false
+   * @bug [WHEN Execute is called and given an invalid input for given Value] no
+   * exception is thrown where one should be. Bool runSimulation is not set to
+   * false. The function has no check to make sure given parameter Value
+   * contains valid digits.
    */
   void execute(ApplicationValues& appValues, char* dimensions) override;
 };
@@ -230,10 +256,14 @@ class FileArgument : public BaseArgument {
    * the simulation will not run.
    * @param appValues struct holding application Values
    * @param fileNameArg holding the filename to be read from.
-   * @test Pass default ApplicationValues object and a given value, test that
-   * the function sets filename to the correct value.
-   * @test Test that error message is printed if the argument is passed with no
+   * @test Test that the function sets filename to the correct value.
+   * @test Test that an exception is thrown if the argument is passed with no
    * value.
+   * @test Test that the bool runSimulation is set to false if argument is
+   * passed with no value.
+   * @bug [WHEN Execute is called and given no value] no exception is thrown
+   * where one should be. The function instead calls a print function from a
+   * class that should be silent.
    */
   void execute(ApplicationValues& appValues, char* fileNameArg) override;
 };
@@ -270,8 +300,13 @@ class EvenRuleArgument : public BaseArgument {
    * @param evenRule holding rule to be used for even generations.
    * @test Pass default ApplicationValues object and a given value, test that
    * the function sets evenRuleName to the correct value.
-   * @test Test that error message is printed if the argument is passed with no
+   * @test Test that an exception is thrown if the argument is passed with no
    * value.
+   * @test Test that the bool runSimulation is set to false if argument is
+   * passed with no value.
+   * @bug [WHEN Execute is called and given no value] no exception is thrown
+   * where one should be. The function instead calls a print function from a
+   * class that should be silent. The bool runSimulation is not set to false.
    */
   void execute(ApplicationValues& appValues, char* evenRule) override;
 };
@@ -307,8 +342,13 @@ class OddRuleArgument : public BaseArgument {
    * @param oddRule holding the rule to be used for odd generations.
    * @test Pass default ApplicationValues object and a given value, test that
    * the function sets oddRuleName to the correct value.
-   * @test Test that error message is printed if the argument is passed with no
+   * @test Test that exception is thrown if the argument is passed with no
    * value.
+   * @test Test that the bool runSimulation is set to false if argument is
+   * passed with no value.
+   * @bug [WHEN Execute is called and given no value] no exception is thrown
+   * where one should be. The function instead calls a print function from a
+   * class that should be silent. The bool runSimulation is not set to false.
    */
   void execute(ApplicationValues& appValues, char* oddRule) override;
 };
