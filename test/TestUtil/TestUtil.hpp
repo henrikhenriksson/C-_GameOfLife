@@ -61,8 +61,27 @@ void createMap(map<Point, Cell> &map,
  * @param newCellAges defines distances from the center and the ages to set
  */
 void updateCellAge(map<Point, Cell> &cells,
+                   TestPoint center,
+                   std::vector<pair<TestPoint, int>> &newCellAges);
+
+/**
+ * @brief Overloaded version of void updateCellAge(map<Point, Cell> &cells,
                    Point center,
                    std::vector<pair<TestPoint, int>> &newCellAges);
+   with center set to [0,0]
+ * @param cells
+ * @param newCellAges
+ */
+void updateCellAge(map<Point, Cell> &cells,
+    std::vector<pair<TestPoint, int>>& newCellAges);
+
+/**
+ * @brief Updates the age of a singel cell
+ * @param cells Game board
+ * @param pos Positon to update
+ * @param age New Age to set
+ */
+void updateCellAge(map<Point, Cell> &cells, TestPoint pos, int age);
 
 /**
  * @brief Print the positions and if the cell is a rim cell or not
@@ -159,21 +178,30 @@ void printCellAge(map<Point, Cell> &cells) {
 }
 
 void updateCellAge(map<Point, Cell> &cells,
-                   Point center,
+                   std::vector<pair<TestPoint, int>>& newCellAges)
+{
+    updateCellAge(cells, TestPoint(0,0), newCellAges);
+}
+
+void updateCellAge(map<Point, Cell> &cells,
+                   TestPoint center,
                    std::vector<pair<TestPoint, int>> &newCellAges) {
 
     int newX, newY; //Variables used to temp store the new positions
     for (auto update : newCellAges) {
 
-        //Calculate absolute position and create a pont with the absolute
-        // position
-        newX = (center.x + update.first.x);
-        newY = (center.y + update.first.y);
-        Point newPoint{newY, newX};
-
         //set the age of the cell
-        TestUtilCell::setCellAge(cells[newPoint], update.second);
+        TestUtilCell::setCellAge(
+            cells[(center + update.first).toPoint()],
+            update.second);
+        //TestUtilCell::setCellAge(cells[newPoint], update.second);
     }
+}
+
+void updateCellAge(map<Point, Cell> &cells, TestPoint pos, int age)
+{
+    TestUtilCell::setCellAge(
+        cells[pos.toPoint()],age);
 }
 
 
