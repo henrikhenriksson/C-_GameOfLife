@@ -6,7 +6,7 @@ Description This is the Main readme file that will be used to present the projec
 
 # **Game of Life**
 
-Game of Life, Life, Conway's Game of Life, är en cellulär automat där användaren väljer en startuppställning som helt avgör hur simulationen kommer att utvecklas, enligt strikta regler. Utmaningen ligger i att hitta startuppställningar som ger intressanta utvecklingar. Game of Life är ett exempel på hur komplicerade mönster kan uppstå från väldigt enkla regler, ett fenomen som kallas emergens.
+Game of Life, är en cellulär automat där användaren väljer en startuppställning som helt avgör hur simulationen kommer att utvecklas, enligt strikta regler. Utmaningen ligger i att hitta startuppställningar som ger intressanta utvecklingar. Game of Life är ett exempel på hur komplicerade mönster kan uppstå från väldigt enkla regler, ett fenomen som kallas emergens. Under tiden har allt fler användare skapat egna uppsättningar regler som ger unika utvecklingar.
 
 Programmet uppfanns av John Horton Conway 1970. _[1]_
 
@@ -80,6 +80,8 @@ Studenterna ska kunna visa prov på praktisk erfarenhet av:
 
 # Genomförande
 
+**IN PROGRESS**
+
 Efter gruppindelningen har gruppen skapat ett Trello Bräde som baserats på ett exempelbräde tillhandahållet i kursmaterialet. Medlemmarna höll därefter en diskussion om hur arbetet smidigast kunnat läggas upp och kom överens om en grov skiss för ett arbetssätt att följa, med reservationen om att detta arbetssätt skulle komma att utvecklas under projektets gång när nya behov uppstått och nya infallsvinklar betraktats.
 
 Den gruppmedlem som kommit fram till att en uppggift behöver genomföras skapar ett kort på Trellobrädet. Men inget krav ställs på att just den medlemen som skapat kortet genomför uppgiften. Vanligast har dock blivit att den medlem som skapat kortet tagit kortet vidare från "Backlog" till "In Progress" och vidare.
@@ -94,7 +96,7 @@ När en uppgift slutförts och lagts för peer review har genomgång skett i oli
 
 ## Utvecklingsmiljöer och verktyg:
 
-### Henrik:
+### **Henrik:**
 
 Jag har främst utfört uppgifterna på en Windows 10 maskin, med Visual Studio Community version 16.3.5 som främsta utvecklingsmiljö. Jag har även använt mig av cLion för Windows version 2019.2.4.
 
@@ -104,11 +106,19 @@ För versionshantering använder jag GIT version 2.23.0 för Windows.
 
 För dokumentation har jag använt doxygen version 1.8.16 för Windows.
 
-### Johan:
-
-**IN PROGRESS**
+### **Johan:**
 
 # Diskussion
+
+## (gemensam)
+
+## Uppkomna hinder
+
+# Slutsatser och kommentarer
+
+## Reflektioner Henrik
+
+## Reflektioner Johan
 
 **IN PROGRESS**
 
