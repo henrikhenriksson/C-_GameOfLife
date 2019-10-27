@@ -11,7 +11,21 @@ and automatically generated HTML style documentation for all provided classes.\n
 /**
 * @page about_the_authors Presentation about the project members:
 * @section Author1 Henrik Henriksson
-TODO: Add information and image
+* @image html Henrik.png
+Jag är uppvuxen i Östersund och har läst naturvetenskapliga programmet på gymnasiet.\n
+
+Jag läser nu andra året på programvaruteknik på Mittuniversitetet i Östersund,\n där jag är en av få elever som faktiskt läser det här programmet på Campus.\n\n
+
+Jag valde att studera programvaruteknik eftersom jag alltid haft ett intresse\n för datorer, hårdvara och mjukvara, men aldrig tidigare dykt djupare i hur saker\n och ting faktiskt fungerar. I framtiden tänker jag mig en karriär\n inom programutveckling.
+
+Efter gymnasiet har jag arbetat på ett antal olika kontor med varierande uppgifter.\n Var jag än jobbat har jag på grund av mitt intresse blivit den som\n blivit teamtets "it-kille". I mitt nuvarande arbete som handläggare på\n en statlig myndighet har jag insett att vi utför många rutinmässiga uppgifter,\n skriver samma texter om och om igen med mycket små variationer.
+
+Jag började därför leka med ett scriptspråk kallat Autohotkey. Väldigt enkelt\n till en början till att bli mer och mer av ett hobbyprojekt då jag och några\n kollegor insåg hur mycket vi kunde få ut av att själva automatisera moment och textinmatning.\n Det script jag en gång påbörjade tillsammans med mina kollegor \n har nu sedan jag började det här programmet utvecklats ordentligt och även\n spritit sig inom myndigheten till att bli ett verktyg som används av\n handläggare över hela riket.\n\n
+
+Fritiden spenderar jag mest med min sambo och min strax ettåriga son.\n Om jag får tid över från det spelar jag främst klassikern World of Warcraft med vänner.\n
+
+
+
 * @section Author2 Johan Karlsson
 TODO: Add information and image
 */
