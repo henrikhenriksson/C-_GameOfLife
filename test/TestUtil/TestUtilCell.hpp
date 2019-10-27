@@ -84,7 +84,7 @@ bool setCellAlive(Cell &cell);
 bool setCellAlive(Cell &cell)
 {
     bool dummy;
-    return setCellAge(cell, dummy);
+    return setCellAlive(cell, dummy);
 }
 
 bool setCellAlive(Cell &cell, bool &updated) {
@@ -120,11 +120,11 @@ bool setCellAge(Cell &cell, int newAge) {
         //Kill cell to reset age
         cell.setNextGenerationAction(KILL_CELL);
         cell.updateState();
+    }
 
-        //Give cell life again
-        if(newAge > 0) {
-            setCellAlive(cell);
-        }
+    //Give cell life again
+    if(newAge > 0) {
+        setCellAlive(cell);
     }
 
     //Age the cell the remaining wanted iterations
