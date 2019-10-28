@@ -2,9 +2,7 @@
 // Created by Johan on 2019-10-25.
 //
 
-#include <iostream>
 #include "TestPoint.h"
-#include "GoL_Rules/RuleOfExistence.h"
 
 Directions TestPoint::toDirections() { return Directions{x, y}; }
 

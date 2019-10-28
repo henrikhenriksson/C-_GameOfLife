@@ -53,12 +53,6 @@ void TestUtil::printCellAge(std::map<Point, Cell> &cells) {
 }
 
 void TestUtil::updateCellAge(std::map<Point, Cell> &cells,
-                   std::vector<pair<TestPoint, int>>& newCellAges)
-{
-    updateCellAge(cells, TestPoint(0,0), newCellAges);
-}
-
-void TestUtil::updateCellAge(std::map<Point, Cell> &cells,
                    TestPoint center,
                    std::vector<pair<TestPoint, int>> &newCellAges) {
 
@@ -73,11 +67,11 @@ void TestUtil::updateCellAge(std::map<Point, Cell> &cells,
     }
 }
 
-void TestUtil::updateCellAge(std::map<Point, Cell> &cells, TestPoint pos, int
-age)
+void TestUtil::updateCellAge(std::map<Point, Cell> &cells,
+    TestPoint pos,
+    int age)
 {
-    TestUtilCell::setCellAge(
-        cells[pos.toPoint()],age);
+    TestUtilCell::setCellAge(cells[pos.toPoint()],age);
 }
 
 

@@ -70,9 +70,15 @@ void updateCellAge(std::map<Point, Cell> &cells,
                    std::vector<pair<TestPoint, int>> &newCellAges);
 
 /**
- * @brief Overloaded version of void updateCellAge(map<Point, Cell> &cells,
-                   Point center,
-                   std::vector<pair<TestPoint, int>> &newCellAges);
+ * @brief Updates the age for the cell at the given pos
+ *
+ * @details Updates the age for a non rim cells at positions.
+ * Rim cells cant be updated with this function due to restrictions in the
+ * Cell class
+ *
+ */
+void updateCellAge(std::map<Point, Cell> &cells, TestPoint pos, int
+age);
 
 /**
  * @brief Print the positions and if the cell is a rim cell or not
