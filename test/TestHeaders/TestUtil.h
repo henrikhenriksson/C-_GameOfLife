@@ -16,8 +16,10 @@
 #ifndef GAMEOFLIFE_TEST_TESTUTIL_H_
 #define GAMEOFLIFE_TEST_TESTUTIL_H_
 
+#include <map>
 #include "Support/SupportStructures.h"
-#include "TestUtilCell.hpp"
+#include "TestUtilCell.h"
+#include "TestP
 #include "Cell_Culture/Cell.h"
 
 
@@ -28,6 +30,9 @@
  * with test data or objects that are note tied to a specific class or type.
  */
 namespace TestUtil {
+
+static const char *ACTIONNames[] = {"KILL_CELL", "IGNORE_CELL",
+                                    "GIVE_CELL_LIFE", "DO_NOTHING"};
 
 /**
  * @brief Creates a new empty game map of the defined size
@@ -43,7 +48,7 @@ namespace TestUtil {
  * @param defineRimCells should the cells surrounding the game board be set to
  * rimCells
  */
-void createMap(map<Point, Cell> &map,
+void createMap(std::map<Point, Cell> &map,
                int height,
                int width,
                bool defineRimCells);
@@ -60,7 +65,7 @@ void createMap(map<Point, Cell> &map,
  * @param center Sets the center which the positions of the cells is calculated
  * @param newCellAges defines distances from the center and the ages to set
  */
-void updateCellAge(map<Point, Cell> &cells,
+void updateCellAge(std::map<Point, Cell> &cells,
                    TestPoint center,
                    std::vector<pair<TestPoint, int>> &newCellAges);
 
@@ -68,20 +73,6 @@ void updateCellAge(map<Point, Cell> &cells,
  * @brief Overloaded version of void updateCellAge(map<Point, Cell> &cells,
                    Point center,
                    std::vector<pair<TestPoint, int>> &newCellAges);
-   with center set to [0,0]
- * @param cells
- * @param newCellAges
- */
-void updateCellAge(map<Point, Cell> &cells,
-    std::vector<pair<TestPoint, int>>& newCellAges);
-
-/**
- * @brief Updates the age of a singel cell
- * @param cells Game board
- * @param pos Positon to update
- * @param age New Age to set
- */
-void updateCellAge(map<Point, Cell> &cells, TestPoint pos, int age);
 
 /**
  * @brief Print the positions and if the cell is a rim cell or not
@@ -178,30 +169,21 @@ void printCellAge(map<Point, Cell> &cells) {
 }
 
 void updateCellAge(map<Point, Cell> &cells,
-                   std::vector<pair<TestPoint, int>>& newCellAges)
-{
-    updateCellAge(cells, TestPoint(0,0), newCellAges);
-}
-
-void updateCellAge(map<Point, Cell> &cells,
-                   TestPoint center,
+                   Point center,
                    std::vector<pair<TestPoint, int>> &newCellAges) {
 
     int newX, newY; //Variables used to temp store the new positions
     for (auto update : newCellAges) {
 
-        //set the age of the cell
-        TestUtilCell::setCellAge(
-            cells[(center + update.first).toPoint()],
-            update.second);
-        //TestUtilCell::setCellAge(cells[newPoint], update.second);
-    }
-}
+        //Calculate absolute position and create a pont with the absolute
+        // position
+        newX = (center.x + update.first.x);
+        newY = (center.y + update.first.y);
+        Point newPoint{newY, newX};
 
-void updateCellAge(map<Point, Cell> &cells, TestPoint pos, int age)
-{
-    TestUtilCell::setCellAge(
-        cells[pos.toPoint()],age);
+        //set the age of the cell
+        TestUtilCell::setCellAge(cells[newPoint], update.second);
+    }
 }
 
 
