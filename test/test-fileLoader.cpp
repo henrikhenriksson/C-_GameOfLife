@@ -21,17 +21,19 @@
  * found, closing application".
  */
 SCENARIO("Loading a population from an invalid file") {
+  std::string oldFile = fileName;
   GIVEN("a Map holding cells") {
     map<Point, Cell> cells;
     WHEN("an invalid filename is entered:") {
       fileName = "invalid.txt";
       FileLoader fileloader;
       THEN("an exception should be thrown, with error message:") {
-        REQUIRE_THROWS_WITH(fileloader.loadPopulationFromFile(cells),
-                            "Could not find file. Closing application");
+        CHECK_THROWS_WITH(fileloader.loadPopulationFromFile(cells),
+                          "Could not find file. Closing application");
       }
     }
   }
+  fileName = oldFile;
 }
 
 /**
@@ -43,6 +45,7 @@ SCENARIO("Loading a population from an invalid file") {
  * the .exe.
  */
 SCENARIO("Loading and building a population from a valid file") {
+  std::string oldFile = fileName;
   GIVEN("a Map holding cells") {
     map<Point, Cell> cells;
     WHEN("a valid filename is entered") {
@@ -54,5 +57,6 @@ SCENARIO("Loading and building a population from a valid file") {
       }
     }
   }
+  fileName = oldFile;
 }
 //---------------------------------------------------------------------------
