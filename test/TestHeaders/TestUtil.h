@@ -19,7 +19,7 @@
 #include <map>
 #include "Support/SupportStructures.h"
 #include "TestUtilCell.h"
-#include "TestP
+#include "TestPoint.h"
 #include "Cell_Culture/Cell.h"
 
 
@@ -112,80 +112,6 @@ bool isPosRimCell(int x, int y);
  * @param cells defining the game board
  */
 void printCellAge(map<Point, Cell> &cells);
-
-
-
-
-
-//-------------------------------------------------------------------------------------
-void createMap(map<Point, Cell> &cells,
-               int height,
-               int width,
-               bool defineRimCells) {
-    //Clear existing cells in the game map.
-    //cells.clear();
-    //Update world dimensions
-    WORLD_DIMENSIONS.HEIGHT = height;
-    WORLD_DIMENSIONS.WIDTH = width;
-
-
-    //Iterate through the world and create a new cell for each position
-    for (int row = 0; row <= height + 1; row++) {
-        for (int col = 0; col <= width + 1; col++) {
-            cells.insert(
-                pair<Point, Cell>
-                    (
-                        Point{row, col},
-                        Cell(defineRimCells && isPosRimCell(row, col))
-                    )
-            );
-//            cells[Point{row,col}] =
-//                Cell( defineRimCells && isPosRimCell(row, col) );
-//                cells[Point{row, col}] = Cell(true);
-        }
-    }
-}
-
-void printIsRimCell(map<Point, Cell> &cells) {
-    //Iterate through all the cells and print their rim cell status
-    for (auto mapIt : cells) {
-        std::cout << mapIt.first.x << "," << mapIt.first.y
-                  << ":" << mapIt.second.isRimCell() << std::endl;
-    }
-}
-
-bool isPosRimCell(int row, int col) {
-    //Check if position is around the boarders of the game board
-    return ((row == 0) || (row == WORLD_DIMENSIONS.HEIGHT + 1)
-        || (col == 0) || col == WORLD_DIMENSIONS.WIDTH + 1);
-}
-
-void printCellAge(map<Point, Cell> &cells) {
-    //Iterate through all the cells and print position and age
-    for (auto mapIt : cells) {
-        std::cout << " " << mapIt.first.x << "," << mapIt.first.y
-                  << ":" << mapIt.second.getAge() << std::endl;
-    }
-}
-
-void updateCellAge(map<Point, Cell> &cells,
-                   Point center,
-                   std::vector<pair<TestPoint, int>> &newCellAges) {
-
-    int newX, newY; //Variables used to temp store the new positions
-    for (auto update : newCellAges) {
-
-        //Calculate absolute position and create a pont with the absolute
-        // position
-        newX = (center.x + update.first.x);
-        newY = (center.y + update.first.y);
-        Point newPoint{newY, newX};
-
-        //set the age of the cell
-        TestUtilCell::setCellAge(cells[newPoint], update.second);
-    }
-}
-
 
 }
 #endif //GAMEOFLIFE_TEST_TESTUTIL_H_
