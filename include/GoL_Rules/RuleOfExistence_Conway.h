@@ -40,7 +40,7 @@ class RuleOfExistence_Conway : public RuleOfExistence {
  * calculates and sets the next generation action and color. Does only define
  * colors for alive and dead
  *
- * Test Recomendations
+ * Test Recommendations
  * Test that the correct action is set for an cell
  * Test that a cell that is given life gets the correct color
  * Test that a cell that is killed gets the correct color
