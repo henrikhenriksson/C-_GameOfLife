@@ -1,6 +1,6 @@
 /**
  * @file RuleOfExistence.h
- * @author      Erik Ström
+ * @author      Erik StrÃ¶m
  * @date        July 2019
  * @version     0.2
  *
