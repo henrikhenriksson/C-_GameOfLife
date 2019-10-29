@@ -1,6 +1,6 @@
 /**
  * @file RuleOfExistence.h
- * @author      Erik Str�m
+ * @author      Erik Ström
  * @date        July 2019
  * @version     0.2
  *
@@ -70,8 +70,15 @@ const vector<Directions> DIAGONAL{{1, -1}, {1, 1}, {-1, 1}, {-1, -1}};
  * requirement RuleOfExistence will utilize a **Template Method** design
  * pattern, where all derived rules implemented their logic based on the virtual
  * method executeRule().
+ *
 */
 class RuleOfExistence {
+ /**
+  * @issue Should the data have protected scope. It have made testing easier
+  * but it would be preferred with a redesign that does not depend on
+  * protected variables
+  */
+
  protected:
    /// @brief Rule ui identification string
   string ruleName;
@@ -100,8 +107,8 @@ class RuleOfExistence {
    * @test That no error is thrown when an rim cell is given
    * @test That no error is thrown when an negative coords cell is given
    *
-   * @bug Throws an error when an rim cell is gicen. Trying to acces cells
-   * outside the game borad, non existet
+   * @bug Throws an error when an rim cell is given. Trying to acces cells
+   * outside the game board, non existent
    * Test recommendation
 
    * Point out of board
@@ -160,9 +167,9 @@ class RuleOfExistence {
   /**
    * @brief Get function for the rule name
    *
-   * @Test Thest that name given for constructor is used
+   * @Test Test that name given for constructor is used
    *
-   * @return string : name of rule
+   * @return string Name of rule
    */
   string getRuleName() { return ruleName; }
 };
