@@ -39,6 +39,12 @@ struct PopulationLimits {
  * @brief Data structure for storing directional values.
  * @details Used by direction vectors to set which cell use as neighbours. To
  * calculate a neighbourg position the cell position + Direction is calculated
+ *
+ * @issue Directions and Point fulfills the same need and could be replaced
+ * with one struct instead of two. Since direction has no limitation of the
+ * range of the input.
+ * @issue Operations such as +, += and == should be overloaded to make it
+ * easier to use and read. Instead of as now adding the elements in code
  */
 struct Directions {
   int HORIZONTAL; ///< horizontal offset fom cell
@@ -64,8 +70,15 @@ const vector<Directions> DIAGONAL{{1, -1}, {1, 1}, {-1, 1}, {-1, -1}};
  * requirement RuleOfExistence will utilize a **Template Method** design
  * pattern, where all derived rules implemented their logic based on the virtual
  * method executeRule().
+ *
 */
 class RuleOfExistence {
+ /**
+  * @issue Should the data have protected scope. It have made testing easier
+  * but it would be preferred with a redesign that does not depend on
+  * protected variables
+  */
+
  protected:
    /// @brief Rule ui identification string
   string ruleName;
@@ -85,12 +98,22 @@ class RuleOfExistence {
    * @details Counts the nr of alive cell in the directions supplied by the
    * defined rules
    *
+   * @test That an alive cell is detected at every possible direction when
+   * ALL_DIRECTIONS is set
+   * @test That cells older than 1 iteration is only counted as 1 alive cell
+   * @test That the correct nr of alive cells is counted, from 0 to 9 alive
+   * neighbours
+   * @test That no error is thrown when an cell outside the board is given
+   * @test That no error is thrown when an rim cell is given
+   * @test That no error is thrown when an negative coords cell is given
+   *
+   * @bug Throws an error when an rim cell is given. Trying to acces cells
+   * outside the game board, non existent
    * Test recommendation
-   * Count only specified (in constructor) directions
-   * Count various nr of alive cells
-   * Null input to point
-   * negative currentPoint
+
    * Point out of board
+   * Test that nrAlive cells is not affected if the cell age are > 1, counter
+   * adds age instead of 1 for alive cells
    *
    * @param currentPoint Point to a cell at the game board to use as center
    * for calculation
@@ -118,8 +141,7 @@ class RuleOfExistence {
   /**
    * @brief Constructor for the abstract class RuleOfExistence
    *
-   * Test Recommendations
-   * Test that each data field can be set
+   * @Test Test that the correct values is set
    *
    * @param limits Defines the limits that defines what ACTION should be used
    * for nr of alive neighbours
@@ -145,10 +167,9 @@ class RuleOfExistence {
   /**
    * @brief Get function for the rule name
    *
-   * Test Recommendation
-   * Create instance and read value
+   * @Test Test that name given for constructor is used
    *
-   * @return string : name of rule
+   * @return string Name of rule
    */
   string getRuleName() { return ruleName; }
 };

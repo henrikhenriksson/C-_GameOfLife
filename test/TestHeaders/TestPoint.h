@@ -52,7 +52,7 @@ class TestPoint {
  *
  * @return Point with the coordinates from the TestPoint
  */
-  Point toPoint() { return Point{x, y}; }
+  inline Point toPoint() { return Point{x, y}; }
 
   /**
    * @brief Creates a Direction instance from the data in the TestPoint
@@ -61,7 +61,7 @@ class TestPoint {
    *
    * @return Directions
    */
-  Directions toDirections();
+  inline Directions toDirections() { return Directions{x, y}; }
 
   /**
    * @brief Override the += operator to make it simpler to increase a TestPoint
@@ -99,6 +99,15 @@ class TestPoint {
    * @return stream instance
    */
   friend std::ostream &operator<<(std::ostream &out, const TestPoint &f);
+
+  /**
+   * @brief Overload == operator to make point and direction comparision easier
+   * @details Compares point or direction data
+   * @param lhs left hand size instance
+   * @param rhs right hand size instance
+   * @return bool, does instances point to the same point/directions
+   */
+  friend bool operator==(const TestPoint& lhs, const TestPoint& rhs);
 };
 
 #endif //GAMEOFLIFE_TEST_TESTCLASSES_TESTPOINT_H_

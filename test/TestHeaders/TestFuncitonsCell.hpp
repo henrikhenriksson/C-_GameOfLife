@@ -6,6 +6,8 @@
  * @details This to keep the test cases in the test file as clear as possible.
  * This file also contains abstract test cases that can test functionality with
  * different parameters.
+ * @todo When time is available this file should be splitted into a .h and
+ * .cpp files
  */
 
 #ifndef GAMEOFLIFE_CELLTESTER_H
@@ -24,10 +26,14 @@
  * @return std::string corresponding to the input value
  *
  * @throws std::runtime_error if unimplemented actions is used. This to make
- * it clear that the function has been used in not defined way.
+ * it clear that the function has been used in not defined way. Since tests
+ * should be run the same way each time I think that it is better to notice
+ * missuse directly instead of notice it in test results
+ *
  */
 std::string actionToString(ACTION action)
 {
+    //Return string representation of each action
     switch (action)
     {
         case KILL_CELL:
@@ -121,7 +127,7 @@ void testCellIsAlive(bool testRimCell)
         }
     }
 
-    //Let the cell age one itteration
+    //Let the cell age one iteration
     testCell.setNextGenerationAction(IGNORE_CELL);
     testCell.updateState();
     AND_WHEN("Another iteration is passed")

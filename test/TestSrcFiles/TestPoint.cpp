@@ -1,12 +1,10 @@
 //
-// Created by Johan on 2019-10-25.
+// Author Johan Karlsson, joka1806
+// Implementations of class functions for TestPoint
+// Doxygen comments not added for .cpp files
 //
 
-#include <iostream>
 #include "TestPoint.h"
-#include "GoL_Rules/RuleOfExistence.h"
-
-Directions TestPoint::toDirections() { return Directions{x, y}; }
 
 TestPoint &TestPoint::operator+=(TestPoint const &obj) {
     x += obj.x;
@@ -23,4 +21,9 @@ std::ostream &operator<<(std::ostream &out, const TestPoint &f) {
     out << f.x << "," << f.y;
 
     return out;
+}
+
+bool operator==(const TestPoint& lhs, const TestPoint& rhs)
+{
+    return ((lhs.x == rhs.x) && (lhs.y == rhs.y));
 }
