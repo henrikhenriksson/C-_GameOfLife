@@ -1,12 +1,12 @@
 /**
  * @file test-RulesOfExistence.cpp
- *
- * @brief Contains test cases for the class RulesOfExistence
+ * @author Johan Karlsson, joka1806
+ * @brief Contains tests for the class RulesOfExistence
  */
 #include "catch.hpp"
 #include "TestPoint.h"
 #include "TestFunctionsRulesOfExistence.h"
-#include "AccessRulesOfExistence.h"
+#include "AccessRuleOfExistence.h"
 #include "TestUtil.h"
 
 #define RULES_OF_EXISTENCE_TAG "[RulesOfExistence]"
@@ -17,32 +17,39 @@
 SCENARIO("Set constructor values should be stored in class",
          RULES_OF_EXISTENCE_TAG) {
     GIVEN("Default constuctor used") {
-        map<Point, Cell> cells;
 
+        //Create a test map
+        map<Point, Cell> cells;
         TestUtil::createMap(cells, 10, 10, false);
 
+        //Create test instance
         AccessRulesOfExistence testClass(cells);
 
+        //Test given data
         TestFunctionsRuleOfExistence::testValesRulesOfExistence(testClass,
-            cells);
-    }GIVEN("Custom values sent to the Constuctor") {
+                                                                cells);
+    }
+    GIVEN("Custom values sent to the Constuctor") {
+
+        //Create a test map
         map<Point, Cell> cells;
+        TestUtil::createMap(cells, 10, 11, false);
 
-        TestUtil::createMap(cells, 10, 10, false);
-
-        std::cout << "Map size2: " << cells.size() << std::endl;
-
+        //Use non default limit
         PopulationLimits expLim{1, 2, 3};
 
+        //Use non default rule name
         std::string expName = "Kalle";
 
+        //Create test instance with custom data
         AccessRulesOfExistence testClass(cells, DIAGONAL, expLim, expName);
 
+        //Test that the given data is set
         TestFunctionsRuleOfExistence::testValesRulesOfExistence(testClass,
-                                                              cells,
-                                                              expLim,
-                                                              DIAGONAL,
-                                                              expName);
+                                                                cells,
+                                                                expLim,
+                                                                DIAGONAL,
+                                                                expName);
     }
 }
 
@@ -52,14 +59,16 @@ SCENARIO("Set constructor values should be stored in class",
  *
  * @details Uses a minimized game board of size [1,1] which will create a
  * board of absolute size [3,3] since this contains the tested cell and
- * surrounding cells.
- * Also tests that cells older than 1 iteratin only is tested once
+ * surrounding cells. If a rule would trie to access a cell further away from
+ * the center this would also be caut when a exception should be thrown by
+ * the map
+ * Also tests that cells older than 1 iteration only is counted as 1
  */
 SCENARIO("Alive cells should be detected in all directions",
          RULES_OF_EXISTENCE_TAG) {
 
-    //Create minimal board that defines sorounding cells for the tested cell,
-    // center
+    //Create minimal board that defines a center cell and surrounding
+    // neighbour cells
     map<Point, Cell> cells;
     TestUtil::createMap(cells, 1, 1, false);
 
@@ -70,6 +79,7 @@ SCENARIO("Alive cells should be detected in all directions",
         //Create a test instance
         AccessRulesOfExistence testClass(cells, ALL_DIRECTIONS);
 
+        //Test that a alive cell detected correct for all directions
         TestFunctionsRuleOfExistence::testAliveCellInAllDirections(
             testClass,
             center,
@@ -81,6 +91,8 @@ SCENARIO("Alive cells should be detected in all directions",
         //Create a test instance
         AccessRulesOfExistence testClass(cells, CARDINAL);
 
+        //Test that a cell is only count when positioned in a CARDINAL
+        // position
         TestFunctionsRuleOfExistence::testAliveCellInAllDirections(
             testClass,
             center,
@@ -92,6 +104,8 @@ SCENARIO("Alive cells should be detected in all directions",
         //Create a test instance
         AccessRulesOfExistence testClass(cells, DIAGONAL);
 
+        //Test that a cell is only count when positioned in a DIAGONAL
+        // position
         TestFunctionsRuleOfExistence::testAliveCellInAllDirections(
             testClass,
             center,
@@ -115,10 +129,16 @@ SCENARIO("Should be able to count all alive cells", RULES_OF_EXISTENCE_TAG) {
     TestPoint center{1, 1};
 
     GIVEN("Rules that checks all directions") {
+
+        //Create test instance
         AccessRulesOfExistence testClass(cells);
 
-        for (int nrAliveCells = 0; nrAliveCells <= ALL_DIRECTIONS.size();
+        //Test for alive cells from 0 to every position
+        for (int nrAliveCells = 0;
+             nrAliveCells <= ALL_DIRECTIONS.size();
              nrAliveCells++) {
+
+            //Create test header
             std::stringstream header;
             header << nrAliveCells << " nr of neighbors is set to alive";
             WHEN(header.str()) {
@@ -172,7 +192,7 @@ SCENARIO("Should handle if Points outside the board passed",
             }
         }
 
-            //Test that no error is thrown when points at the border is used
+        //Test that no error is thrown when points at the border is used
         WHEN("A rim cell is given [0,1]") {
             TestPoint invalidPoint(0, 1);
             THEN("No error should be thrown") {
@@ -209,6 +229,7 @@ SCENARIO("Should handle if Points outside the board passed",
             }
         }
 
+        //Test for positions outside the board
         WHEN("A negative value cells is given [-1,2]") {
             TestPoint invalidPoint(-1, 2);
             THEN("No error should be thrown") {
@@ -245,7 +266,7 @@ SCENARIO("Test that the correct ACTION (getAction) is given nr of alive cell",
 
     //Test an DEAD cell
     GIVEN("A DEAD cell") {
-        //Test all valid values from 0-9
+        //Test all valid values from 0-9 where 9 is the max nr of neigbours
         for (int aliveNeighbours = 0; aliveNeighbours <= 9; aliveNeighbours++) {
 
             //Create header
@@ -280,7 +301,7 @@ SCENARIO("Test that the correct ACTION (getAction) is given nr of alive cell",
             }
         }
     }
-        //Test an Alive cell
+    //Test an Alive cell
     GIVEN("An Alive cell") {
         //Test all valid values from 0-9
         for (int aliveNeighbours = 0; aliveNeighbours <= 9; aliveNeighbours++) {
