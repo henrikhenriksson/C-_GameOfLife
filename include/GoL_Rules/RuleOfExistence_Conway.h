@@ -3,6 +3,8 @@
  * @author      Erik Ström
  * @date        July 2019
  * @version     0.2
+ *
+ * @brief This files contains the class and execution for the Conway rules
 */
 
 #ifndef GAMEOFLIFE_RULEOFEXISTENCE_CONWAY_H
