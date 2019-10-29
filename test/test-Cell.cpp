@@ -15,7 +15,8 @@
 #include <string>
 #include "Cell_Culture/Cell.h"
 #include "catch.hpp"
-#include "TestFuncitonsCell.hpp"
+#include "TestUtil.h"
+#include "TestFuncitonsCell.h"
 
 /**
  * @brief Tests set and get for isAliveNextGen
@@ -558,12 +559,13 @@ SCENARIO("Test possible nextGenarationAction changes")
     for(auto startAction: TEST_ACTIONS)
     {
         testCell.setNextGenerationAction(startAction);
-        GIVEN("A non rim cell of state: " + actionToString(startAction))
+        GIVEN("A non rim cell of state: " + TestUtil::actionToString
+        (startAction))
         {
 
             //Check that the start action is set
             THEN("getNextGenAction() should return the start state: "
-                 + actionToString(startAction));
+                 + TestUtil::actionToString(startAction));
             {
                 REQUIRE(testCell.getNextGenerationAction() == startAction);
             }
@@ -577,7 +579,7 @@ SCENARIO("Test possible nextGenarationAction changes")
                 {
 
                     AND_WHEN("nextGenerationAction is set to: "
-                                 + actionToString(nextAction))
+                                 + TestUtil::actionToString(nextAction))
                     {
                         //Set tested action
                         testCell.setNextGenerationAction(nextAction);
@@ -592,7 +594,7 @@ SCENARIO("Test possible nextGenarationAction changes")
                         }
 
                         THEN("getNextGeneration() should return: "
-                             + actionToString(nextAction))
+                             + TestUtil::actionToString(nextAction))
                         {
                             REQUIRE(testCell.getNextGenerationAction()
                                     == nextAction);
@@ -618,7 +620,7 @@ SCENARIO("Test possible nextGenarationAction changes")
         Cell testCell(true);
         for(auto setAction : TEST_ACTIONS)
         {
-            WHEN(actionToString(setAction) + "is set with setNextGenerationAction")
+            WHEN(TestUtil::actionToString(setAction) + "is set with setNextGenerationAction")
             {
                 testCell.setNextGenerationAction(setAction);
                 THEN("getNextAction should return DO_NOTHING")

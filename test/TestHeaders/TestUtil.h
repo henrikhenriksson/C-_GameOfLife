@@ -120,5 +120,19 @@ bool isPosRimCell(int x, int y);
  */
 void printCellAge(map<Point, Cell> &cells);
 
+/**
+ * @brief Support function that returns the corresponding string for the given
+ * action
+ * @param action to convert to string
+ * @return std::string corresponding to the input value
+ *
+ * @throws std::runtime_error if unimplemented actions is used. This to make
+ * it clear that the function has been used in not defined way. Since tests
+ * should be run the same way each time I think that it is better to notice
+ * missuse directly instead of notice it in test results
+ *
+ */
+std::string actionToString(ACTION action);
+
 }
 #endif //GAMEOFLIFE_TEST_TESTUTIL_H_

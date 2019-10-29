@@ -96,4 +96,24 @@ void TestUtil::updateCellAge(std::map<Point, Cell> &cells,
     TestUtilCell::setCellAge(cells[pos.toPoint()],age);
 }
 
+std::string TestUtil::actionToString(ACTION action)
+{
+    //Return string representation of each action
+    switch (action)
+    {
+        case KILL_CELL:
+            return "KILL_CELL";
+        case IGNORE_CELL:
+            return "IGNORE_CELL";
+        case GIVE_CELL_LIFE:
+            return "GIVE_CELL_LIFE";
+        case DO_NOTHING:
+            return "DO_NOTHING";
+        default:
+            //Trow error if undefined actions are used
+            throw std::runtime_error("Unsupported action, actionToString" +
+                std::to_string(action) );
+
+    }
+}
 
