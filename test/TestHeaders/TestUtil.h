@@ -66,9 +66,9 @@ void createMap(std::map<Point, Cell> &map,
  * @param center Sets the center which the positions of the cells is calculated
  * @param newCellAges defines distances from the center and the ages to set
  */
-void updateCellAge(std::map<Point, Cell> &cells,
-                   TestPoint center,
-                   std::vector<pair<TestPoint, int>> &newCellAges);
+void updateCellsAge(std::map<Point, Cell> &cells,
+                    TestPoint center,
+                    std::vector<pair<TestPoint, int>> &newCellAges);
 
 /**
  * @brief Updates the age for the cell at the given pos
