@@ -1,5 +1,6 @@
 //
 // Created by Johan on 2019-10-28.
+// Doxygen comments is not used in .cpp files
 //
 
 
@@ -7,11 +8,16 @@
 #include "TestFunctionsRulesOfExistence.h"
 
 
-
+/*
+ * Test that 2 Directions vector matches
+ * Matches size and element
+ */
 void TestFunctionsRuleOfExistence::testCompareDirections(
     const vector<Directions> &readDir,
     const vector<Directions> &expDir) {
 
+    //Test size first. Compare elements is put under the same when block
+    //This to abort test if there is a size mismatch
     THEN("Vector sizes should match") {
         //Check that both vectors has the same length. Not placed in a THEN
         // block since it does not make since to continue if the sizes differ
@@ -36,22 +42,21 @@ void TestFunctionsRuleOfExistence::testCompareDirections(
     }
 }
 
+/*
+ * Test that the class data is as expected
+ */
 void TestFunctionsRuleOfExistence::testValesRulesOfExistence(
     AccessRulesOfExistence &testClass,
     map<Point, Cell> &expCells,
     PopulationLimits expLimits,
     vector<Directions> expDirections,
-    const std::string &expRuleName) {
+    const std::string &expRuleName)
+    {
     std::stringstream header;
 
     //Check that the rule name is set
     header << "The correct name should be used: " << expRuleName;
     THEN(header.str()) {
-        REQUIRE(testClass.getRuleName() == expRuleName);
-    }
-
-    //Check that getRuleName() returns the expected value
-    THEN("getRuleName() should return the correct name") {
         REQUIRE(testClass.getRuleName() == expRuleName);
     }
 
@@ -70,11 +75,22 @@ void TestFunctionsRuleOfExistence::testValesRulesOfExistence(
     }
 
     //Check that the directions is set
-    TestFunctionsRuleOfExistence::testCompareDirections(testClass
-    .getDirections(), expDirections);
+    TestFunctionsRuleOfExistence::testCompareDirections(
+        testClass.getDirections(),
+        expDirections);
+
+    //Check that game board sizes match.
+    THEN("The game board should contains the correct nr of cells")
+    {
+        REQUIRE(testClass.getCells().size() == expCells.size());
+
+    }
 
 }
 
+/*
+ * Test that an alive cell is detected in all valid directions.
+ */
 void TestFunctionsRuleOfExistence::testAliveCellInAllDirections(
     AccessRulesOfExistence &testClass,
     TestPoint &center,
@@ -96,9 +112,7 @@ void TestFunctionsRuleOfExistence::testAliveCellInAllDirections(
             std::find_if(expDirections.begin(), expDirections.end(),
                          [&aliveDirection](const Directions &d1) {
                            return (
-                               (aliveDirection.VERTICAL == d1.VERTICAL)
-                                   && (aliveDirection.HORIZONTAL
-                                       == d1.HORIZONTAL)
+                               TestPoint(d1) == TestPoint(aliveDirection)
                            );
                          });
 
@@ -117,6 +131,7 @@ void TestFunctionsRuleOfExistence::testAliveCellInAllDirections(
                << TestPoint(aliveDirection)
                << ", abs pos: " << aliveAbsPos;
 
+        //Update cell age and check if the cell is counted for when supposed
         WHEN(header.str()) {
 
             //Update the "alive" cell
@@ -140,6 +155,10 @@ void TestFunctionsRuleOfExistence::testAliveCellInAllDirections(
     }
 }
 
+/*
+ * Implemented with a switch structure to make changes easy
+ * Different expected rules for alive and dead cells
+ */
 ACTION TestFunctionsRuleOfExistence::getExpAction(int aliveNeighbours, bool
 aliveCell){
     ACTION action;
