@@ -26,7 +26,11 @@ class RuleOfExistence_Conway : public RuleOfExistence {
  private:
 
  public:
-  ///@brief constructor
+  /**
+   * @brief constructor
+   * @test Test that the expected rule name is set
+   */
+
   explicit RuleOfExistence_Conway(map<Point, Cell> &cells)
       : RuleOfExistence({2, 3, 3}, cells, ALL_DIRECTIONS, "conway") {}
 /// @brief default destructor
