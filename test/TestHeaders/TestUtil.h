@@ -17,6 +17,7 @@
 #define GAMEOFLIFE_TEST_TESTUTIL_H_
 
 #include <map>
+#include <iostream>
 #include "Support/SupportStructures.h"
 #include "TestUtilCell.h"
 #include "TestPoint.h"
