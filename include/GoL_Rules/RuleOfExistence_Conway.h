@@ -20,16 +20,15 @@
  * OVERPOPULATION		> 3*	**Cell dies of overcrowding**
  * RESURRECTION		    = 3*	**Cell is infused with life**
  */
-class RuleOfExistence_Conway : public RuleOfExistence
-{
-private:
+class RuleOfExistence_Conway : public RuleOfExistence {
+ private:
 
-public:
+ public:
   ///@brief constructor
-    explicit RuleOfExistence_Conway(map<Point, Cell>& cells)
-            : RuleOfExistence({ 2,3,3 }, cells, ALL_DIRECTIONS, "conway") {}
+  explicit RuleOfExistence_Conway(map<Point, Cell> &cells)
+      : RuleOfExistence({2, 3, 3}, cells, ALL_DIRECTIONS, "conway") {}
 /// @brief default destructor
-    ~RuleOfExistence_Conway() override = default;
+  ~RuleOfExistence_Conway() override = default;
 
 /**
  * @brief Calculates and updates the cell population (game board) for the
@@ -44,7 +43,7 @@ public:
  * Test that a cell that is given life gets the correct color
  * Test that a cell that is killed gets the correct color
  */
-    void executeRule() override;
+  void executeRule() override;
 };
 
 #endif //GAMEOFLIFE_RULEOFEXISTENCE_CONWAY_H
