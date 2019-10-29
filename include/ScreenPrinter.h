@@ -54,10 +54,12 @@ class ScreenPrinter {
 
   /**
    * @brief Print the population to screen
-   * @details
+   * @details The function takes an input parameter Population object, compares
+   * the worldsize, and prints cell values to the screen for each generation it
+   * passes.
    * @param population holding a reference to a Population object to print.
    * @test Test that when the function has been called, something has been
-   * entered into the outstream. 
+   * entered into the outstream.
    * @test That After a printout, the size of the outstream
    * should be the same as WORLD_DIMENSIONS.HEIGHT * WORLD_DIMENSIONS.WIDTH.
    *
