@@ -24,6 +24,7 @@ bool TestUtilCell::setCellAlive(Cell &cell, bool &updated) {
     //Ignore alive cells
     if (!cell.isAlive()) {
         cell.setNextGenerationAction(GIVE_CELL_LIFE);
+        cell.setNextColor(STATE_COLORS.LIVING);
         cell.updateState();
         updated = true;
     }
@@ -44,6 +45,7 @@ bool TestUtilCell::setCellAge(Cell &cell, int newAge) {
     if (cell.getAge() > newAge) {
         //Kill cell to reset age
         cell.setNextGenerationAction(KILL_CELL);
+        cell.setNextColor(STATE_COLORS.DEAD);
         cell.updateState();
     }
 
