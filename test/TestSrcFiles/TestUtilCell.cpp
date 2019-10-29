@@ -1,5 +1,6 @@
 //
-// Created by Johan on 2019-10-28.
+// Author Johan Karlsson, joka1806
+// Doxygen comments not adde to .cpp files
 //
 
 #include "TestUtilCell.h"
