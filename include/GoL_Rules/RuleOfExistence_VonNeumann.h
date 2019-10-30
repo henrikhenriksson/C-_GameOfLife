@@ -25,7 +25,11 @@ class RuleOfExistence_VonNeumann : public RuleOfExistence
 private:
 
 public:
-  /// @brief Default constructor
+  /**
+   * @brief Default constructor
+   * @test That the correct values are set by the constructor
+   */
+
     explicit RuleOfExistence_VonNeumann(map<Point, Cell>& cells)
             : RuleOfExistence({ 2,3,3 }, cells, CARDINAL, "von_neumann") {}
     /// @brief Default destructor
@@ -39,10 +43,15 @@ public:
  * Sets the color STATE_COLORS.LIVING to cells that are given life
  * Uses default functions for counting alive neighbours and which action to take
  *
- * Test Recommendations
- * Test that only alice cells at cardinal directions is counted
- * Test that the correct color is set for cells that are killed
- * Test that the correct color is set for cells that are given life
+ * @test That an dead cell does not change after an iteration when the cell
+ * stays dead
+ * @test That only the age increases after an cell stays alive.
+ * @test That the color, and other cell properties, changes correctly when a
+ * dead cell is given life
+ * @test That the color, and other cell properties, changes correctly when a
+ * alive cell is killed
+ * @test That a alive cell dies when 1 Cardinal and 1 Diagonal neighbor is
+ * alive, neumann only counts Cardinal
  */
     void executeRule() override;
 };
