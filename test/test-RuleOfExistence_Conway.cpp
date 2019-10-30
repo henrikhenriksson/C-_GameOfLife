@@ -60,44 +60,50 @@ SCENARIO("Test that a dead cell does not change values", CONWAY_TEST_TAG) {
 
 SCENARIO("Test that a alive cell does not change values", CONWAY_TEST_TAG) {
 
-    TestPoint center(1,1);
+    TestPoint centerPoint(2, 2);
     GIVEN("A alive cell") {
+
         //Define game world
         map<Point, Cell> cells;
-        TestUtil::createMap(cells, 1, 1, true);
+        TestUtil::createMap(cells, 3, 3, true);
 
+        //Create test instance
         RuleOfExistence_Conway testInstance(cells);
-        Cell *centerPoint;
-        centerPoint = &cells.at(center.toPoint());
 
-        //Color must be set before setCellAge which will update the color
-        centerPoint->setNextColor(STATE_COLORS.LIVING);
-        TestUtilCell::setCellAge(*centerPoint, 1);
+        //Create a refference to the tested center cell, easier to write and
+        // read test
+        Cell *centerCell;
+        centerCell = &cells.at(centerPoint.toPoint());
 
+        //Create vector of cells to uppdate
+        std::vector<pair<TestPoint, int>> updateCells;
 
+        //Set age of center cell, Test cell, and 3 sorunding cells to keep
+        // test cell alive
+        updateCells.push_back(std::make_pair(TestPoint(0,1), 1));
+        updateCells.push_back(std::make_pair(TestPoint(1,1), 1));
+        updateCells.push_back(std::make_pair(TestPoint(-2,1), 1));
+        updateCells.push_back(std::make_pair(TestPoint(0,0), 1));
+        TestUtil::updateCellsAge(cells, centerPoint, updateCells);
 
+        //Test that the testCell has the correct start values
         testCellState(
-            cells.at(center.toPoint()),
+            *centerCell,
             1,
             true,
             '#',
             STATE_COLORS.LIVING);
 
-
-
         WHEN("An iteration is run") {
             testInstance.executeRule();
 
-            //Update states
-            for (auto & cell : cells) {
-                cell.second.updateState();
-            }
+            centerCell->updateState();
 
-            THEN("The cell should still be deat")
+            THEN("The cell should still be dead")
             {
                 testCellState(
-                    cells.at(center.toPoint()),
-                    1,
+                    *centerCell,
+                    2,
                     true,
                     '#',
                     STATE_COLORS.LIVING);
