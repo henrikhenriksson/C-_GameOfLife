@@ -14,6 +14,13 @@
 #include "Cell_Culture/Cell.h"
 #include "GoL_Rules/RuleOfExistence_VonNeumann.h"
 
+/**
+ * @brief Test tag that should be used for all test in this file
+ * @details Used to be able to fiter out test for the clas
+ * RuleOfExistence_VonNeumann when running the test executable
+ */
+
+
 #define VONNEUMANN_TEST_TAG "[RuleOfExistence_VonNeumann]"
 
 /**
@@ -366,8 +373,7 @@ SCENARIO("Test that non CARDIANL directions is not used when counting "
             TestUtil::setCellAliveNeighbours(cells, testPoint, DIAGONAL, 1);
 
             testClass.executeRule();
-            THEN("When the cell is updated the cell should die")
-            {
+            THEN("When the cell is updated the cell should die") {
                 testCell->updateState();
                 testCellState(
                     *testCell,
@@ -376,7 +382,7 @@ SCENARIO("Test that non CARDIANL directions is not used when counting "
                     '#',
                     "DEAD",
                     STATE_COLORS.DEAD
-                    );
+                );
             }
 
         }
