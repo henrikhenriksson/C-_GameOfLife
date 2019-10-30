@@ -43,7 +43,8 @@ void RuleOfExistence_Erik::executeRule() {
 }
 
 /*
-* With age comes experience. Cells older than 5 generations recievees an old age color.
+* With age comes experience. Cells older than 5 generations receives an old
+* age color.
 * If the cell is older than 10 generations, it also gets the value 'E' (for Erik) signifying
 * a sentient lifeform of great wisdom. Thus proving, that intelligent life can be created using
 * cellular automata.
