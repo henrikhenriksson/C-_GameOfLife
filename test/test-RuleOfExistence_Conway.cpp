@@ -41,6 +41,11 @@ SCENARIO("RuleOfExistence_Conway should set the expected start values",
 
 }
 
+/**
+ * @brief Test that the exeuteRule sets the correct next generation values
+ * when a cell stays alive
+ *
+ */
 SCENARIO("Test that a dead cell does not change values", CONWAY_TEST_TAG) {
 
     TestPoint center(1, 1);
@@ -75,6 +80,14 @@ SCENARIO("Test that a dead cell does not change values", CONWAY_TEST_TAG) {
     }
 }
 
+/**
+ * @brief Test that executeRule sets the correct next action values for a
+ * cell that stays alive
+ *
+ * @details Uting a game board of [3,3] raw [5,5] to have surrounding cells
+ * that is modifiable as well as rim cells. Rim cells must be defined for
+ * execteRules not to throw an error.
+ */
 SCENARIO("Test that a alive cell does not change values", CONWAY_TEST_TAG) {
 
     TestPoint centerPoint(2, 2);
@@ -106,11 +119,15 @@ SCENARIO("Test that a alive cell does not change values", CONWAY_TEST_TAG) {
             "Living",
             STATE_COLORS.LIVING);
 
+        //Check that the correct values is set when an iteration is run
         WHEN("An iteration is run") {
             testInstance.executeRule();
 
+            //executeRule should only affect next generation values. This is
+            // tested in other test case
             centerCell->updateState();
 
+            //Check that the values is unchanged, except for age
             THEN("The cell should still be dead") {
                 testCellState(
                     *centerCell,
@@ -125,6 +142,13 @@ SCENARIO("Test that a alive cell does not change values", CONWAY_TEST_TAG) {
     }
 }
 
+/**
+ * @brief Test that the correct values are set for a cell that is given life
+ *
+ * @details Uting a game board of [3,3] raw [5,5] to have surrounding cells
+ * that is modifiable as well as rim cells. Rim cells must be defined for
+ * execteRules not to throw an error.
+ */
 SCENARIO("Test that a cell that is given life get the correct values",
          CONWAY_TEST_TAG) {
     GIVEN("A dead cell") {
@@ -135,15 +159,139 @@ SCENARIO("Test that a cell that is given life get the correct values",
         // cells set.
         TestUtil::createMap(cells, 3, 3, true);
 
+        //Create test instance
+        RuleOfExistence_Conway testInstance(cells);
 
-        //Create vector of cells to uppdate
-        std::vector<pair<TestPoint, int>> updateCells;
-        //Set age of center cell, Test cell, and 2 surrounding cells to keep
-        // test cell alive
-        updateCells.push_back(std::make_pair(TestPoint(0, 1), 1));
-        updateCells.push_back(std::make_pair(TestPoint(1, 1), 1));
-        updateCells.push_back(std::make_pair(TestPoint(0, 0), 1));
-        TestUtil::updateCellsAge(cells, centerPoint, updateCells);
+        //Set 3 alive neighbours to keep the cell alive
+        TestUtil::setCellAliveNeighbours(cells,
+                                         centerPoint,
+                                         ALL_DIRECTIONS,
+                                         3);
 
+        //Store a reference to the test cell to make test easier to write an
+        // read
+        Cell *testCell;
+        testCell = &cells.at(centerPoint.toPoint());
+
+        //Test that the test cell has the correct start values
+        testCellState(
+            *testCell,
+            0,
+            false,
+            '#',
+            "Dead",
+            STATE_COLORS.DEAD
+        );
+
+        //Test that the correct actions it taken after 1 iteration,
+        // executeRule() is called
+        WHEN("the cell has 3 alive neighbours the cell shoule be given life") {
+
+            //Call test function
+            testInstance.executeRule();
+
+            //Test that executeRule does only update next generation values
+            THEN("The cell should be unaffected BEFORE updateState is called") {
+                testCellState(
+                    *testCell,
+                    0,
+                    false,
+                    '#',
+                    "Dead",
+                    STATE_COLORS.DEAD
+                );
+            }
+            //Tested function only sets next gen state, not update it
+            testCell->updateState();
+
+            //Test the cell values after the cell has been updated from next
+            // generation values
+            THEN("The cell values should be updated AFTER updateState is "
+                 "called") {
+                testCellState(
+                    *testCell,
+                    1,
+                    true,
+                    '#',
+                    "Living",
+                    STATE_COLORS.LIVING
+                );
+            }
+        }
+
+    }
+}
+
+/**
+ * @brief Test that the correct values are set for a cell that is killed
+ *
+ * @details Uting a game board of [3,3] raw [5,5] to have surrounding cells
+ * that is modifiable as well as rim cells. Rim cells must be defined for
+ * execteRules not to throw an error.
+ */
+SCENARIO("Test that a living cell that is alive gets the correct values")
+{
+    GIVEN("A alive cell") {
+        TestPoint centerPoint(2, 2);
+        map<Point, Cell> cells;
+
+        //Create a map with rim cells, test function will not work without rim
+        // cells set.
+        TestUtil::createMap(cells, 3, 3, true);
+
+        //Create test instance
+        RuleOfExistence_Conway testInstance(cells);
+
+        //Store a pointer to the test cell, easier to write and read test
+        Cell *testCell;
+        testCell = &cells.at(centerPoint.toPoint());
+
+        //Set start condiitons, living cell
+        TestUtilCell::setCellAlive(*testCell);
+
+        //Test that the correct start conditions is set
+        testCellState(
+            *testCell,
+            1,
+            true,
+            '#',
+            "Living",
+            STATE_COLORS.LIVING
+        );
+
+        //Test that the correct actions is taken during one simulated itteration
+        WHEN("The cell has no alive neighbours, and should be killed") {
+
+            //Call test function
+            testInstance.executeRule();
+
+            //Test that executeRule does only update next generation values
+            THEN("The cell should be unaffected BEFORE updateState is called") {
+                testCellState(
+                    *testCell,
+                    1,
+                    true,
+                    '#',
+                    "Living",
+                    STATE_COLORS.LIVING
+                );
+            }
+            //Tested funciton only sets next gen state, not update it
+            testCell->updateState();
+
+            //Test that the expected values is set after cell is updated from
+            // next generation values
+            THEN("The cell values should be updated AFTER updateState is "
+                 "called") {
+                testCellState(
+                    *testCell,
+                    0,
+                    false,
+                    '#',
+                    "Dead",
+                    STATE_COLORS.DEAD
+                );
+            }
+        }
     }
 }
