@@ -146,8 +146,8 @@ SCENARIO("Should be able to count all alive cells", RULES_OF_EXISTENCE_TAG) {
                 //Set alive cells
                 auto it = ALL_DIRECTIONS.begin();
                 for (int i = 0; i < nrAliveCells; i++, it++) {
-                    TestUtil::updateCellPosAge(cells, TestPoint(*it) + center,
-                        1);
+                    TestUtil::updateCellAgeAtPos(cells, TestPoint(*it) + center,
+                                                 1);
                 }
 
                 //Check that the correct nr of alive cells is returned

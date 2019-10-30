@@ -72,9 +72,9 @@ void TestUtil::printBoardCellAge(std::map<Point, Cell> &cells) {
  * Updates cell ages for the given cells. Cells is given with a direction
  * from the center point given
  */
-void TestUtil::updateCellPossAge(std::map<Point, Cell> &cells,
-                                 TestPoint center,
-                                 std::vector<pair<TestPoint,
+void TestUtil::updateCellsAgeAtPos(std::map<Point, Cell> &cells,
+                                   TestPoint center,
+                                   std::vector<pair<TestPoint,
                                                   int>> &newCellAges) {
 
     int newX, newY; //Variables used to temp store the new positions
@@ -90,9 +90,9 @@ void TestUtil::updateCellPossAge(std::map<Point, Cell> &cells,
 /*
  * Updates the cell age for a given position
  */
-void TestUtil::updateCellPosAge(std::map<Point, Cell> &cells,
-                                TestPoint pos,
-                                int age) {
+void TestUtil::updateCellAgeAtPos(std::map<Point, Cell> &cells,
+                                  TestPoint pos,
+                                  int age) {
     TestUtilCell::setCellAge(cells[pos.toPoint()], age);
 }
 
