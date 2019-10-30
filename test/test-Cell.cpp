@@ -347,13 +347,14 @@ SCENARIO("Test that the correct actions is taken for defined ACTIONS")
         testCell.updateState();
 
         //Test start conditions
-        testCellState(testCell, 1, true, '#', STATE_COLORS.DEAD);
+        testCellState(testCell, 1, true, '#', "Dead", STATE_COLORS.DEAD);
 
         //Test that the action KILL_CELL
         WHEN("The cell next generation action is set to KILL_CELL")
         {
             char expVal = 'a';  //value to test
             COLOR  expColor = STATE_COLORS.OLD; //color to test
+            std::string expColorName = "OLD";
 
             //Set test values
             testCell.setNextGenerationAction(KILL_CELL);
@@ -364,7 +365,7 @@ SCENARIO("Test that the correct actions is taken for defined ACTIONS")
             testCell.updateState();
 
             //Test that the expected values are updated
-            testCellState(testCell, 0, false, expVal, expColor);
+            testCellState(testCell, 0, false, expVal, expColorName, expColor);
 
         }
 
@@ -407,20 +408,21 @@ SCENARIO("Test that the correct actions is taken for defined ACTIONS")
             testCell.updateState();
 
             //Test cell status
-            testCellState(testCell, 1, true, expVal, STATE_COLORS.DEAD);
+            testCellState(testCell, 1, true, expVal, "Dead", STATE_COLORS.DEAD);
         }
     }
     GIVEN("An dead cell")
     {
         //Create a dead cell
         Cell testCell;
-        testCellState(testCell, 0, false, '#', STATE_COLORS.DEAD);
+        testCellState(testCell, 0, false, '#', "Dead", STATE_COLORS.DEAD);
 
         WHEN("The cell next generation action is set to KILL_CELL")
         {
             //Define test data
             char expVal = 'a';
             COLOR  expColor = STATE_COLORS.OLD;
+            std::string expColorName = "old";
 
             //Set test data
             testCell.setNextGenerationAction(KILL_CELL);
@@ -429,7 +431,7 @@ SCENARIO("Test that the correct actions is taken for defined ACTIONS")
             testCell.updateState();
 
             //Test cell values
-            testCellState(testCell, 0, false, expVal, expColor);
+            testCellState(testCell, 0, false, expVal, expColorName, expColor);
 
         }
         WHEN("The cell next generation action is set to IGNORE_CELL")
@@ -474,20 +476,22 @@ SCENARIO("Test that the correct actions is taken for defined ACTIONS")
             testCell.updateState();
 
             //Test cell values
-            testCellState(testCell, 0, false, expVal, STATE_COLORS.DEAD);
+            testCellState(testCell, 0, false, expVal, "Dead", STATE_COLORS
+            .DEAD);
         }
     }
     GIVEN("An rim cell")
     {
         //Create a rim test cell
         Cell testCell(true);
-        testCellState(testCell, 0, false, '#', STATE_COLORS.DEAD);
+        testCellState(testCell, 0, false, '#',"Dead", STATE_COLORS.DEAD);
 
         WHEN("The cell next generation action is set to KILL_CELL")
         {
             //Define test data
             char expVal = 'a';
             COLOR  expColor = STATE_COLORS.OLD;
+            std::string expColorName = "Dead";
 
             //Set test data
             testCell.setNextGenerationAction(KILL_CELL);
@@ -496,7 +500,7 @@ SCENARIO("Test that the correct actions is taken for defined ACTIONS")
             testCell.updateState();
 
             //test cell values
-            testCellState(testCell, 0, false, expVal, expColor);
+            testCellState(testCell, 0, false, expVal, expColorName, expColor);
 
         }
         WHEN("The cell next generation action is set to IGNORE_CELL")
@@ -538,7 +542,7 @@ SCENARIO("Test that the correct actions is taken for defined ACTIONS")
             testCell.updateState();
 
             //Test that the rim cell is not affected
-            testCellState(testCell, 0, false, expVal, STATE_COLORS.DEAD);
+            testCellState(testCell, 0, false, expVal,"Dead", STATE_COLORS.DEAD);
         }
     }
 }

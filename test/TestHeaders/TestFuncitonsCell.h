@@ -63,6 +63,8 @@ void testCellState(Cell &testCell, int expAge, bool expAlive);
  * @param expAge expected age
  * @param expAlive expected alive status
  * @param expValue expected Cell value
+ * @param expColorName name of expected color, Dead, Living..., This to make
+ * a easier to read test result
  * @param expColor expected Cell COLOUR
  */
 void testCellState(
@@ -70,6 +72,7 @@ void testCellState(
         int expAge,
         bool expAlive,
         char expValue,
+        std::string expColorName,
         COLOR expColor);
 
 #endif //GAMEOFLIFE_CELLTESTER_H

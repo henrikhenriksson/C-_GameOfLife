@@ -147,6 +147,7 @@ void testCellState(
     int expAge,
     bool expAlive,
     char expValue,
+    std::string expColorName,
     COLOR expColor)
 {
     //Test age and alive status
@@ -164,7 +165,8 @@ void testCellState(
     header.str(std::string());
 
     //Create test header
-    header << "getColor() should return: " << std::to_string((int)expColor);
+    header << "getColor() should return " << expColorName << ": " <<
+    std::to_string((int)expColor);
     THEN(header.str())
     {
         //Test expected colour
