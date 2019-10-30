@@ -92,15 +92,10 @@ SCENARIO("Test that a alive cell does not change values", CONWAY_TEST_TAG) {
         Cell *centerCell;
         centerCell = &cells.at(centerPoint.toPoint());
 
-        //Create vector of cells to uppdate
-        std::vector<pair<TestPoint, int>> updateCells;
-
-        //Set age of center cell, Test cell, and 2 surrounding cells to keep
-        // test cell alive
-        updateCells.push_back(std::make_pair(TestPoint(0, 1), 1));
-        updateCells.push_back(std::make_pair(TestPoint(1, 1), 1));
-        updateCells.push_back(std::make_pair(TestPoint(0, 0), 1));
-        TestUtil::updateCellsAge(cells, centerPoint, updateCells);
+        TestUtil::setCellAliveNeighbours(cells,
+                                         centerPoint,
+                                         ALL_DIRECTIONS,
+                                         3);
 
         //Test that the testCell has the correct start values
         testCellState(
