@@ -11,9 +11,9 @@
  * to be set or not
  */
 void TestUtil::createMap(std::map<Point, Cell> &cells,
-               int height,
-               int width,
-               bool defineRimCells) {
+                         int height,
+                         int width,
+                         bool defineRimCells) {
 
     //Update world dimensions
     WORLD_DIMENSIONS.HEIGHT = height;
@@ -40,7 +40,7 @@ void TestUtil::createMap(std::map<Point, Cell> &cells,
 /*
  * Prints the rimcell and its status to shell to cout
  */
-void TestUtil::printIsRimCell(std::map<Point, Cell> &cells) {
+void TestUtil::printBoardlIsRimCell(std::map<Point, Cell> &cells) {
     //Iterate through all the cells and print their rim cell status
     for (auto mapIt : cells) {
         std::cout << TestPoint(mapIt.first)
@@ -60,11 +60,11 @@ bool TestUtil::isPosRimCell(int row, int col) {
 /*
  * Prints the cell position and age to cout
  */
-void TestUtil::printCellAge(std::map<Point, Cell> &cells) {
+void TestUtil::printBoardCellAge(std::map<Point, Cell> &cells) {
     //Iterate through all the cells and print position and age
     for (auto mapIt : cells) {
         std::cout << " " << TestPoint(mapIt.first)
-        << ":" << mapIt.second.getAge() << std::endl;
+                  << ":" << mapIt.second.getAge() << std::endl;
     }
 }
 
@@ -72,9 +72,10 @@ void TestUtil::printCellAge(std::map<Point, Cell> &cells) {
  * Updates cell ages for the given cells. Cells is given with a direction
  * from the center point given
  */
-void TestUtil::updateCellsAge(std::map<Point, Cell> &cells,
-                              TestPoint center,
-                              std::vector<pair<TestPoint, int>> &newCellAges) {
+void TestUtil::updateCellPossAge(std::map<Point, Cell> &cells,
+                                 TestPoint center,
+                                 std::vector<pair<TestPoint,
+                                                  int>> &newCellAges) {
 
     int newX, newY; //Variables used to temp store the new positions
     for (auto update : newCellAges) {
@@ -89,31 +90,49 @@ void TestUtil::updateCellsAge(std::map<Point, Cell> &cells,
 /*
  * Updates the cell age for a given position
  */
-void TestUtil::updateCellAge(std::map<Point, Cell> &cells,
-    TestPoint pos,
-    int age)
-{
-    TestUtilCell::setCellAge(cells[pos.toPoint()],age);
+void TestUtil::updateCellPosAge(std::map<Point, Cell> &cells,
+                                TestPoint pos,
+                                int age) {
+    TestUtilCell::setCellAge(cells[pos.toPoint()], age);
 }
 
-std::string TestUtil::actionToString(ACTION action)
-{
+std::string TestUtil::actionToString(ACTION action) {
     //Return string representation of each action
-    switch (action)
-    {
-        case KILL_CELL:
-            return "KILL_CELL";
-        case IGNORE_CELL:
-            return "IGNORE_CELL";
-        case GIVE_CELL_LIFE:
-            return "GIVE_CELL_LIFE";
-        case DO_NOTHING:
-            return "DO_NOTHING";
+    switch (action) {
+        case KILL_CELL:return "KILL_CELL";
+        case IGNORE_CELL:return "IGNORE_CELL";
+        case GIVE_CELL_LIFE:return "GIVE_CELL_LIFE";
+        case DO_NOTHING:return "DO_NOTHING";
         default:
             //Trow error if undefined actions are used
             throw std::runtime_error("Unsupported action, actionToString" +
-                std::to_string(action) );
+                std::to_string(action));
 
     }
 }
 
+void TestUtil::setCellAliveNeighbours(map<Point, Cell> &cells,
+                            TestPoint cellPos,
+                            std::vector<Directions> directions,
+                            int setNrAliveCells) {
+    //Check that the direction vector is large enough
+    if(directions.size() < setNrAliveCells)
+    {
+        throw invalid_argument("Not enough directions given for "
+                               "setNrAliveCells");
+    }
+
+    //Update given nr of cells
+    auto dirIt = directions.begin();
+    for(int i = 0; i < setNrAliveCells; i++)
+    {
+        //Get a reference to the cell to update
+        Cell *updateCell;
+        updateCell = &cells.at((cellPos + TestPoint(*dirIt)).toPoint());
+
+        //Update cell
+        TestUtilCell::setCellAlive(*updateCell);
+    }
+
+
+}

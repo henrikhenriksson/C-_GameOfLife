@@ -135,9 +135,9 @@ void TestFunctionsRuleOfExistence::testAliveCellInAllDirections(
         WHEN(header.str()) {
 
             //Update the "alive" cell
-            TestUtil::updateCellAge(testClass.getCells(),
-                                    aliveAbsPos,
-                                    aliveCellAge);
+            TestUtil::updateCellPosAge(testClass.getCells(),
+                                       aliveAbsPos,
+                                       aliveCellAge);
 
             header.str(std::string(""));
             header << "countAliveNeighbours() should return: " <<
