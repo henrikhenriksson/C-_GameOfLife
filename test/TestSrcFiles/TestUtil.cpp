@@ -124,7 +124,7 @@ void TestUtil::setCellAliveNeighbours(map<Point, Cell> &cells,
 
     //Update given nr of cells
     auto dirIt = directions.begin();
-    for(int i = 0; i < setNrAliveCells; i++)
+    for(int i = 0; i < setNrAliveCells; i++, dirIt++)
     {
         //Get a reference to the cell to update
         Cell *updateCell;
