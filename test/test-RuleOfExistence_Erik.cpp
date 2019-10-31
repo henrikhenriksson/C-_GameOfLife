@@ -1,9 +1,9 @@
 /**
- * @file test-RuleOfExistence_VonNeumann.cpp
+ * @file test-RuleOfExistence_Erik.cpp
  * @author Johan Karlsson, joka1806
  *
  * @brief Constains test senarios for testing the class
- * RuleOfExistence_VonNeumann
+ * RuleOfExistence_Erik
  */
 
 #include <map>
@@ -12,7 +12,7 @@
 #include "TestUtilCell.h"
 #include "TestFuncitonsCell.h"
 #include "Cell_Culture/Cell.h"
-#include "GoL_Rules/RuleOfExistence_VonNeumann.h"
+#include "GoL_Rules/RuleOfExistence_Erik.h"
 
 /**
  * @brief Test tag that should be used for all test in this file
@@ -21,22 +21,22 @@
  */
 
 
-#define VONNEUMANN_TEST_TAG "[RuleOfExistence_VonNeumann]"
+#define ERIK_TEST_TAG "[RuleOfExistence_VonNeumann]"
 
 /**
  * @brief Test that the constructor sets the expected start values
  */
-SCENARIO("RuleOfExistence_Conway should set the expected start values",
-         VONNEUMANN_TEST_TAG) {
+SCENARIO("RuleOfExistence_Erik should set the expected start values",
+         ERIK_TEST_TAG) {
     WHEN("An instance is created") {
         //Define empty game board, not used
         map<Point, Cell> cells;
 
         //Create test instance
-        RuleOfExistence_VonNeumann testClass(cells);
-        THEN("The name should be set to von_neumann") {
+        RuleOfExistence_Erik testClass(cells);
+        THEN("The name should be set to erik") {
             //Create test instance
-            REQUIRE("von_neumann" == testClass.getRuleName());
+            REQUIRE("erik" == testClass.getRuleName());
         }
 ///@todo create a RuleOfExistence test class to be able to gain access to
 // protected members. Then test population limits and directions can be read
@@ -58,7 +58,8 @@ SCENARIO("RuleOfExistence_Conway should set the expected start values",
  * @details A game board of [1,1], raw[3,3] is used since no extra cells in
  * needed to keep the main cell alive
  */
-SCENARIO("Test that a dead cell does not change values", VONNEUMANN_TEST_TAG) {
+SCENARIO("RuleOfExistence_Erik. Test that a dead cell does not change values",
+    ERIK_TEST_TAG) {
 
     TestPoint center(1, 1);
     GIVEN("A dead cell") {
@@ -67,7 +68,7 @@ SCENARIO("Test that a dead cell does not change values", VONNEUMANN_TEST_TAG) {
         TestUtil::createMap(cells, 1, 1, true);
 
         //Create test instance
-        RuleOfExistence_VonNeumann testInstance(cells);
+        RuleOfExistence_Erik testInstance(cells);
 
         //Get a reference/pointer to the test cell
         Cell *testCell;
@@ -113,7 +114,8 @@ SCENARIO("Test that a dead cell does not change values", VONNEUMANN_TEST_TAG) {
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("Test that a alive cell does not change values", VONNEUMANN_TEST_TAG) {
+SCENARIO("RuleOfExistence_Erik. Test that a alive cell does not change "
+         "values", ERIK_TEST_TAG) {
 
     TestPoint centerPoint(2, 2);
     GIVEN("A alive cell") {
@@ -123,7 +125,7 @@ SCENARIO("Test that a alive cell does not change values", VONNEUMANN_TEST_TAG) {
         TestUtil::createMap(cells, 3, 3, true);
 
         //Create test instance
-        RuleOfExistence_VonNeumann testInstance(cells);
+        RuleOfExistence_Erik testInstance(cells);
 
         //Create a reference to the tested center cell, easier to write and
         // read test
@@ -181,8 +183,9 @@ SCENARIO("Test that a alive cell does not change values", VONNEUMANN_TEST_TAG) {
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("Test that a cell that is given life get the correct values",
-         VONNEUMANN_TEST_TAG) {
+SCENARIO("RuleOfExistence_Erik. Test that a cell that is given life get the "
+         "correct values",
+         ERIK_TEST_TAG) {
     GIVEN("A dead cell") {
         TestPoint centerPoint(2, 2);
         map<Point, Cell> cells;
@@ -192,7 +195,7 @@ SCENARIO("Test that a cell that is given life get the correct values",
         TestUtil::createMap(cells, 3, 3, true);
 
         //Create test instance
-        RuleOfExistence_VonNeumann testInstance(cells);
+        RuleOfExistence_Erik testInstance(cells);
 
         //Set 3 alive neighbours to keep the cell alive
         TestUtil::setCellAliveNeighbours(cells,
@@ -262,7 +265,8 @@ SCENARIO("Test that a cell that is given life get the correct values",
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("Test that a living cell that is Killed gets the correct values") {
+SCENARIO("RuleOfExistence_Erik. Test that a living cell that is Killed gets "
+         "the correct values") {
     GIVEN("A alive cell") {
         TestPoint centerPoint(2, 2);
         map<Point, Cell> cells;
@@ -272,7 +276,7 @@ SCENARIO("Test that a living cell that is Killed gets the correct values") {
         TestUtil::createMap(cells, 3, 3, true);
 
         //Create test instance
-        RuleOfExistence_VonNeumann testInstance(cells);
+        RuleOfExistence_Erik testInstance(cells);
 
         //Store a pointer to the test cell, easier to write and read test
         Cell *testCell;
@@ -280,6 +284,7 @@ SCENARIO("Test that a living cell that is Killed gets the correct values") {
 
         //Set start conditions, a living test cell
         TestUtilCell::setCellAlive(*testCell);
+        TestUtil::setCellAliveNeighbours(cells, centerPoint, CARDINAL, 1);
 
         //Test that the correct start conditions is set
         testCellState(
@@ -336,15 +341,16 @@ SCENARIO("Test that a living cell that is Killed gets the correct values") {
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("Test that non CARDIANL directions is not used when counting "
-         "neighbor cells", VONNEUMANN_TEST_TAG) {
+SCENARIO("RuleOfExistence_Erik. Test that non DIAGONAL directions is not used "
+         "when counting "
+         "neighbor cells", ERIK_TEST_TAG) {
     GIVEN("A alive cell with 1 CARDINAL neighbor and 1 non CARDINAL neighbor") {
         //Create game board
         map<Point, Cell> cells;
         TestUtil::createMap(cells, 3, 3, true);
 
         //Create a test instance
-        RuleOfExistence_VonNeumann testClass(cells);
+        RuleOfExistence_Erik testClass(cells);
 
         //Create a point to the tested cell to make test easier to write and
         // read
