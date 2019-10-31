@@ -1,9 +1,9 @@
 /**
- * @file		test-fileLoader.cpp
+ * @file	test-fileLoader.cpp
  * @author	Henrik Henriksson (hehe0601)
- * @brief  This file contains test cases to test the class fileLoader
+ * @brief	This file contains test cases to test the class fileLoader
  *
- * @details The test cases in this file will strive to ensure that the
+ * @details	The test cases in this file will strive to ensure that the
  * functionality related to reading information from file actually works.
  *
  */
@@ -31,7 +31,7 @@ SCENARIO("Test support function to create a new file for reading is called:",
       THEN("It should be possible to read from the file") {
         std::string readFromFile;
         std::ifstream inFile(testName);
-        inFile >> readFromFile;
+        REQUIRE(inFile >> readFromFile);
         AND_THEN("The readString should not be empty.") {
           REQUIRE_FALSE(readFromFile.empty());
         }
@@ -65,14 +65,12 @@ SCENARIO("Loading a population from an invalid file", FILELOADER_TAG) {
   }
   fileName = oldFile;
 }
-
+//---------------------------------------------------------------------------
 /**
  * @brief Test the loadPopulationFromFile
  * @details In this scenario the test is given a valid filename. The test then
  * makes sure the file is loaded and that a world is created based on the
  * dimensions specified in the file. (Height+2) * (Width+2).
- * this test currently assumes the valid file is places in the same folder as
- * the .exe.
  */
 SCENARIO(
     "Loading and building a population from a valid file created for the "
@@ -83,7 +81,7 @@ SCENARIO(
     CreateFileToRead("testFile.txt");
 
     map<Point, Cell> cells;
-    WHEN("a valid filename is entered") {
+    WHEN("a valid filename is entered holding the dimensions 20x10") {
       fileName = "testFile.txt";
       FileLoader fileLoader;
       fileLoader.loadPopulationFromFile(cells);
