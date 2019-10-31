@@ -387,7 +387,6 @@ SCENARIO("Test that cells older than 5 itterations are marked as old") {
         testInstance.executeRule();
         testCell->updateState();
 
-        TestUtil::printBoardCellAge(cells);
         WHEN("The age has passed (>)4 the cell should be marked as old") {
             testCellState(*testCell,
                           6,
@@ -511,7 +510,6 @@ SCENARIO("Test that cells older than 10 itterations are marked as E") {
         testCell->updateState();
 
         //Second time a cell is the elder it is set to elder as well
-        TestUtil::printBoardCellAge(cells);
         WHEN("The age has passed (>)10 the cell should be marked as Erik") {
             testCellState(*testCell,
                           11,
