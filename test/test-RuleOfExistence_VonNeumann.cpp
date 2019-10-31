@@ -365,7 +365,7 @@ SCENARIO("Test that non CARDIANL directions is not used when counting "
                 "Living",
                 STATE_COLORS.LIVING
             );
-        }WHEN("1 cardinal and 1 diagonal neighborcell is alive and the "
+        }WHEN("1 cardinal and 1 diagonal neighbor cell is alive and the "
               "executeRule() is called") {
 
             //Set 1 diagonal and 1 cardinal cell to alive
