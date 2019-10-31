@@ -66,9 +66,9 @@ void createMap(std::map<Point, Cell> &map,
  * @param center Sets the center which the positions of the cells is calculated
  * @param newCellAges defines distances from the center and the ages to set
  */
-void updateCellAge(std::map<Point, Cell> &cells,
-                   TestPoint center,
-                   std::vector<pair<TestPoint, int>> &newCellAges);
+void updateCellsAgeAtPos(std::map<Point, Cell> &cells,
+                         TestPoint center,
+                         std::vector<pair<TestPoint, int>> &newCellAges);
 
 /**
  * @brief Updates the age for the cell at the given pos
@@ -78,7 +78,7 @@ void updateCellAge(std::map<Point, Cell> &cells,
  * Cell class
  *
  */
-void updateCellAge(std::map<Point, Cell> &cells, TestPoint pos, int
+void updateCellAgeAtPos(std::map<Point, Cell> &cells, TestPoint pos, int
 age);
 
 /**
@@ -92,7 +92,7 @@ age);
  *
  * @param cells to print
  */
-void printIsRimCell(map<Point, Cell> &cells);
+void printBoardlIsRimCell(map<Point, Cell> &cells);
 
 /**
  * @brief Checks wheter the cell at the given position is a rim cell or not
@@ -118,7 +118,38 @@ bool isPosRimCell(int x, int y);
  *
  * @param cells defining the game board
  */
-void printCellAge(map<Point, Cell> &cells);
+void printBoardCellAge(map<Point, Cell> &cells);
 
+/**
+ * @brief Support function that returns the corresponding string for the given
+ * action
+ * @param action to convert to string
+ * @return std::string corresponding to the input value
+ *
+ * @throws std::runtime_error if unimplemented actions is used. This to make
+ * it clear that the function has been used in not defined way. Since tests
+ * should be run the same way each time I think that it is better to notice
+ * missuse directly instead of notice it in test results
+ *
+ */
+std::string actionToString(ACTION action);
+
+
+/**
+ * @brief Sets the given nr of neighbours to alive from the given Directions.
+ * @details Directions is picked from the first direction to the given nr.
+ * Directions can preferably be used with pre defined game rules directions.
+ * Directions must be larger than setNrAliveCells.
+ * If a cell at a given direction already is alive that cell still counts
+ *
+ * @param cells reference to the game map
+ * @param cellPos Center position that directions is given from
+ * @param directions Directions from start point to use
+ * @param setNrAliveCells nr of alive cells to set
+ */
+void setCellAliveNeighbours(map<Point,Cell> &cells,
+    TestPoint cellPos,
+    std::vector<Directions> directions,
+    int setNrAliveCells);
 }
 #endif //GAMEOFLIFE_TEST_TESTUTIL_H_
