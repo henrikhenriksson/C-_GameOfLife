@@ -11,6 +11,14 @@
 #include <iostream>
 #include <string>
 
+/**
+ * @brief create a file and fill with data
+ * @details This support functions opens the ofstream, fills a new file with
+ * data taken from the 'population_seed.txt' file and then closes the ofstream.
+ * This will enable testing of the function "readpopulation from file"
+ * regardless if a file exists in the build directory when the test starts or
+ * not.
+ */
 void CreateFileToRead(std::string name) {
   std::ofstream of(name);
   of << "20x10\n";
