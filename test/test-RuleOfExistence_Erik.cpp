@@ -333,65 +333,66 @@ SCENARIO("RuleOfExistence_Erik. Test that a living cell that is Killed gets "
     }
 }
 
-/**
- * @brief Test that Non cardianl directions is not counted
- *
- * @details Uting a game board of [3,3] raw [5,5] to have surrounding cells
- * that is modifiable beyond the rim cells. Rim cells must be defined for
- * execteRules not to throw an error. The cells that is closest surrounding the
- * testCell(center) is modified each itteration to update the main cell
- */
-SCENARIO("RuleOfExistence_Erik. Test that non DIAGONAL directions is not used "
-         "when counting "
-         "neighbor cells", ERIK_TEST_TAG) {
-    GIVEN("A alive cell with 1 CARDINAL neighbor and 1 non CARDINAL neighbor") {
-        //Create game board
-        map<Point, Cell> cells;
-        TestUtil::createMap(cells, 3, 3, true);
-
-        //Create a test instance
-        RuleOfExistence_Erik testClass(cells);
-
-        //Create a point to the tested cell to make test easier to write and
-        // read
-        TestPoint testPoint(2, 2);
-
-        //Create a reference to the tested cell
-        Cell *testCell;
-        testCell = &cells.at(testPoint.toPoint());
-
-        //Set tested cell to alive
-        TestUtilCell::setCellAlive(*testCell);
-        THEN("Before update the cell should be alive") {
-            testCellState(
-                *testCell,
-                1,
-                true,
-                '#',
-                "Living",
-                STATE_COLORS.LIVING
-            );
-        }WHEN("1 cardinal and 1 diagonal neighborcell is alive and the "
-              "executeRule() is called") {
-
-            //Set 1 diagonal and 1 cardinal cell to alive
-            TestUtil::setCellAliveNeighbours(cells, testPoint, CARDINAL, 1);
-            TestUtil::setCellAliveNeighbours(cells, testPoint, DIAGONAL, 1);
-
-            testClass.executeRule();
-            THEN("When the cell is updated the cell should die")
-            {
-                testCell->updateState();
-                testCellState(
-                    *testCell,
-                    0,
-                    false,
-                    '#',
-                    "DEAD",
-                    STATE_COLORS.DEAD
-                );
-            }
-
-        }
-    }
-}
+//@todo remove if diagonal rules is nott applied
+///**
+// * @brief Test that Non cardianl directions is not counted
+// *
+// * @details Uting a game board of [3,3] raw [5,5] to have surrounding cells
+// * that is modifiable beyond the rim cells. Rim cells must be defined for
+// * execteRules not to throw an error. The cells that is closest surrounding the
+// * testCell(center) is modified each itteration to update the main cell
+// */
+//SCENARIO("RuleOfExistence_Erik. Test that non DIAGONAL directions is not used "
+//         "when counting "
+//         "neighbor cells", ERIK_TEST_TAG) {
+//    GIVEN("A alive cell with 1 CARDINAL neighbor and 1 non CARDINAL neighbor") {
+//        //Create game board
+//        map<Point, Cell> cells;
+//        TestUtil::createMap(cells, 3, 3, true);
+//
+//        //Create a test instance
+//        RuleOfExistence_Erik testClass(cells);
+//
+//        //Create a point to the tested cell to make test easier to write and
+//        // read
+//        TestPoint testPoint(2, 2);
+//
+//        //Create a reference to the tested cell
+//        Cell *testCell;
+//        testCell = &cells.at(testPoint.toPoint());
+//
+//        //Set tested cell to alive
+//        TestUtilCell::setCellAlive(*testCell);
+//        THEN("Before update the cell should be alive") {
+//            testCellState(
+//                *testCell,
+//                1,
+//                true,
+//                '#',
+//                "Living",
+//                STATE_COLORS.LIVING
+//            );
+//        }WHEN("1 cardinal and 1 diagonal neighborcell is alive and the "
+//              "executeRule() is called") {
+//
+//            //Set 1 diagonal and 1 cardinal cell to alive
+//            TestUtil::setCellAliveNeighbours(cells, testPoint, CARDINAL, 1);
+//            TestUtil::setCellAliveNeighbours(cells, testPoint, DIAGONAL, 1);
+//
+//            testClass.executeRule();
+//            THEN("When the cell is updated the cell should die")
+//            {
+//                testCell->updateState();
+//                testCellState(
+//                    *testCell,
+//                    0,
+//                    false,
+//                    '#',
+//                    "DEAD",
+//                    STATE_COLORS.DEAD
+//                );
+//            }
+//
+//        }
+//    }
+//}
