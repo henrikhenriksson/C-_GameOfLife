@@ -18,14 +18,15 @@
 #include "TestUtil.h"
 #include "TestFuncitonsCell.h"
 
+#define CELL_TAG "[Cell]"
+
 /**
  * @brief Tests set and get for isAliveNextGen
  *
  * @details Since isAliveNextGen is separated from other functions in class
  * these two functions can be tested separate
  */
-SCENARIO("set and get isAliveNextGen")
-{
+SCENARIO("set and get isAliveNextGen", CELL_TAG) {
     Cell testCell;
     GIVEN("A Cell from default constructor")
     {
@@ -64,8 +65,7 @@ SCENARIO("set and get isAliveNextGen")
  * to DO_NOTHING and then cant be tested.
  *
  */
-SCENARIO("Check that constructor can set rimCell and ACTION")
-{
+SCENARIO("Check that constructor can set rimCell and ACTION", CELL_TAG) {
     //Test constructor values for a rim cell
     testSetConstructorValues(true);
 
@@ -83,8 +83,7 @@ SCENARIO("Check that constructor can set rimCell and ACTION")
  * @todo Check that IGNORE_CELL is the value that should be set when a cell
  * survives an iteration
  */
-SCENARIO("Create a cell and validate that the cell ages")
-{
+SCENARIO("Create a cell and validate that the cell ages", CELL_TAG) {
     GIVEN("A new born cell that is not a rim cell")
     {
         //Create a non rim cell for test that is living from start
@@ -171,8 +170,7 @@ SCENARIO("Create a cell and validate that the cell ages")
  * @details Uses setNextGenColor() and updateState() to validate that the
  * correct color is stored.
  */
-SCENARIO("Create a cell and validate that the color can be changed")
-{
+SCENARIO("Create a cell and validate that the color can be changed", CELL_TAG) {
     GIVEN("Any cell")
     {
         //Defin colors to test
@@ -217,8 +215,7 @@ SCENARIO("Create a cell and validate that the color can be changed")
  * @todo Test with program what happends in terminal when an undefined color
  * is used and update test cases with lession learned
  */
-SCENARIO("Trie to set an non defined color for a cell")
-{
+SCENARIO("Trie to set an non defined color for a cell", CELL_TAG) {
     GIVEN("A default cell")
     {
         Cell testCell;
@@ -243,8 +240,8 @@ SCENARIO("Trie to set an non defined color for a cell")
  * setNextCellValue() and updateState() is used to set values
  */
 SCENARIO("getValue should return the value set by setNextCellValue after "
-         "updateState is called")
-{
+    "updateState is called",
+    CELL_TAG) {
     GIVEN("A valid cell")
     {
         //Create a default test cell
@@ -287,8 +284,8 @@ SCENARIO("getValue should return the value set by setNextCellValue after "
  * destory intended layout of game board. Also check if this should be tested
  * elsvere
  */
-SCENARIO("Test that invalid escape character can't be used as cell value")
-{
+SCENARIO("Test that invalid escape character can't be used as cell value",
+         CELL_TAG) {
     GIVEN("A valid cell")
     {
         Cell testCell;
@@ -314,8 +311,7 @@ SCENARIO("Test that invalid escape character can't be used as cell value")
  * Rim cells are not allowed to be alive and is also tested
  * updateState() and setNextStateAction() is used to manipulate age.
  */
-SCENARIO("Check the alive status of a cell")
-{
+SCENARIO("Check the alive status of a cell", CELL_TAG) {
     //Test that a non rim cell is aging
     GIVEN("A non rim cell")
     {
@@ -337,8 +333,8 @@ SCENARIO("Check the alive status of a cell")
  * different cell states. Tested cell states Alive, Dead and for rimCells
  * Tested actions
  */
-SCENARIO("Test that the correct actions is taken for defined ACTIONS")
-{
+SCENARIO("Test that the correct actions is taken for defined ACTIONS",
+         CELL_TAG) {
     GIVEN("An alive cell")
     {
         //Create an alive non rim cell
@@ -555,8 +551,7 @@ SCENARIO("Test that the correct actions is taken for defined ACTIONS")
  * action is returned.
  * For alive cells GIVE_CELL_LIFE should be ignored
  */
-SCENARIO("Test possible nextGenarationAction changes")
-{
+SCENARIO("Test possible nextGenarationAction changes", CELL_TAG) {
     ACTION TEST_ACTIONS[] =
             { GIVE_CELL_LIFE, IGNORE_CELL, KILL_CELL, DO_NOTHING };
     Cell testCell;
@@ -614,8 +609,8 @@ SCENARIO("Test possible nextGenarationAction changes")
 /**
  * @brief Test that setNextGenerationAction does not affect rim cells
  */
- SCENARIO("Test that setNextGenerationAction does not affects rim cells")
-{
+SCENARIO("Test that setNextGenerationAction does not affects rim cells",
+         CELL_TAG) {
     ACTION TEST_ACTIONS[] =
             { GIVE_CELL_LIFE, IGNORE_CELL, KILL_CELL, DO_NOTHING };
     GIVEN("A Rim cell")

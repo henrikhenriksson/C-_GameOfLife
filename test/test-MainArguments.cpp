@@ -17,6 +17,8 @@
 #include "Support/MainArguments.h"
 #include "catch.hpp"
 //---------------------------------------------------------------------------
+#define MAINARGUMENTS_TAG "[MainArguments]"
+
 /**
  * @brief Test HelpArgument constructor and public function
  * @details This scenario will test the abstract constructor, getvalue and
@@ -26,7 +28,8 @@
  * as this function calls in turn another function which prints to screen during
  * the test.
  */
-SCENARIO("Test the HelpArgument Constructor and public funtions") {
+SCENARIO("Test the HelpArgument Constructor and public funtions",
+         MAINARGUMENTS_TAG) {
   GIVEN("An object of a derived class HelpArgument") {
     HelpArgument helpArgTest;
     THEN("The function getValue should return the correct argValue '-h'") {
@@ -64,10 +67,11 @@ SCENARIO("Test the HelpArgument Constructor and public funtions") {
  * execute functions for the derived class GenerationsArgument
  *
  */
-SCENARIO("Test the GenerationsArgument Constructor and Public funtion") {
+SCENARIO("Test the GenerationsArgument Constructor and Public funtion",
+         MAINARGUMENTS_TAG) {
   GIVEN("An object of a derived class GenerationsArgument") {
     GenerationsArgument genArgTest;
-    THEN("The function getValue should return the correct argValue") {
+    THEN("The function getValue should return the correct argValue '-g'") {
       REQUIRE(genArgTest.getValue() == "-g");
     }
     WHEN("The function execute() is called and given an argument value") {
@@ -112,10 +116,11 @@ SCENARIO("Test the GenerationsArgument Constructor and Public funtion") {
  * @details This scenario will test the abstract constructor, getvalue and
  * execute functions for the derived class WorldsizeArgument
  */
-SCENARIO("Test the WorldsizeArgument Constructor and Public funtions") {
+SCENARIO("Test the WorldsizeArgument Constructor and Public funtions",
+         MAINARGUMENTS_TAG) {
   GIVEN("An object of a derived class WorldsizeArgument") {
     WorldsizeArgument WorldsizeTest;
-    THEN("The function getValue should return the correct argValue") {
+    THEN("The function getValue should return the correct argValue '-s'") {
       REQUIRE(WorldsizeTest.getValue() == "-s");
     }
     // Save the previously stored values.
@@ -150,7 +155,7 @@ SCENARIO("Test the WorldsizeArgument Constructor and Public funtions") {
         REQUIRE_FALSE(appValues.runSimulation);
       }
     }
-    WHEN("THe function execute() is given an invalid format for given Value") {
+    WHEN("The function execute() is given an invalid format for given Value") {
       ApplicationValues appValues;
       char* dimensions = "20xtest";
       THEN("An exception should throw as the function should expect digits") {
@@ -171,12 +176,13 @@ SCENARIO("Test the WorldsizeArgument Constructor and Public funtions") {
  * @details This scenario will test the abstract constructor, getvalue and
  * execute functions for the derived class FileArgument
  */
-SCENARIO("Test the FileArgument Constructor and public functions") {
+SCENARIO("Test the FileArgument Constructor and public functions",
+         MAINARGUMENTS_TAG) {
   // save the old value
   std::string oldFile = fileName;
   GIVEN("An object of the derived class FileArgument") {
     FileArgument FileArgTest;
-    THEN("The function getValue() should return the correct argValue") {
+    THEN("The function getValue() should return the correct argValue '-f'") {
       REQUIRE(FileArgTest.getValue() == "-f");
     }
     WHEN("The function execute() is called and given an argument value") {
@@ -184,7 +190,7 @@ SCENARIO("Test the FileArgument Constructor and public functions") {
       char* fileNameArg = "Population_Seed.txt";
       FileArgTest.execute(appValues, fileNameArg);
       THEN("The global variable fileName should be set to fileNameArg")
-      REQUIRE(fileName == "Population_Seed.txt");
+      CHECK(fileName == "Population_Seed.txt");
     }
     WHEN("The function Execute() is called and given an no value") {
       ApplicationValues appValues;
@@ -206,10 +212,11 @@ SCENARIO("Test the FileArgument Constructor and public functions") {
  * @details This scenario will test the abstract constructor, getvalue and
  * execute functions for the derived class FileArgument
  */
-SCENARIO("Test the EvenRuleArgument Constructor and public functions") {
+SCENARIO("Test the EvenRuleArgument Constructor and public functions",
+         MAINARGUMENTS_TAG) {
   GIVEN("An object of the derived class EvenRuleArgument") {
     EvenRuleArgument EvenRuleTest;
-    THEN("The function getValue() should return the correct argValue") {
+    THEN("The function getValue() should return the correct argValue '-er'") {
       REQUIRE(EvenRuleTest.getValue() == "-er");
     }
     WHEN("The function execute() is called and given an argument value") {
@@ -237,10 +244,11 @@ SCENARIO("Test the EvenRuleArgument Constructor and public functions") {
  * @details This scenario will test the abstract constructor, getvalue and
  * execute functions for the derived class FileArgument
  */
-SCENARIO("Test the OddRuleArgument Constructor and public functions") {
+SCENARIO("Test the OddRuleArgument Constructor and public functions",
+         MAINARGUMENTS_TAG) {
   OddRuleArgument OddRuleTest;
   GIVEN("An object of the derived class OddRuleArgument") {
-    THEN("The function getValue() should return the correct argValue") {
+    THEN("The function getValue() should return the correct argValue '-or'") {
       REQUIRE(OddRuleTest.getValue() == "-or");
     }
     WHEN("The function execute() is called and given an argument value") {

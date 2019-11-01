@@ -51,7 +51,7 @@ public:
  * @test That the color, and other cell properties, changes correctly when a
  * alive cell is killed
  * @test That a alive cell dies when 1 Cardinal and 1 Diagonal neighbor is
- * alive, neumann only counts Cardinal
+ * alive, Neumann should only counts Cardinal distances
  */
     void executeRule() override;
 };

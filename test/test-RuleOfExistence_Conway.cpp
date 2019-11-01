@@ -1,9 +1,9 @@
 /**
- * @file test-RuleOfExistence_VonNeumann.cpp
+ * @file test-RuleOfExistence_Conway.cpp
  * @author Johan Karlsson, joka1806
  *
  * @brief Constains test senarios for testing the class
- * RuleOfExistence_VonNeumann
+ * RuleOfExistence_Conway
  */
 
 #include <map>
@@ -12,31 +12,24 @@
 #include "TestUtilCell.h"
 #include "TestFuncitonsCell.h"
 #include "Cell_Culture/Cell.h"
-#include "GoL_Rules/RuleOfExistence_VonNeumann.h"
+#include "GoL_Rules/RuleOfExistence_Conway.h"
 
-/**
- * @brief Test tag that should be used for all test in this file
- * @details Used to be able to fiter out test for the clas
- * RuleOfExistence_VonNeumann when running the test executable
- */
-
-
-#define VONNEUMANN_TEST_TAG "[RuleOfExistence_VonNeumann]"
+#define CONWAY_TEST_TAG "[RuleOfExistence_Conway]"
 
 /**
  * @brief Test that the constructor sets the expected start values
  */
 SCENARIO("RuleOfExistence_Conway should set the expected start values",
-         VONNEUMANN_TEST_TAG) {
+         CONWAY_TEST_TAG) {
     WHEN("An instance is created") {
         //Define empty game board, not used
         map<Point, Cell> cells;
 
         //Create test instance
-        RuleOfExistence_VonNeumann testClass(cells);
-        THEN("The name should be set to von_neumann") {
+        RuleOfExistence_Conway testClass(cells);
+        THEN("The name should be set to conway") {
             //Create test instance
-            REQUIRE("von_neumann" == testClass.getRuleName());
+            REQUIRE("conway" == testClass.getRuleName());
         }
 ///@todo create a RuleOfExistence test class to be able to gain access to
 // protected members. Then test population limits and directions can be read
@@ -58,7 +51,7 @@ SCENARIO("RuleOfExistence_Conway should set the expected start values",
  * @details A game board of [1,1], raw[3,3] is used since no extra cells in
  * needed to keep the main cell alive
  */
-SCENARIO("Test that a dead cell does not change values", VONNEUMANN_TEST_TAG) {
+SCENARIO("Test that a dead cell does not change values", CONWAY_TEST_TAG) {
 
     TestPoint center(1, 1);
     GIVEN("A dead cell") {
@@ -67,7 +60,7 @@ SCENARIO("Test that a dead cell does not change values", VONNEUMANN_TEST_TAG) {
         TestUtil::createMap(cells, 1, 1, true);
 
         //Create test instance
-        RuleOfExistence_VonNeumann testInstance(cells);
+        RuleOfExistence_Conway testInstance(cells);
 
         //Get a reference/pointer to the test cell
         Cell *testCell;
@@ -108,12 +101,12 @@ SCENARIO("Test that a dead cell does not change values", VONNEUMANN_TEST_TAG) {
  * @brief Test that executeRule sets the correct next action values for a
  * cell that stays alive
  *
- * @details Using a game board of [3,3] raw [5,5] to have surrounding cells
+ * @details Uting a game board of [3,3] raw [5,5] to have surrounding cells
  * that is modifiable beyond the rim cells. Rim cells must be defined for
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("Test that a alive cell does not change values", VONNEUMANN_TEST_TAG) {
+SCENARIO("Test that a alive cell does not change values", CONWAY_TEST_TAG) {
 
     TestPoint centerPoint(2, 2);
     GIVEN("A alive cell") {
@@ -123,7 +116,7 @@ SCENARIO("Test that a alive cell does not change values", VONNEUMANN_TEST_TAG) {
         TestUtil::createMap(cells, 3, 3, true);
 
         //Create test instance
-        RuleOfExistence_VonNeumann testInstance(cells);
+        RuleOfExistence_Conway testInstance(cells);
 
         //Create a reference to the tested center cell, easier to write and
         // read test
@@ -133,13 +126,11 @@ SCENARIO("Test that a alive cell does not change values", VONNEUMANN_TEST_TAG) {
         //Set the test cell as alive
         TestUtilCell::setCellAlive(*testCell);
 
-        //Set 2 neighbor cell as alive to keep the test cell alive, first 2
-        // elements in ALL_DIRECTION is CARDINAL and could be used but using
-        // CARDINAL to make the test clearer
+        //Set 3 neighbor cell as alive to keep the test cell alive
         TestUtil::setCellAliveNeighbours(cells,
                                          centerPoint,
-                                         CARDINAL,
-                                         2);
+                                         ALL_DIRECTIONS,
+                                         3);
 
         //Test that the testCell has the correct start values
         testCellState(
@@ -182,7 +173,7 @@ SCENARIO("Test that a alive cell does not change values", VONNEUMANN_TEST_TAG) {
  * testCell(center) is modified each itteration to update the main cell
  */
 SCENARIO("Test that a cell that is given life get the correct values",
-         VONNEUMANN_TEST_TAG) {
+         CONWAY_TEST_TAG) {
     GIVEN("A dead cell") {
         TestPoint centerPoint(2, 2);
         map<Point, Cell> cells;
@@ -192,7 +183,7 @@ SCENARIO("Test that a cell that is given life get the correct values",
         TestUtil::createMap(cells, 3, 3, true);
 
         //Create test instance
-        RuleOfExistence_VonNeumann testInstance(cells);
+        RuleOfExistence_Conway testInstance(cells);
 
         //Set 3 alive neighbours to keep the cell alive
         TestUtil::setCellAliveNeighbours(cells,
@@ -262,7 +253,8 @@ SCENARIO("Test that a cell that is given life get the correct values",
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("Test that a living cell that is Killed gets the correct values") {
+SCENARIO("Test that a living cell that is Killed gets the correct values")
+{
     GIVEN("A alive cell") {
         TestPoint centerPoint(2, 2);
         map<Point, Cell> cells;
@@ -272,7 +264,7 @@ SCENARIO("Test that a living cell that is Killed gets the correct values") {
         TestUtil::createMap(cells, 3, 3, true);
 
         //Create test instance
-        RuleOfExistence_VonNeumann testInstance(cells);
+        RuleOfExistence_Conway testInstance(cells);
 
         //Store a pointer to the test cell, easier to write and read test
         Cell *testCell;
@@ -324,67 +316,6 @@ SCENARIO("Test that a living cell that is Killed gets the correct values") {
                     STATE_COLORS.DEAD
                 );
             }
-        }
-    }
-}
-
-/**
- * @brief Test that Non cardianl directions is not counted
- *
- * @details Uting a game board of [3,3] raw [5,5] to have surrounding cells
- * that is modifiable beyond the rim cells. Rim cells must be defined for
- * execteRules not to throw an error. The cells that is closest surrounding the
- * testCell(center) is modified each itteration to update the main cell
- */
-SCENARIO("Test that non CARDIANL directions is not used when counting "
-         "neighbor cells", VONNEUMANN_TEST_TAG) {
-    GIVEN("A alive cell with 1 CARDINAL neighbor and 1 non CARDINAL neighbor") {
-        //Create game board
-        map<Point, Cell> cells;
-        TestUtil::createMap(cells, 3, 3, true);
-
-        //Create a test instance
-        RuleOfExistence_VonNeumann testClass(cells);
-
-        //Create a point to the tested cell to make test easier to write and
-        // read
-        TestPoint testPoint(2, 2);
-
-        //Create a reference to the tested cell
-        Cell *testCell;
-        testCell = &cells.at(testPoint.toPoint());
-
-        //Set tested cell to alive
-        TestUtilCell::setCellAlive(*testCell);
-        THEN("Before update the cell should be alive") {
-            testCellState(
-                *testCell,
-                1,
-                true,
-                '#',
-                "Living",
-                STATE_COLORS.LIVING
-            );
-        }WHEN("1 cardinal and 1 diagonal neighbor cell is alive and the "
-              "executeRule() is called") {
-
-            //Set 1 diagonal and 1 cardinal cell to alive
-            TestUtil::setCellAliveNeighbours(cells, testPoint, CARDINAL, 1);
-            TestUtil::setCellAliveNeighbours(cells, testPoint, DIAGONAL, 1);
-
-            testClass.executeRule();
-            THEN("When the cell is updated the cell should die") {
-                testCell->updateState();
-                testCellState(
-                    *testCell,
-                    0,
-                    false,
-                    '#',
-                    "DEAD",
-                    STATE_COLORS.DEAD
-                );
-            }
-
         }
     }
 }

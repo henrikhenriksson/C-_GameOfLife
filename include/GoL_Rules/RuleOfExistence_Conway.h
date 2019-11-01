@@ -26,7 +26,10 @@ class RuleOfExistence_Conway : public RuleOfExistence {
  private:
 
  public:
-  ///@brief constructor
+  /**
+   * @brief constructor
+   * @test Test that the expected rule name is set
+   */
   explicit RuleOfExistence_Conway(map<Point, Cell> &cells)
       : RuleOfExistence({2, 3, 3}, cells, ALL_DIRECTIONS, "conway") {}
 /// @brief default destructor
@@ -40,10 +43,13 @@ class RuleOfExistence_Conway : public RuleOfExistence {
  * calculates and sets the next generation action and color. Does only define
  * colors for alive and dead
  *
- * Test Recommendations
- * Test that the correct action is set for an cell
- * Test that a cell that is given life gets the correct color
- * Test that a cell that is killed gets the correct color
+ * @test That an dead cell does not change after an iteration when the cell
+ * stays dead
+ * @test That only the age increases after an cell stays alive.
+ * @test That the color, and other cell properties, changes correctly when a
+ * dead cell is given life
+ * @test That the color, and other cell properties, changes correctly when a
+ * alive cell is killed
  */
   void executeRule() override;
 };
