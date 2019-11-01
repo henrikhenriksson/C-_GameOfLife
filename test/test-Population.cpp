@@ -12,6 +12,7 @@
 #include "../include/Cell_Culture/Population.h"
 
 //---------------------------------------------------------------------------
+/// @brief Tag used with CATCH to run test in this test file
 #define POPULAITON_TAG "[Population]"
 
 /**
