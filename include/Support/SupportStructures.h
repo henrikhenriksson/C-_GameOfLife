@@ -22,22 +22,29 @@
  * world of Game of life, and is used to map Cell objects to their positions.
  */
 struct Point {
-  int x, y;
+  int x,  ///< representing a column coordinate
+      y;  ///< representing a row coordinate
 
-  /// @brief Overloading operator < for comparing Point objects
+  /**
+   * @brief Overloading operator < for comparing Point objects
+   * @details used when comparing one point object with another to determine
+   * which is larger. Will compare column value before row value.
+   * @test see the class TestPoint.cpp
+   */
   bool operator<(const Point& other) const {
     if (x == other.x) return y < other.y;
     return x < other.x;
   }
 };
 
-/*
+/**
  * @brief Data structure holding information about world dimensions in pixels.
  * @details Can be used to generate a Dimensions object holding width and height
  * to be used for the game world size
  */
 struct Dimensions {
-  int WIDTH, HEIGHT;
+  int WIDTH,   ///< representing a widht of the game world
+      HEIGHT;  ///< representing a height of the game world.
 };
 
 #endif  // GAMEOFLIFE_SUPPORTSTRUCTURES_H
