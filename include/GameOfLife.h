@@ -17,7 +17,7 @@
 #include "Cell_Culture/Population.h"
 #include "ScreenPrinter.h"
 
-/*
+/**
 * @brief The heart of the simulation, interconnects the main execution with the
 graphical
 * presentation.
