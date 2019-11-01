@@ -8,18 +8,10 @@
  existence and interactions.
  *
  * @details The Population constitutes of all current, previous and future
- generations of cells, both living and dead
+ * generations of cells, both living and dead.
  * as well as those not yet born. By mapping all cells to their respective
- positions in the simulation world,
- * Population has the complete knowledge of each cell's whereabouts.
- Furthermore, the class is responsible for
- * determining which rules should be required from the RuleFactory, and store
- the pointer to these as members.
- *
- * Population's main responsibility during execution is determining which rule
- to apply for each new generation
- * and updating the cells to their new states.
- *
+ * positions in the simulation world.
+ * 
  * @test The constructor and each public function in this class should be tested
  with a separate test function
 
@@ -36,6 +28,15 @@
 #include "Support/Globals.h"
 
 using namespace std;
+/**
+ * @brief the population class holds information about each generation.
+ * @details Population's main responsibility during execution is determining which
+ * rule to apply for each new generation and updating the cells to their new
+ * states. Population has the complete knowledge of each cell's whereabouts.
+ * Furthermore, the class is responsible for
+ * determining which rules should be required from the RuleFactory, and store
+ * the pointer to these as members.
+ */
 
 class Population {
  private:
