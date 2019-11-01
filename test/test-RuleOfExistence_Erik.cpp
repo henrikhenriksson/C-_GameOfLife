@@ -273,7 +273,8 @@ SCENARIO("RuleOfExistence_Erik. Test that a cell that is given life get the "
  * testCell(center) is modified each itteration to update the main cell
  */
 SCENARIO("RuleOfExistence_Erik. Test that a living cell that is Killed gets "
-         "the correct values") {
+         "the correct values",
+         ERIK_TEST_TAG) {
     GIVEN("A alive cell") {
         TestPoint centerPoint(2, 2);
         map<Point, Cell> cells;
@@ -350,7 +351,8 @@ SCENARIO("RuleOfExistence_Erik. Test that a living cell that is Killed gets "
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("Test that cells older than 5 itterations are marked as old") {
+SCENARIO("Test that cells older than 5 itterations are marked as old",
+         ERIK_TEST_TAG) {
     //Create game board
     map<Point, Cell> cells;
     TestUtil::createMap(cells, 3, 3, true);
@@ -405,7 +407,8 @@ SCENARIO("Test that cells older than 5 itterations are marked as old") {
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("All values is reset when a old cell dies") {
+SCENARIO("All values is reset when a old cell dies",
+         ERIK_TEST_TAG) {
     GIVEN("A game board with a Old cell, age > 5") {
 
         //Create game board
@@ -468,7 +471,8 @@ SCENARIO("All values is reset when a old cell dies") {
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("Test that cells older than 10 itterations are marked as E") {
+SCENARIO("Test that cells older than 10 itterations are marked as E",
+         ERIK_TEST_TAG) {
     //Create game board
     map<Point, Cell> cells;
     TestUtil::createMap(cells, 3, 3, true);
@@ -531,7 +535,8 @@ SCENARIO("Test that cells older than 10 itterations are marked as E") {
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("Test that the oldest cell is set as the elder") {
+SCENARIO("Test that the oldest cell is set as the elder",
+         ERIK_TEST_TAG) {
     GIVEN("A game board with a test cell and 3 alive neigbors") {
         //Create a game board
         map<Point, Cell> cells;
@@ -629,7 +634,8 @@ SCENARIO("Test that the oldest cell is set as the elder") {
  * increasing ages. When the oldest dies the second oldes should take place
  * as the new older
  */
-SCENARIO("Test that only 1 oldest cell can be an elder") {
+SCENARIO("Test that only 1 oldest cell can be an elder",
+         ERIK_TEST_TAG) {
     GIVEN("A map of 3 elders") {
         map<Point, Cell> cells;
         TestUtil::createMap(cells, 3, 3, true);
