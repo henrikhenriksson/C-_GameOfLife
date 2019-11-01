@@ -2,15 +2,18 @@
  * @file test-Population.cpp
  * @author Henrik Henriksson, hehe0601
  * @brief This file contains test cases to test the class Population
- * @details to come
+ * @details These test cases will strive to ensure the class Population behaves
+ * as desired.
  *
  */
 
 #include <catch.hpp>
 #include <string>
-#include "GameOfLife.h"
+#include "../include/Cell_Culture/Population.h"
 
 //---------------------------------------------------------------------------
+#define POPULAITON_TAG "[Population]"
+
 /**
  * @brief Tests initiatePopulation
  * @details Test the function initiatePopulation when input parameters are
@@ -19,7 +22,7 @@
  * not be desirable for the program to run default rulesets if the user intended
  * to use another ruleset.
  */
-SCENARIO("Input is given to initiatePopulation") {
+SCENARIO("Input is given to initiatePopulation", POPULAITON_TAG) {
   GIVEN("a Population object created by default constructor") {
     Population pop;
     WHEN("Valid rule names are given") {
@@ -56,7 +59,7 @@ SCENARIO("Input is given to initiatePopulation") {
  * @todo test if evenRule or oddRule is executed depending on the value of
  * generation.
  */
-SCENARIO("The function is called as the programme is running") {
+SCENARIO("The function is called as the programme is running", POPULAITON_TAG) {
   GIVEN("a Population obejct created by default constructor and initiated") {
     Population pop;
     pop.initiatePopulation("");
@@ -84,7 +87,7 @@ SCENARIO("The function is called as the programme is running") {
  * @details test to make sure that if a cell is position at a point that is a
  * border cell, it should get the value isRimCell, otherwise, it should not.
  */
-SCENARIO("Get the value of a specific cell in the population") {
+SCENARIO("Get the value of a specific cell in the population", POPULAITON_TAG) {
   GIVEN("a Population object is created by default constructor and initiated") {
     Population pop;
     pop.initiatePopulation("");
@@ -108,13 +111,13 @@ SCENARIO("Get the value of a specific cell in the population") {
  * @details Test to make sure that the funciton returns the correct value. The
  * standard WORLD_DIMENSIONS should return the value 80+2x24+2 == 1920.
  */
-SCENARIO("Check the total cell population") {
+SCENARIO("Check the total cell population", POPULAITON_TAG) {
   GIVEN("a Population object is created by default constructor and initiated") {
     Population pop;
     pop.initiatePopulation("");
     THEN("The entire population should be WIDTH * HEIGHT") {
       REQUIRE(pop.getTotalCellPopulation() ==
-              ((WORLD_DIMENSIONS.HEIGHT+2) * (WORLD_DIMENSIONS.WIDTH+2)));
+              ((WORLD_DIMENSIONS.HEIGHT + 2) * (WORLD_DIMENSIONS.WIDTH + 2)));
     }
   }
 }

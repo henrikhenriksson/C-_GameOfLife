@@ -13,7 +13,8 @@
 #include <string>
 #include "Support/MainArgumentsParser.h"
 #include "catch.hpp"
-
+//---------------------------------------------------------------------------
+#define PARSER_TAG "[MainArgumentsParser]"
 /**
  * @brief The Parser manipulates application values.
  * @details This test scenario will use a MainArgumentsParser object to
@@ -24,7 +25,8 @@
  */
 SCENARIO(
     "A MainArgumentsParser is created and used to set valid application "
-    "values") {
+    "values",
+    PARSER_TAG) {
   // save old global variable values:
   Dimensions oldDimensions = WORLD_DIMENSIONS;
   std::string oldFile = fileName;
@@ -79,7 +81,8 @@ SCENARIO(
  * input parameter. If no arguments are given, the parser should not change any
  * default settings, as this is not its purpouse.
  */
-SCENARIO("A MainArgumentsParser is created given no extra arguments to parse") {
+SCENARIO("A MainArgumentsParser is created given no extra arguments to parse",
+         PARSER_TAG) {
   // save old global variable values:
   Dimensions oldDimensions = WORLD_DIMENSIONS;
   std::string oldFile = fileName;
@@ -118,7 +121,8 @@ SCENARIO("A MainArgumentsParser is created given no extra arguments to parse") {
  * required when parsing this argument.
  * @TODO make this test work without producing runtime error in VSC.
  */
-////SCENARIO("The Parser is given the -h argument to bring up the help screen")
+////SCENARIO("The Parser is given the -h argument to bring up the help screen",
+///PARSER_TAG)
 //{ /  GIVEN("A mainArgumentsParser object and an argv[] containing '-h'
 // argument") { /    MainArgumentsParser testHelpParser; /    char* testArgv[]
 // =
