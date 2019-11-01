@@ -17,6 +17,7 @@
 #include "Support/MainArguments.h"
 #include "catch.hpp"
 //---------------------------------------------------------------------------
+/// @brief Tag used with CATCH to run test in this test file
 #define MAINARGUMENTS_TAG "[MainArguments]"
 
 /**
@@ -24,7 +25,7 @@
  * @details This scenario will test the abstract constructor, getvalue and
  * execute functions for the derived class HelpArgument
  *
- * std::cout is redirected during the function call of ::execute()
+ * std::cout is redirected during the function call of HelpArgument::execute()
  * as this function calls in turn another function which prints to screen during
  * the test.
  */

@@ -92,7 +92,7 @@ age);
  *
  * @param cells to print
  */
-void printBoardlIsRimCell(map<Point, Cell> &cells);
+void printBoardlIsRimCell(std::map<Point, Cell> &cells);
 
 /**
  * @brief Checks wheter the cell at the given position is a rim cell or not
@@ -116,9 +116,9 @@ bool isPosRimCell(int x, int y);
  *
  * @todo decide if algorithm input and common print function should be developed
  *
- * @param cells defining the game board
+ * @param cells Game board to print
  */
-void printBoardCellAge(map<Point, Cell> &cells);
+void printBoardCellAge(std::map<Point, Cell> &cells);
 
 /**
  * @brief Support function that returns the corresponding string for the given

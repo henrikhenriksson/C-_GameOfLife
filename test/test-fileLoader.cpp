@@ -14,6 +14,7 @@
 #include "TestHeaders/TestFunctionFileLoader.hpp"
 #include "catch.hpp"
 //---------------------------------------------------------------------------
+/// @brief Tag used with CATCH to run test in this test file
 #define FILELOADER_TAG "[FileLoader]"
 /**
  * @brief Test the Test support function

@@ -1,5 +1,5 @@
 /**
- * @file testFunctionFileLoader.h
+ * @file testFunctionFileLoader.hpp
  * @author Henrik Henriksson
  *
  * @brief This file contains test function for the fileLoader class
