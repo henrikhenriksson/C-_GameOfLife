@@ -211,7 +211,7 @@ För dokumentation har jag använt doxygen version 1.8.16 för Windows.
 Jag har främst utfört uppgifterna på under MacOs (10.14) med cLion (2019.2.4)
 men för vissa uppgifter har jag även använt terminalen. För att testa
 kompabilitet har jag även testat att bygga programmen i en Virtuell Maskin
-med Ubuntu 18.
+med Ubuntu 18.4
 
 Clang är den kompilator som jag huvudsakligen har använt men har även vid
  vissa tillfällen testat med g++.
