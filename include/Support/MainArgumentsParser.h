@@ -1,4 +1,4 @@
-/*
+/**
  * @file        MainArgumentsParser.h
  * @author      Erik Ström
  * @date        October 2017
@@ -19,9 +19,6 @@
 
 using namespace std;
 
-/*
-Static functions that parses the starting arguments for the application.
-*/
 
 /**
  * @brief This class parses any given arguments.
@@ -37,8 +34,8 @@ class MainArgumentsParser {
    * derived mainArgument classes.
    * @details Only looks for valid arguments. Invalid arguments are discarded.
    * Sets the evenRuleName to default "conway" if none is entered.
-   * @param argv Argument Vector containing strings of arguments and values.
-   * @param lenght containing the number of arguments in the argument vector.
+   * @param argv[] Argument Vector containing strings of arguments and values.
+   * @param length containing the number of arguments in the argument vector.
    * @test What happens if the function is given argument parameter. Test that
    * the function returns the correct appValues.
    * @test Test that the function actually sets global functions
@@ -49,7 +46,7 @@ class MainArgumentsParser {
    * an array containing no extra arguments] the Parser sets the value of even
    * and odd rule even if no value was parsed. This should not be the
    * responsability of the parser function, but rather the
-   * even/oddRuleArgument::Execute funciton, or the RuleFactory class.
+   * even/oddRuleArgument Execute function, or the RuleFactory class.
    * @bug [SCENARIO The Parser is given the -h argument to bring up the help
    * screen] This scenario produces a runtime error when the test is compiled
    * using VC++ compiler as the char * "value" is uninitialized when passed as
