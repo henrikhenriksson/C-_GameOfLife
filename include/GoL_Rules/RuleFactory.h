@@ -43,7 +43,12 @@ class RuleFactory {
    * - A empty input should return a Conway rule
    * - What happends if a nullptr is supplied?
    *
-   * @issue It would be good to define constants tha can be used by callers.
+   * @test That the expected class is created
+   * @test That invalid rule names creates a Conway rule
+   * @test That if no rule is given, default, a Conway rule is created
+   *
+   * @issue It would be good to define constants tha can be used by callers
+   * for class identification string. Such ass RuleOfExistence_Erik.CLASS_NAME
    *
    * @param cells Game board
    * @param ruleName string of the rule name to use

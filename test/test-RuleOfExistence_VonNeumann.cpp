@@ -26,7 +26,8 @@
 /**
  * @brief Test that the constructor sets the expected start values
  */
-SCENARIO("RuleOfExistence_Conway should set the expected start values",
+SCENARIO("VonNeumann: RuleOfExistence_VonNeuman should set the expected start "
+         "values",
          VONNEUMANN_TEST_TAG) {
     WHEN("An instance is created") {
         //Define empty game board, not used
@@ -58,7 +59,8 @@ SCENARIO("RuleOfExistence_Conway should set the expected start values",
  * @details A game board of [1,1], raw[3,3] is used since no extra cells in
  * needed to keep the main cell alive
  */
-SCENARIO("Test that a dead cell does not change values", VONNEUMANN_TEST_TAG) {
+SCENARIO("VonNeumann: Test that a dead cell does not change values",
+    VONNEUMANN_TEST_TAG) {
 
     TestPoint center(1, 1);
     GIVEN("A dead cell") {
@@ -113,7 +115,8 @@ SCENARIO("Test that a dead cell does not change values", VONNEUMANN_TEST_TAG) {
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("Test that a alive cell does not change values", VONNEUMANN_TEST_TAG) {
+SCENARIO("VonNeumann: Test that a alive cell does not change values",
+    VONNEUMANN_TEST_TAG) {
 
     TestPoint centerPoint(2, 2);
     GIVEN("A alive cell") {
@@ -181,7 +184,7 @@ SCENARIO("Test that a alive cell does not change values", VONNEUMANN_TEST_TAG) {
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("Test that a cell that is given life get the correct values",
+SCENARIO("VonNeumann: Test that a cell that is given life get the correct values",
          VONNEUMANN_TEST_TAG) {
     GIVEN("A dead cell") {
         TestPoint centerPoint(2, 2);
@@ -262,7 +265,8 @@ SCENARIO("Test that a cell that is given life get the correct values",
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("Test that a living cell that is Killed gets the correct values") {
+SCENARIO("VonNeumann: Test that a living cell that is Killed gets the correct"
+         " values", VONNEUMANN_TEST_TAG) {
     GIVEN("A alive cell") {
         TestPoint centerPoint(2, 2);
         map<Point, Cell> cells;
@@ -336,7 +340,7 @@ SCENARIO("Test that a living cell that is Killed gets the correct values") {
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("Test that non CARDIANL directions is not used when counting "
+SCENARIO("VonNeumann: Test that non CARDIANL directions is not used when counting "
          "neighbor cells", VONNEUMANN_TEST_TAG) {
     GIVEN("A alive cell with 1 CARDINAL neighbor and 1 non CARDINAL neighbor") {
         //Create game board

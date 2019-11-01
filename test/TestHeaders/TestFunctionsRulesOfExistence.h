@@ -1,5 +1,5 @@
 /**
- * @file TestClassRulesOfExistence.hpp
+ * @file TestClassRulesOfExistence.h
  * @author Johan Karlsson, joka1806
  *
  * @brief This file contains test functionality for the RuleOfExistence class

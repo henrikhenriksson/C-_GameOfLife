@@ -21,6 +21,9 @@
  * UNDERPOPULATION	    < 2*	**Cell dies of loneliness**
  * OVERPOPULATION		> 3*	**Cell dies of overcrowding**
  * RESURRECTION		    = 3*	**Cell is infused with life**
+ *
+ * @issue The class name "conway" should be declared as a class constant that
+ * is accessable from the outside
  */
 class RuleOfExistence_Conway : public RuleOfExistence {
  private:
