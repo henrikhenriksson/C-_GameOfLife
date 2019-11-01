@@ -14,6 +14,7 @@
 #include "Cell_Culture/Cell.h"
 #include "GoL_Rules/RuleOfExistence_Conway.h"
 
+/// @brief Tag used with CATCH to run test in this test file
 #define CONWAY_TEST_TAG "[RuleOfExistence_Conway]"
 
 /**

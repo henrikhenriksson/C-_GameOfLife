@@ -52,6 +52,9 @@ class AccessRulesOfExistence : public RuleOfExistence {
   /**
    * @brief Constructor that sets default values used by program rules
    * @param cells Gameborad to use
+   * @param directions That should be used for counting alive cells
+   * @param limits cell limits used when applying rules
+   * @param ruleName Rule name to use
    */
   explicit AccessRulesOfExistence(
       map<Point, Cell> &cells,

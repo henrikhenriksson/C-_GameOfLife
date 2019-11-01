@@ -1,5 +1,5 @@
 /**
- * @file testUtil.hpp
+ * @file testUtil.h
  * @author Johan Karlsson, joka1806
  *
  * @brief this file contains support functions modify or interacts with test
@@ -103,8 +103,8 @@ void printBoardlIsRimCell(map<Point, Cell> &cells);
  *
  * @todo create overloaded version for Position
  *
- * @param row Cell x pos
- * @param col Cell y pos
+ * @param x Cell x pos
+ * @param y Cell y pos
  * @return
  */
 bool isPosRimCell(int x, int y);

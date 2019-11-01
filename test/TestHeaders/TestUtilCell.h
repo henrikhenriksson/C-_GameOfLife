@@ -1,5 +1,5 @@
 /**
- * @file TestUtilCell.hpp
+ * @file TestUtilCell.h
  * @author Johan Karlsson joka1806
  *
  * @brief This file contains suport functions to modify or interact with the

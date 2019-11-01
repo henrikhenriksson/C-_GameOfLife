@@ -9,6 +9,7 @@
 #include "AccessRuleOfExistence.h"
 #include "TestUtil.h"
 
+/// @brief Tag used with CATCH to run test in this test file
 #define RULES_OF_EXISTENCE_TAG "[RulesOfExistence]"
 
 /**
