@@ -18,6 +18,7 @@
 #include "TestUtil.h"
 #include "TestFuncitonsCell.h"
 
+/// @brief Tag used with CATCH to run test in this test file
 #define CELL_TAG "[Cell]"
 
 /**
