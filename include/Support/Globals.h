@@ -1,4 +1,4 @@
-/*
+/**
  * @file	    Globals.h
  * @author      Erik Ström
  * @date        October 2017
@@ -22,10 +22,15 @@
 
 using namespace std;
 
-/// @brief The actual width and height of the used world
+/**
+@brief The actual width and height of the used world
+@bug This struct variable has a confusing name as it is a global variable and
+not a constand. Capital letters should not be used for variables that are not
+const declared.
+*/
 extern Dimensions WORLD_DIMENSIONS;
 
-// @brief Name of file to read
+/// @brief Name of file to read a popualtion from.
 extern string fileName;
 
 #endif
