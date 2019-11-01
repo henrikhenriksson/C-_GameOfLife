@@ -79,7 +79,10 @@ private:
     void setPrimeElder(Cell* newElder);
 
 public:
-  /// @brief default constructor
+  /** @brief default constructor
+   * @test that the correct values are set
+   * @param cells game board
+   */
     explicit RuleOfExistence_Erik(map<Point, Cell>& cells)
             : RuleOfExistence({2,3,3}, cells, ALL_DIRECTIONS, "erik"), usedCellValue('E') {
         primeElder = nullptr;
