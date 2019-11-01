@@ -13,6 +13,7 @@
 
 #include "GoL_Rules/RuleFactory.h"
 
+/// @brief Tag used with CATCH to run test in this test file
 #define RULE_FACTORY_TAG "[RuleFactory]"
 
 /**
