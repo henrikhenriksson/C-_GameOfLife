@@ -10,6 +10,7 @@
 #include "../include/ScreenPrinter.h"
 #include "catch.hpp"
 //---------------------------------------------------------------------------
+/// @brief Tag used with CATCH to run test in this test file
 #define SCREENPRINTER_TAG "[ScreenPrinter]"
 
 /**
