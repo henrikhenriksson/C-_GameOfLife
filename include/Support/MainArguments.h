@@ -35,7 +35,7 @@ struct ApplicationValues {
       true;  ///< Bool controlling if the program should be run or not.
   string evenRuleName,       ///< Strings holding even rule name
       oddRuleName;           ///< Strings holding odd rule name
-  int maxGenerations = 100;  ///> Int holding the number of max generations to
+  int maxGenerations = 100;  ///< Int holding the number of max generations to
                              /// be run, default= 100
 };
 
@@ -48,7 +48,7 @@ struct ApplicationValues {
  */
 class BaseArgument {
  protected:
-  const string argValue;
+  const string argValue; ///< string holding an argument value assigned by the parser.
 
   /**
    @brief Inform the user that no value was provided for the argument
@@ -206,7 +206,7 @@ class WorldsizeArgument : public BaseArgument {
    * value nad sets the size of the world.  If no value is
    * passed, the simulation will not run.
    * @param appValues struct holding application Values
-   * @param dimension holding the size the world will have.
+   * @param dimensions holding the size the world will have.
    * @test Test that the function sets WORLD_DIMENSTIONS.WIDTH and .HEIGHT to
    * the correct value.
    * @test Test that exception is thrown if the argument is passed with no
