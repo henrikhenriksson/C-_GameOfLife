@@ -28,6 +28,9 @@
  * is determined to be the oldest living cell, it will
  * become a **prime elder**, and have its color changed once again. A generation
  * may only have one such elder.
+ *
+ * @issue The class name "conway" should be declared as a class constant that
+ * is accessable from the outside
 */
 class RuleOfExistence_Erik : public RuleOfExistence
 {

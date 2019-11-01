@@ -19,6 +19,9 @@
  * @details Concrete Rule of existence, implementing Von Neumann's rule.
  * Only difference from Conway is that neighbours are determined using only
  * cardinal directions (N, E, S, W).
+ *
+ * @issue The class name "conway" should be declared as a class constant that
+ * is accessable from the outside
 */
 class RuleOfExistence_VonNeumann : public RuleOfExistence
 {
