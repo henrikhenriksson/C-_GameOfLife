@@ -33,7 +33,7 @@
 /**
  * @brief Test that the constructor sets the expected start values
  */
-SCENARIO("RuleOfExistence_Erik should set the expected start values",
+SCENARIO("RuleOfExistence_Erik: should set the expected start values",
          ERIK_TEST_TAG) {
     WHEN("An instance is created") {
         //Define empty game board, not used
@@ -65,7 +65,7 @@ SCENARIO("RuleOfExistence_Erik should set the expected start values",
  * @details A game board of [1,1], raw[3,3] is used since no extra cells in
  * needed to keep the main cell alive
  */
-SCENARIO("RuleOfExistence_Erik. Test that a dead cell does not change values",
+SCENARIO("RuleOfExistence_Erik: Test that a dead cell does not change values",
          ERIK_TEST_TAG) {
 
     TestPoint center(1, 1);
@@ -121,7 +121,7 @@ SCENARIO("RuleOfExistence_Erik. Test that a dead cell does not change values",
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("RuleOfExistence_Erik. Test that a alive cell does not change "
+SCENARIO("RuleOfExistence_Erik: Test that a alive cell does not change "
          "values", ERIK_TEST_TAG) {
 
     TestPoint centerPoint(2, 2);
@@ -190,7 +190,7 @@ SCENARIO("RuleOfExistence_Erik. Test that a alive cell does not change "
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("RuleOfExistence_Erik. Test that a cell that is given life get the "
+SCENARIO("RuleOfExistence_Erik: Test that a cell that is given life get the "
          "correct values",
          ERIK_TEST_TAG) {
     GIVEN("A dead cell") {
@@ -272,7 +272,7 @@ SCENARIO("RuleOfExistence_Erik. Test that a cell that is given life get the "
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("RuleOfExistence_Erik. Test that a living cell that is Killed gets "
+SCENARIO("RuleOfExistence_Erik: Test that a living cell that is Killed gets "
          "the correct values",
          ERIK_TEST_TAG) {
     GIVEN("A alive cell") {
@@ -351,7 +351,8 @@ SCENARIO("RuleOfExistence_Erik. Test that a living cell that is Killed gets "
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("Test that cells older than 5 itterations are marked as old",
+SCENARIO("RuleOfExistence_Erik: Test that cells older than 5 itterations are "
+         "marked as old",
          ERIK_TEST_TAG) {
     //Create game board
     map<Point, Cell> cells;
@@ -407,7 +408,7 @@ SCENARIO("Test that cells older than 5 itterations are marked as old",
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("All values is reset when a old cell dies",
+SCENARIO("RuleOfExistence_Erik: All values is reset when a old cell dies",
          ERIK_TEST_TAG) {
     GIVEN("A game board with a Old cell, age > 5") {
 
@@ -471,7 +472,7 @@ SCENARIO("All values is reset when a old cell dies",
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("Test that cells older than 10 itterations are marked as E",
+SCENARIO("RuleOfExistence_Erik: Test that cells older than 10 itterations are marked as E",
          ERIK_TEST_TAG) {
     //Create game board
     map<Point, Cell> cells;
@@ -535,7 +536,7 @@ SCENARIO("Test that cells older than 10 itterations are marked as E",
  * execteRules not to throw an error. The cells that is closest surrounding the
  * testCell(center) is modified each itteration to update the main cell
  */
-SCENARIO("Test that the oldest cell is set as the elder",
+SCENARIO("RuleOfExistence_Erik: Test that the oldest cell is set as the elder",
          ERIK_TEST_TAG) {
     GIVEN("A game board with a test cell and 3 alive neigbors") {
         //Create a game board
@@ -634,7 +635,7 @@ SCENARIO("Test that the oldest cell is set as the elder",
  * increasing ages. When the oldest dies the second oldes should take place
  * as the new older
  */
-SCENARIO("Test that only 1 oldest cell can be an elder",
+SCENARIO("RuleOfExistence_Erik: Test that only 1 oldest cell can be an elder",
          ERIK_TEST_TAG) {
     GIVEN("A map of 3 elders") {
         map<Point, Cell> cells;
