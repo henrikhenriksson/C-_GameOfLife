@@ -39,9 +39,14 @@ class TestPoint {
  * @details Sets the coodinate to [0,0]
  */
   TestPoint() : x(0), y(0) {};
+  /// @param x Point Column
+  /// @param y Point row
   TestPoint(int x, int y) : x(x), y(y) {};
+  /// @param d Directions data used for creating TestPoint data
   explicit TestPoint(Directions d) : x(d.HORIZONTAL), y(d.VERTICAL) {};
+  /// @param p TestPoint used
   explicit TestPoint(Point p) : x(p.x), y(p.y) {};
+   /// @param p TestPoint used
   TestPoint(TestPoint const &p) : x(p.x), y(p.y) {};
 ///@}
 

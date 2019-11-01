@@ -1,5 +1,5 @@
 /**
- * @file TestFuncitonsCell.hpp
+ * @file TestFuncitonsCell.h
  * @author Johan Karlsson, joka1806
  * @brief This file contains test functions that supports testing of the Cell
  * class.

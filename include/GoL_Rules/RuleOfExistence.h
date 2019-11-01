@@ -141,7 +141,7 @@ class RuleOfExistence {
   /**
    * @brief Constructor for the abstract class RuleOfExistence
    *
-   * @Test Test that the correct values is set
+   * @test test that the correct values is set
    *
    * @param limits Defines the limits that defines what ACTION should be used
    * for nr of alive neighbours
@@ -161,13 +161,16 @@ class RuleOfExistence {
         ruleName(std::move(ruleName)) {}
   virtual ~RuleOfExistence() = default;
 
-  // Execute rule, in order specific to the concrete rule, by utilizing template method DP
+  /**
+   * @brief Execute rule, in order specific to the concrete rule, by utilizing
+   * template method DP
+   */
   virtual void executeRule() = 0;
 
   /**
    * @brief Get function for the rule name
    *
-   * @Test Test that name given for constructor is used
+   * @test Test that name given for constructor is used
    *
    * @return string Name of rule
    */
