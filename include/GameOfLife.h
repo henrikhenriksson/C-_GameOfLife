@@ -87,6 +87,13 @@ class GameOfLife {
    * @test Make sure no exception is thrown when running the simulation.
    * @test Make sure the appValue generation the same as nrOfGenerations after
    * running the function.
+   * @bug [SCENARIO Running the simulation with valid input values] Test found
+   * while debugging this test function. No rules are set for the 0th
+   * generation, and thus no changes are made between the first two calls of the
+   * function "printboard()". It should probably be the responsability of the
+   * RuleFactory class to actually set rules when a population is loaded. This
+   * currently doensnt happen until a new generation is calculated. Resulting in
+   * the 0th generation not having any rules set for the 1st generation.
    */
   void runSimulation();
 };
