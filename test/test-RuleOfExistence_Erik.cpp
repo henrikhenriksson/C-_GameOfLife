@@ -27,7 +27,7 @@
  * RuleOfExistence_Erik when running the test executable
  */
 
-
+/// @brief Tag used with CATCH to run test in this test file
 #define ERIK_TEST_TAG "[RuleOfExistence_Erik]"
 
 /**
