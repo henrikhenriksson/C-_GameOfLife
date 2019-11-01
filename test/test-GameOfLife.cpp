@@ -14,7 +14,8 @@
 #include "catch.hpp"
 
 //---------------------------------------------------------------------------
-#define GAMEOFLIFE_TAG "[GameOFLife]"
+/// @brief Tag used with CATCH to run test in this test file
+#define GAMEOFLIFE_TAG "[GameOfLife]" 
 
 /**
  * @brief Test the constructor
@@ -75,5 +76,4 @@ SCENARIO("Running the simulation with valid input values.", GAMEOFLIFE_TAG) {
       }
     }
   }
-  
 }
