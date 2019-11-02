@@ -242,6 +242,22 @@ Under testning av vissa klasser uppstod ett behov att kontrollera att något skr
 
 För att lösa detta har vi främst använt oss av det testramverk som finns i cLion och som skriver ut testresultaten i .xml format.
 
+Då vi uppfattade det som att vi inte ska stänga brancher som vi har använt för
+olika task så har det bidragit till att listan över brancher har växt
+ordentligt mot slutet och tyvärr även medfört vissa hanterings missar då fel
+branch har mergats in. Detta är egentligen inte något större problem men d
+å det har blivit några långa pass och sena kvällar så har det ibland ställt
+till det i.af för Johan.
+ 
+Ett annat problem är att cLions integration med Catch inte alltid har
+fungerat så väl med den äldre versionen av Catch som tillhandahölls i repot.
+Att köra testprogrammet har fungerat men inte köra specifika tester från
+cLion. Detta har gått att åtgärda med att använda en nyare version av Catch
+vilket har underlättat at kunna använda de integrerade gränssnitten. Vi har
+frågat om det i uppgiften är ok att använda den nyare versionen men än inte
+fått något svar. Detta har ställt till det då det blir flera extra steg som 
+måste testas med jämna mellanrum.  
+
 # Slutsatser och kommentarer
 
 ## Reflektioner Henrik
