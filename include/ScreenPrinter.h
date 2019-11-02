@@ -1,4 +1,4 @@
-/*
+/**
  * @file	    ScreenPrinter.h
  * @author      Erik Ström
  * @date        July 2019
@@ -83,7 +83,7 @@ class ScreenPrinter {
    * @brief Print a message to the user
    * @details If the printMessage function is called with a std::string
    * parameter, the message will be printed to the screen in a defined format.
-   * @param const message, std::string containing the message to be printed.
+   * @param message a string containing the message to be printed.
    * @test Send a teststring message and test that the function prints the
    * message to the outstream.
    */
