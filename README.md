@@ -54,7 +54,30 @@ Programmet kan nu köras genom att starta programmet genom terminalen och ange n
 
 ### **Terminal/Manual build:**
 
-**TODO**
+Att bygga manuellt via terminalen/shell har framförallt gjorts under MacOs
+
+ eller Ubuntu. För att skilja mellan filerna som genereras via IDEer så har
+  en separat build mapp använts. Denna har då inte påverkats utav något annat program.
+För att bygga projektet
+
+    cmake ..
+    make
+
+Där det första commandot "cmake .." genererar byggfiler, kräver att
+ CMakeLists filen finns lokaliserad i föräldramappen.
+Efter det så byggs huvudprogrammet (GameOfLife) och test programmet
+ (GameOfLife_Test) med "make" vilket kräver att programmet make finns
+  installerat.
+  
+För att testa specifika kompilatorer kan istälet följande alternativ kunna an
+ävndats
+
+    CXX=g++ cmake ..
+    make
+    
+Då har programmet programmet bygts med g++ istället för clan vilket är
+ standard kompilatorn under MacOs systemet som använts.
+     
 
 ### **Visual Studio:**
 
@@ -66,7 +89,24 @@ För att köra testerna i visual studio ändras kommandot till _"./GameOfLife_TE
 
 ### **cLion:**
 
-**TODO**
+För att öppna projektet väljer man open och navigerar till och väljer
+projektets root map.
+Efter att projektet har öppnats så skall tillgängliga byggkonfigurationer
+laddas ifrån tillgängliga executables i tillgängliga CMakeLists filer.
+De 2 som har varit aktuella för detta projekt är GameOfLife and
+GameOfLife_Test. Vilka bygger huvudprogrammet eller testprogrammet beroende
+på vilket som valts.
+
+Den stora fördelen med att köra genom IDEn är dock att enkel kunna köra
+separata testfall. Detta görs genom att öppna filen som innehåller
+testfallet och klicka på den gröna pilen till vänster om SCENARIO. 
+Alternativt för att köra alla testfall i en fil går det att högerklicka p
+å filen och välja "Run all in [namn på den aktuella filen]"
+
+Vid byte av branch eller om nya filer läggs till kan det behövas att h
+ögerklicka på projektets CMakeList fil och välj menyalternativet "Reload
+CMake project" för att uppdatera de genererade make filerna. Under vårat
+arbete har det hänt att konstiga fel vid kompilering uppstått.
 
 # Syfte
 
@@ -93,6 +133,8 @@ Den gruppmedlem som kommit fram till att en uppgift behöver genomföras skapar 
 Kontakt har skett genom de kanaler som Trello tillhandahåller, men främst inom de Pull Requests som en medlem skapat efter att en task är redo för review. Vi i gruppen sökte efter vägar att sammanfoga Trello med gruppens Bitbucket repository, men då denna funktionalitet kräver ett proprietärt tillägg valde vi att försöka minska redundansen på andra sätt.
 
 Smidigast kommunikation har skett genom Discord, vilket torde te sig naturligt med hänsyn till gruppens ringa storlek. Vi har här utbytt tankar, funderingar och information. Vi har fördelat arbetet och hållit varandra uppdaterade om hur arbetet fortgått.
+Vid några tillfällen har även telefonmöten ägt rum för att smidigare kunna föra 
+en djupare konversation
 
 Arbetet har utförts inom olika miljöer, vilket inte var planerat från början, men som lett till att ge en bättre insikt i hur projektet fungerar inom olika utvecklingsmiljöer. Henrik har utvecklat främst med hjälp av Visual Studio Community (VSC) på en Windowsmaskin, medan Johan har kodat med cLion på en Mac.
 
@@ -107,7 +149,14 @@ Vad som testas läggs dock till under uppgiften att skapa tester. Finns rekommen
 
 ### Testning av klasser:
 
-Under denna fas så skapas tester och testade funktioner dokumenteras i respektive funktionsbeskrivning. Finns rekommendationer till tester så uppdateras dessa efter vad som faktiskt testas. Om buggar hittas så dokumenteras även de under testfasen. Om behovet av utökad funktionalitet för testning har stödfunktioner eller hela klasser skapats. Kompilering av testerna har i sin tur testats under olika kompilatorer för att upptäcka eventuella fel som kan uppstå, exempelvis GCC, g++ och vc++.
+Under denna fas så skapas tester och testade funktioner dokumenteras i
+respektive funktionsbeskrivning. Finns rekommendationer till tester s
+å uppdateras dessa efter vad som faktiskt testas. Om buggar hittas s
+å dokumenteras även de under testfasen. Det har även funnits saker som
+skulle behöva ändras men som inte kan räknas som en bug. För detta har
+taggen @issue använts. Om behovet av utökad funktionalitet för testning har
+stödfunktioner eller hela klasser skapats. Kompilering av testerna har i sin
+ tur testats under olika kompilatorer för att upptäcka eventuella fel som kan uppstå, exempelvis GCC, g++ och vc++.
 
 ## Kommunikation
 
@@ -159,19 +208,55 @@ För dokumentation har jag använt doxygen version 1.8.16 för Windows.
 
 ### **Johan:**
 
-**TODO**
+Jag har främst utfört uppgifterna på under MacOs (10.14) med cLion (2019.2.4)
+men för vissa uppgifter har jag även använt terminalen. För att testa
+kompabilitet har jag även testat att bygga programmen i en Virtuell Maskin
+med Ubuntu 18.4
+
+Clang är den kompilator som jag huvudsakligen har använt men har även vid
+ vissa tillfällen testat med g++.
+ 
+För versionshantering använder jag git version 2.20.1 (Apple Git-117)
+
+För dokumentation har jag använt Doxygen version 1.8.15
+
 
 ## Uppkomna hinder
 
-Vi har under projektets gång känt oss begränsade av avsaknaden av så kallade "power ups" som finns i Trello, bland annat för "work package" support och bitbucket integrering. De verktyg vi haft tillgång till inte kunnat integreras ordentligt, vilket har gjort det lätt för oss att ibland glömma ett steg. Exemelvis att efter att ha godkänt en pull Request i Bitbucket behöva gå över till Trello-brädet för att markera även kortet som godkänt.
+Vi har under projektets gång känt oss begränsade av begränsningen att
+ inte kunna använda fler så kallade "power ups" som finns i Trello, bland
+  annat för "work package" support och bitbucket integrering. De verktyg vi haft
+   tillgång till inte kunnat integreras ordentligt, vilket har gjort det lätt för oss att ibland glömma ett steg. Exemelvis att efter att ha godkänt en pull Request i Bitbucket behöva gå över till Trello-brädet för att markera även kortet som godkänt.
 
 Vi hade till en början svårt att få till en cMakeLists som fungerade att kompilera i olika kompilatorer. Vi fick då en möjlighet att verkligen kontrollera att vi kan kompilera koden i olika miljöer för att få allt att fungera, vissa eftergifter fick här göras, främst gällande testramverk.
+
+Ett av problemem med cMakeLists filen var att "problemet finns inte på min
+maskin". Detta ledde till svårigheter och tidsfördröjningar med att försöka
+ta fram en lösning som fungerar på så många system som möjligt. Detta har
+ visat på att en utvecklare själv ska kunna testa på så många system som 
+ möjligt under utveckling.
 
 Ytterligare ett hinder som kunnat uppstå är när man delat upp en större uppgift i flera små, men som är beroende av varandra, kan arbetstakten stanna av medan en medlem väntar på feedback från den andre. Som tur är har det alltid funnits mycket att göra, och Trello korten har gjort det lätt att hålla reda på var man var i en specifik uppgift.
 
 Under testning av vissa klasser uppstod ett behov att kontrollera att något skrivits ut till terminalen, eftersom det varit funktionens uppgift. För att undvika att ovidkommande information skrivs till terminalen har outstreamen i vissa testfall "omdirigerats" till en sträng [2]. Denna sträng kan då även vid behov användas vid kontroll. Dock innehåller vissa funktioner som ska testas anrop till andra funktioner, som ändrar pekarens position eller som kör ett terminal.clear() kommando, vilket negativt påverkat utskriften av misslyckade testfall.
 
 För att lösa detta har vi främst använt oss av det testramverk som finns i cLion och som skriver ut testresultaten i .xml format.
+
+Då vi uppfattade det som att vi inte ska stänga brancher som vi har använt för
+olika task så har det bidragit till att listan över brancher har växt
+ordentligt mot slutet och tyvärr även medfört vissa hanterings missar då fel
+branch har mergats in. Detta är egentligen inte något större problem men d
+å det har blivit några långa pass och sena kvällar så har det ibland ställt
+till det i.af för Johan.
+ 
+Ett annat problem är att cLions integration med Catch inte alltid har
+fungerat så väl med den äldre versionen av Catch som tillhandahölls i repot.
+Att köra testprogrammet har fungerat men inte köra specifika tester från
+cLion. Detta har gått att åtgärda med att använda en nyare version av Catch
+vilket har underlättat at kunna använda de integrerade gränssnitten. Vi har
+frågat om det i uppgiften är ok att använda den nyare versionen men än inte
+fått något svar. Detta har ställt till det då det blir flera extra steg som 
+måste testas med jämna mellanrum.  
 
 # Slutsatser och kommentarer
 
@@ -183,7 +268,56 @@ Jag vill argumentera för att projektets syfte blivit uppfyllt, eftersom samtlig
 
 ## Reflektioner Johan
 
-**TODO**
+Trots att detta projekt har varit relatift litet i antalet inbalndade
+personer har det visa på att det är viktigt att ha tydliga processer och att
+de verktyg som används underlättar att dessa processer följs. I början av
+projektet bestod arbetet mycket i att definiera hur vårat arbetsflöde skulle
+se ut och hur vi underlättar för att kunna följa det. Under denna fas så 
+hittaddes många "Power Ups" för trello som skulle kunna underlätta. Det 
+försvårades dock pga begränsningen av att inte kunna intsalera fler "Power
+Ups".<br>
+Vilten och nyttan av detta arbete har senare kunnats se i form av att vi
+uppfattat få problem med våran process under arbetet. Då förutom några mindre
+diskusioner så har det mest förekommande problemet varit att en Pull Request
+har godkännts i Bitbucket men inte uppdaterats i Trello. Vilket snabbt
+medelats efter en påminnelse i Discord. <br>
+Att våra processer har fungerat ganska bra har även setts då vi har jobbat
+med projektet under olika tider under dagen. Då Henrik har utgått ifrån att
+jobba under dagtid medan jag, Johan, mestadels har jobbat med projektet under
+kvällstid. Trots detta har arbetet flytit på väl.
+
+Vikten av att verktygen underlättar för att följa processen tycker jag även
+har synliggjorts av vilka problem vi har stött på under projektet. Som
+Henrik skrev så har projektet kunnat genomföras utan någon merge conflict
+vilket även kan ses i form av att git som verktyg underlättar för att dela
+upp uppgifter och jobba med korta arbetsflöden och kontinuerliga
+uppdateringar. <br>
+Det jag har saknat är möjligheten att kunna sätta upp en miljö där alla
+utveklare enkelt skulle kunna genomför "smoke tests" för varje uppgift, det
+vill säga att huvudprogram och framförallt för oss test programmet
+går att kompilera/länka och köras. Av nyfikenhet hade det varit intresant att
+testa om detta skulle gå att genomför med hjälp utav Docker men tyvärr har
+inte tiden funnits för att testa ett sådant system.<br>
+På samma sätt skulle det för våran situation varit bra med ett system som
+kontrolerar om generering av doxygen dokumentation resulterar i några
+varningar för den de klasser som ändrats i en Pull Request. Detta då det i b
+örjan var väldigt många varningar tack vare alla klasser och funktioner som
+inte var dokumenterade vilket gjorde att det var enkelt att missa varningar
+som tillhörde de filer som vi arbetat med. 
+
+Arbetet har varit utmanande då både dokumentation och testning båda utgår
+från hur programmet är tänkt att fungera medans vi har haft tillgång till den
+faktiska implementationen. Detta har i sig varit en svårighet att försöka 
+avögra vad den tänkta funktionaliteten är och arbeta efter det. Där har våran
+tag @issue varit till hjälp för att peka på saker som eventuellt är fel och
+skulle behöva undersökas.
+
+Slutligen skulle jag vilja instämma med henrik i att syftet med projektet har
+blivit uppfyllt i form av dokumentation, tester samt arbetssätt samt att vi 
+båda nog har lärt oss mycket av detta arbete. I efterhan har nog båda önskat
+att denna kurs hade kommit tidigare då arbetssättet skulle ha underlättat i
+programmeringskurser.  
+ 
 
 ## Källor
 
